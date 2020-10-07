@@ -32,10 +32,15 @@ public class ManagerRenderCuller : MonoBehaviour
     void cullerSunAndShadows()
     {
         bool flag = false;
+
         for (int i=0;i< artificialSun.Length && !flag; i++)
         {
            if(LOS.LOSHelper.CheckBoundsVisibility(artificialSun[i], meshCullerPlayer.bounds, layerMask))
             {
+                if (Manager.instance.playerControl.setEffects.GetFX("fxSunDamage") != null)
+                {
+                    Manager.instance.playerControl.setEffects.GetFX("fxSunDamage").Play();
+                }
                 Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().settingDamageLifeBySun();
                 Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().isInShadow = false;
                 flag=true;
@@ -47,6 +52,11 @@ public class ManagerRenderCuller : MonoBehaviour
         }
 
         if (!flag) {
+
+            if (Manager.instance.playerControl.setEffects.GetFX("fxRestaureMana") != null)
+            {
+                Manager.instance.playerControl.setEffects.GetFX("fxRestaureMana").Play();
+            }
             Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().settingManaGlobal();
             Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().isInShadow = true;
         }

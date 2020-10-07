@@ -35,6 +35,8 @@ public class Checkers
     public bool remoteControl = false;
     [HideInInspector]
     public bool isStuned = false;
+    [HideInInspector]
+    public bool isDominated = false;
 
     RaycastHit hit;
     Vector3 pointBlocking;

@@ -14,7 +14,8 @@ public class PlayerControl : MonoBehaviour {
     [HideInInspector]
     public ControlInteract controlInteract;
     // public AnimatorControl animatorControl;
-    SetEffects effects;
+    [HideInInspector]
+    public SetEffects setEffects;
     Rigidbody rg;
     CameraControl cam;
     RaycastHit hit;
@@ -28,7 +29,7 @@ public class PlayerControl : MonoBehaviour {
 
     void Start() {
         rg = GetComponent<Rigidbody>();
-        effects = GetComponent<SetEffects>();
+        setEffects = GetComponent<SetEffects>();
         controlInteract = GetComponent<ControlInteract>();
         checkers.isMovingMouse(mousePos = Util.getMousePointWorld(usePad));
     }
@@ -208,9 +209,13 @@ public class PlayerControl : MonoBehaviour {
             {
                 rg.velocity = new Vector3(0, setthing.forceJump, 0);
 
-                if (effects.GetSX("sxJump") != null)
+                if (setEffects.GetSX("sxJump") != null)
                 {
-                    effects.GetSX("sxJump").Play();
+                    setEffects.GetSX("sxJump").Play();
+                }
+                if (setEffects.GetFX("fxJump") != null)
+                {
+                    setEffects.GetFX("fxJump").Play();
                 }
             }
         }
@@ -219,9 +224,13 @@ public class PlayerControl : MonoBehaviour {
             if (!checkers.remoteControl && checkers.canJump && checkers.isGrounded && Input.GetButtonDown("Fire1"))
             {
                 rg.velocity = new Vector3(0, setthing.forceJump, 0);
-                if (effects.GetSX("sxJump") != null)
+                if (setEffects.GetSX("sxJump") != null)
                 {
-                    effects.GetSX("sxJump").Play();
+                    setEffects.GetSX("sxJump").Play();
+                }
+                if (setEffects.GetFX("fxJump") != null)
+                {
+                    setEffects.GetFX("fxJump").Play();
                 }
             }
         }
@@ -238,13 +247,13 @@ public class PlayerControl : MonoBehaviour {
             {
                 rg.velocity = new Vector3(0, setthing.forceJump, 0);
 
-                if (effects.GetSX("sxJump")!=null) {
+                if (setEffects.GetSX("sxJump")!=null) {
 
-                    effects.GetSX("sxJump").Play();
+                    setEffects.GetSX("sxJump").Play();
                 }
-                if (effects.GetFX("fxJump") != null)
+                if (setEffects.GetFX("fxJump") != null)
                 {
-                    effects.GetSX("fxJump").Play();
+                    setEffects.GetSX("fxJump").Play();
                 }
             }
         }
@@ -254,9 +263,13 @@ public class PlayerControl : MonoBehaviour {
             {
                 rg.velocity = new Vector3(0, setthing.forceJump, 0);
 
-                if (effects.GetSX("sxJump")!=null) {
+                if (setEffects.GetSX("sxJump")!=null) {
 
-                    effects.GetSX("sxJump").Play();
+                    setEffects.GetSX("sxJump").Play();
+                }
+                if (setEffects.GetFX("fxJump") != null)
+                {
+                    setEffects.GetFX("fxJump").Play();
                 }
             }
         }
@@ -288,8 +301,12 @@ public class PlayerControl : MonoBehaviour {
                 Vector3 normaLizeDir = Vector3.zero;
                 Vector3 dir = Vector3.zero;
 
-                if (effects.GetSX("sxDash")!=null) {
-                    effects.GetSX("sxDash").Play();
+                if (setEffects.GetSX("sxDash")!=null) {
+                    setEffects.GetSX("sxDash").Play();
+                }
+                if (setEffects.GetFX("fxDash") != null)
+                {
+                    setEffects.GetFX("fxDash").Play();
                 }
 
                 if (!checkers.blockingPass) {
@@ -321,8 +338,14 @@ public class PlayerControl : MonoBehaviour {
                 Vector3 normaLizeDir = Vector3.zero;
                 Vector3 dir = Vector3.zero;
 
-                effects.GetSX("sxDash").Play();
-
+                if (setEffects.GetSX("sxDash") != null)
+                {
+                    setEffects.GetSX("sxDash").Play();
+                }
+                if (setEffects.GetFX("fxDash") != null)
+                {
+                    setEffects.GetFX("fxDash").Play();
+                }
                 if (!checkers.blockingPass)
                 {
 
@@ -366,7 +389,14 @@ public class PlayerControl : MonoBehaviour {
     {
         if (!checkers.remoteControl && (Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("buttonA")))
         {
-            effects.GetSX("sxDash").Play();
+            if (setEffects.GetSX("sxDash") != null)
+            {
+                setEffects.GetSX("sxDash").Play();
+            }
+            if (setEffects.GetFX("fxDash") != null)
+            {
+                setEffects.GetFX("fxDash").Play();
+            }
             Vector3 normaLizeDir = transform.forward * setthing.distanceDash;
             normaLizeDir.y = 0.0f;
             StartCoroutine("dashPhysiscIE", normaLizeDir);

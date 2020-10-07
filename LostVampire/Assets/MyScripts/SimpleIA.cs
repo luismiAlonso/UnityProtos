@@ -28,9 +28,11 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
     private Transform target;
 
     PlayerControl playerControl;
+    SetEffects setEffects;
 
     private void Start()
     {
+        setEffects = GetComponent<SetEffects>();
         agent = GetComponent<NavMeshAgent>();
         playerControl = GetComponent<PlayerControl>();
     }
@@ -385,6 +387,11 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
         else if (typeNPC == TypeNPC.normal && playerControl.checkers.canAtack)
         {
             settinAtack.ArmaMelee[settinAtack.indexArma].hitMelee();
+
+            if (setEffects.GetFX("fxCupule") !=null) {
+                setEffects.GetFX("fxCupule").Play();
+            }
+
             playerControl.checkers.canAtack = false;
         }
     }

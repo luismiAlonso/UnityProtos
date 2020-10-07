@@ -18,16 +18,17 @@ public class BodyChange : MonoBehaviour
     PlayerControl myPlayerControl;
     PlayerControl dominatorPlayerControl;
     BodyChange bodyChangeControl;
-    KinemaControl kinemaControl;
+   // KinemaControl kinemaControl;
     SimpleIA simpleIA;
-
+    SetEffects setEffects;
     Checkers checkers;
     Vector3 originalScale;
 
     private void Awake()
     {
         myPlayerControl = GetComponent<PlayerControl>();
-        kinemaControl = GetComponent<KinemaControl>();
+        setEffects = GetComponent<SetEffects>();
+       // kinemaControl = GetComponent<KinemaControl>();
         checkers = myPlayerControl.checkers;
         if (!isPlayer)
         {
@@ -67,6 +68,10 @@ public class BodyChange : MonoBehaviour
         if (dominate && !isPlayer && !checkers.isDead && (Input.GetKeyDown(KeyCode.L) || Input.GetButtonDown("buttonY")))
         {
             myPlayerControl.controlInteract.settingLife (myPlayerControl.setthing.life - damageAdsorveLife);
+
+            if (setEffects.GetFX("fxDamageBlood")!=null) {
+                setEffects.GetFX("fxDamageBlood").Play();
+            }
 
             if (myPlayerControl.setthing.life<=0) {
                 checkers.isDead = true;
@@ -112,15 +117,21 @@ public class BodyChange : MonoBehaviour
                        
                         capturate = true;
                         dominatorPlayerControl = hitCollider.transform.gameObject.GetComponent<PlayerControl>();
+
                         if (!hitCollider.GetComponent<BodyChange>().activeSouls)
                         {
                             hitCollider.GetComponent<BodyChange>().activeSouls = true;
                             ControlSouls.instance.activeImgSouls();
                         }
 
+                        if (setEffects.GetFX("fxCaptureNPC")!=null) {
+                            setEffects.GetFX("fxCaptureNPC").Play();
+                        }
+
                         hitCollider.GetComponent<BodyChange>().simpleIA.getNavMeshAgent().enabled = false;
                         hitCollider.GetComponent<BodyChange>().simpleIA.enabled = false;
                         hitCollider.GetComponent<BodyChange>().dominate = true;
+                        hitCollider.transform.gameObject.GetComponent<PlayerControl>().checkers.isDominated = true;
                         hitCollider.GetComponent<BodyChange>().setbodyChangeControl(this);
                         hitCollider.GetComponent<BodyChange>().setPlayerControlDominator(myPlayerControl);
                         hitCollider.transform.gameObject.GetComponent<PlayerControl>().enabled = true;
@@ -139,9 +150,15 @@ public class BodyChange : MonoBehaviour
                             ControlSouls.instance.activeImgSouls();
                         }
 
+                        if (setEffects.GetFX("fxCaptureNPC") != null)
+                        {
+                            setEffects.GetFX("fxCaptureNPC").Play();
+                        }
+
                         hitCollider.GetComponent<BodyChange>().simpleIA.getNavMeshAgent().enabled = false;
                         hitCollider.GetComponent<BodyChange>().simpleIA.enabled = false;
                         hitCollider.GetComponent<BodyChange>().dominate = true;
+                        hitCollider.transform.gameObject.GetComponent<PlayerControl>().checkers.isDominated = true;
                         hitCollider.GetComponent<BodyChange>().setbodyChangeControl(this);
                         hitCollider.GetComponent<BodyChange>().setPlayerControlDominator(myPlayerControl);
                         hitCollider.transform.gameObject.GetComponent<PlayerControl>().enabled = true;
@@ -182,7 +199,10 @@ public class BodyChange : MonoBehaviour
                 if (dominate && !isPlayer && Input.GetButtonDown("buttonB")) {
 
                     prepareToExpulsion();
-
+                    if (setEffects.GetFX("fxCaptureNPC") != null)
+                    {
+                        setEffects.GetFX("fxCaptureNPC").Play();
+                    }
                 } 
             }
             else
@@ -190,6 +210,10 @@ public class BodyChange : MonoBehaviour
                 if (dominate && !isPlayer && Input.GetButtonDown("fire1"))
                 {
                     prepareToExpulsion();
+                    if (setEffects.GetFX("fxCaptureNPC") != null)
+                    {
+                        setEffects.GetFX("fxCaptureNPC").Play();
+                    }
                 }
                
             }
@@ -214,7 +238,13 @@ public class BodyChange : MonoBehaviour
                 {
                     prepareToThrowNPC();
 
-                }else if (dominate && !isPlayer && Input.GetButtonDown("buttonA") && simpleIA.typeNPC == SimpleIA.TypeNPC.clero)
+                    if (setEffects.GetFX("fxDash") != null)
+                    {
+                        setEffects.GetFX("fxDash").Play();
+                    }
+
+                }
+                else if (dominate && !isPlayer && Input.GetButtonDown("buttonA") && simpleIA.typeNPC == SimpleIA.TypeNPC.clero)
                 {
                     simpleIA.settinAtack.Arma[simpleIA.settinAtack.indexArma].ShootingRemote();
                 }
@@ -224,6 +254,11 @@ public class BodyChange : MonoBehaviour
                 if (dominate && !isPlayer && Input.GetButtonDown("fire2") && simpleIA.typeNPC == SimpleIA.TypeNPC.clero)
                 {
                     prepareToThrowNPC();
+
+                    if (setEffects.GetFX("fxDash") != null)
+                    {
+                        setEffects.GetFX("fxDash").Play();
+                    }
                 }
                 else if (dominate && !isPlayer && Input.GetButtonDown("buttonA") && simpleIA.typeNPC == SimpleIA.TypeNPC.clero)
                 {
@@ -249,6 +284,7 @@ public class BodyChange : MonoBehaviour
         checkers.canJump = false;
         checkers.canJump = true;
         dominate = false;
+        myPlayerControl.checkers.isDominated = false;
         CameraControl.instance.setTarget(dominatorPlayerControl.transform);
     }
 
@@ -313,6 +349,7 @@ public class BodyChange : MonoBehaviour
         dominatorPlayerControl.transform.position = new Vector3(transform.position.x, 2.5f, transform.position.z);
         checkers.canJump = false;
         dominate = false;
+        myPlayerControl.checkers.isDominated = false;
         dominatorPlayerControl.remoteFasterJump();
         checkers.canJump = true;
         CameraControl.instance.setTarget(dominatorPlayerControl.transform);

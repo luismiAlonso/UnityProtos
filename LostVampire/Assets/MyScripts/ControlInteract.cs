@@ -16,10 +16,14 @@ public class ControlInteract : MonoBehaviour
     private float timeLife;
 
     private bool stunnedControl;
+    SetEffects setEffects;
+    Coroutine coStun;
+
     // Start is called before the first frame update
     private void Start()
     {
         playerControl = GetComponent<PlayerControl>();
+        setEffects = GetComponent<SetEffects>();
     }
 
     // Update is called once per frame
@@ -160,13 +164,21 @@ public class ControlInteract : MonoBehaviour
     void dead()
     {
         //temporal
-        playerControl.transform.eulerAngles=new Vector3(90,0,0);
-        playerControl.transform.GetComponent<Rigidbody>().useGravity = true;
-        //playerControl.transform.GetComponent<Collider>().isTrigger = true;
-        playerControl.enabled = false;
-        //GetComponent<BodyChange>().enabled = false;
+        if (playerControl.isActiveAndEnabled) {
+            StartCoroutine("timeForRestart");
+        }
     }
 
+    IEnumerator timeForRestart()
+    {
+        playerControl.transform.eulerAngles = new Vector3(90, 0, 0);
+        playerControl.transform.GetComponent<Rigidbody>().useGravity = true;
+        //playerControl.transform.GetComponent<Collider>().isTrigger = true;
+        //GetComponent<BodyChange>().enabled = false;
+        playerControl.enabled = false;
+        yield return new WaitForSeconds(1.5f);
+        Manager.instance.Restart();
+    }
 
     #endregion Player Methods
 
@@ -177,10 +189,20 @@ public class ControlInteract : MonoBehaviour
     {
         if (!stunnedControl)
         {
+            if (setEffects.GetFX("fxStun") != null)
+            {
+                setEffects.GetFX("fxStun").Play();
+            }
             stunnedControl = true;
             simpleIA.getNavMeshAgent().enabled = false;
             simpleIA.enabled = false;
-            StartCoroutine(IstunnedNPC(timeStunned,simpleIA));
+            coStun= StartCoroutine(IstunnedNPC(timeStunned,simpleIA));
+        }
+
+        if (playerControl.checkers.isDominated)
+        {
+            StopCoroutine(coStun);
+
         }
     }
 
