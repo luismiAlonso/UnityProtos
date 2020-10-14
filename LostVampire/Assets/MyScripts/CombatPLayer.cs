@@ -24,14 +24,14 @@ public class CombatPLayer : MonoBehaviour
     {
         if (Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().isInShadow)
         {
-            if (Input.GetButtonDown("buttonB"))
+            if (InputControl.instance.getButtonsControl("Button2"))
             {
                // StartCoroutine("IatackMeleeBase");
             }
         }
         else
         {
-            if (Input.GetButtonDown("buttonB"))
+            if (InputControl.instance.getButtonsControl("Button2"))
             {
                // Debug.Log("en sombra");
                 

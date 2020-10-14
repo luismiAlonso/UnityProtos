@@ -136,6 +136,7 @@ public static List<string> DirectorySearch(string ruta)
         buff = br.ReadBytes((int)numBytes);
         return buff;
     }
+
     //lee todo en bloque
     public static string LeerArchivoFull(string path_)
     {

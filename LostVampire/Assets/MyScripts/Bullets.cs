@@ -57,10 +57,12 @@ public class Bullets : MonoBehaviour {
         if (collision.transform.tag == "Player")
         {
             collision.transform.GetComponent<ControlInteract>().settingLife(collision.transform.GetComponent<ControlInteract>().getLife()- damage);
+            Debug.Log("colisiono con Player");
             Destroy(gameObject);
 
-        }else if (collision.transform.tag == "NPC" && collision.GetComponent<BodyChange>().dominate)
+        }else if (collision.transform.tag == "NPC" && collision.GetComponent<BodyChange>()!=null && collision.GetComponent<BodyChange>().dominate)
         {
+            Debug.Log("colisiono con NPC");
             Manager.instance.playerControl.transform.GetComponent<ControlInteract>().settingMana(0);
             collision.transform.GetComponent<BodyChange>().prepareToExpulsion();
         }
