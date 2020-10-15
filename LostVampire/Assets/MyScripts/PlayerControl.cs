@@ -4,10 +4,9 @@ using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(ControlInteract))]
+[RequireComponent(typeof(SetEffects))]
 public class PlayerControl : MonoBehaviour {
 
-    public bool usePad;
-    public bool faceControl;
     public SetthingAtributePlayer setthing;
     public Checkers checkers;
 
@@ -25,13 +24,14 @@ public class PlayerControl : MonoBehaviour {
 
     void Awake() {
         cam = Camera.main.GetComponent<CameraControl>();    
+        
     }
 
     void Start() {
         rg = GetComponent<Rigidbody>();
         setEffects = GetComponent<SetEffects>();
         controlInteract = GetComponent<ControlInteract>();
-        checkers.isMovingMouse(mousePos = Util.getMousePointWorld(usePad));
+        checkers.isMovingMouse(mousePos = Util.getMousePointWorld(Manager.instance.GlobalUsePad));
     }
 
     void FixedUpdate()
@@ -67,13 +67,12 @@ public class PlayerControl : MonoBehaviour {
 
     void mouseController()
     {
-        if (faceControl) {
+        if (Manager.instance.faceControl) {
 
-            mousePos = Util.getMousePointWorld(usePad); //Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos = InputControl.instance.getAxisFree(); //Util.getMousePointWorld(Manager.instance.GlobalUsePad); //Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            if (!usePad)
+            if (!Manager.instance.GlobalUsePad)
             {
-
                 // locationsElements[3].position = new Vector3(mousePos.x, 0, mousePos.z);
                 // transform.rotation = Quaternion.LookRotation(Vector3.down, transform.position - transform.position);
                 Vector2 direction = new Vector2(mousePos.x, mousePos.y);
@@ -99,9 +98,9 @@ public class PlayerControl : MonoBehaviour {
             }
             else
             {
-                if (!Droid.instance.isAutoimp) {
+                /*if (!Droid.instance.isAutoimp) {
 
-                    /*  if (mousePos.sqrMagnitude > 0.0f)
+                      if (mousePos.sqrMagnitude > 0.0f)
                       {
                           previusAngle = Quaternion.LookRotation(Vector3.down, mousePos);
                           //player.transform.rotation = previusAngle;
@@ -116,11 +115,11 @@ public class PlayerControl : MonoBehaviour {
                               transform.rotation = previusAngle; //Quaternion.LookRotation(Vector3.down, mousePos);
                               transform.rotation = Quaternion.Lerp(transform.rotation, previusAngle, Time.deltaTime * 5);
                           }
-                      }*/
+                      }
                 }
                 else
                 {
-                    /* if (Droid.instance.getTarget()) {
+                    if (Droid.instance.getTarget()) {
 
                          Vector3 aimDir = new Vector3(Droid.instance.getTarget().position.x - transform.position.x, 2, Droid.instance.getTarget().position.z - transform.position.z);
                          aimDir.Normalize();
@@ -129,8 +128,8 @@ public class PlayerControl : MonoBehaviour {
                          m_LookAngle = Mathf.SmoothDampAngle(m_LookAngle, angle, ref m_AngleVelocity, m_RotationSpeed);
 
                          transform.eulerAngles = new Vector3(90, m_LookAngle, 0);
-                     }*/
-                }
+                     }
+                }*/
 
             }
         }
@@ -138,30 +137,14 @@ public class PlayerControl : MonoBehaviour {
     }
 
     void move3d() {
-
-        
+      
         if (!checkers.remoteControl && checkers.canMove) {
-
-            if (!usePad)
-            {
-                float verticalAxes = Input.GetAxis("Vertical");
-                float horizontalAxes = Input.GetAxis("Horizontal");
-                inputs = new Vector3(horizontalAxes, 0, verticalAxes);
+       
+                inputs = new Vector3(InputControl.instance.getAxisControl().x, 0, InputControl.instance.getAxisControl().y);
                 inputs = Vector3.ClampMagnitude(inputs, 1f);
                 rg.velocity = new Vector3(inputs.x * setthing.speedMove, rg.velocity.y, inputs.z * setthing.speedMove);
                 //If face control activated but not use, direction arrow rotate player
-                rotateToDirectionNotFacingMouse(inputs);
-
-            }
-            else
-            {
-                float verticalAxes = Input.GetAxisRaw("PadAxisV");
-                float horizontalAxes = Input.GetAxisRaw("PadAxisH");
-                inputs = new Vector3(horizontalAxes, 0, verticalAxes);
-                inputs = Vector3.ClampMagnitude(inputs, 1f);
-                rg.velocity = new Vector3(inputs.x * setthing.speedMove, rg.velocity.y, inputs.z * setthing.speedMove);
-                rotateToDirectionNotFacingMouse(inputs);
-            }
+                rotateToDirectionNotFacingMouse(inputs);     
         }
 
 
@@ -173,26 +156,26 @@ public class PlayerControl : MonoBehaviour {
 
     void changeFacingControl()
     {
-        if (faceControl)
+        if (Manager.instance.faceControl)
         {
-            faceControl = false;
+            Manager.instance.faceControl = false;
             dirFacing = transform.forward;
         }
         else
         {
-            faceControl = true;
+            Manager.instance.faceControl = true;
         }
     }
 
     void rotateToDirectionNotFacingMouse(Vector3 _inputs)
     {
 
-        if (!checkers.remoteControl && Input.GetKeyDown(KeyCode.LeftShift))
+        if (!checkers.remoteControl && InputControl.instance.getButtonsControl("Button2"))
         {
             changeFacingControl();         
         }
 
-        if (!faceControl && !_inputs.Equals(Vector3.zero))
+        if (!Manager.instance.faceControl && !_inputs.Equals(Vector3.zero))
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_inputs), Time.deltaTime * 40f);
         }
@@ -203,82 +186,44 @@ public class PlayerControl : MonoBehaviour {
 
     void simpleJump()
     {
-        if (usePad) {
 
-            if (!checkers.remoteControl && checkers.canJump && checkers.isGrounded && Input.GetButtonDown("buttonB"))
-            {
-                rg.velocity = new Vector3(0, setthing.forceJump, 0);
-
-                if (setEffects.GetSX("sxJump") != null)
-                {
-                    setEffects.GetSX("sxJump").Play();
-                }
-                if (setEffects.GetFX("fxJump") != null)
-                {
-                    setEffects.GetFX("fxJump").Play();
-                }
-            }
-        }
-        else
+        if (!checkers.remoteControl && checkers.canJump && checkers.isGrounded && InputControl.instance.getButtonsControl("Button1"))
         {
-            if (!checkers.remoteControl && checkers.canJump && checkers.isGrounded && Input.GetButtonDown("Fire1"))
+            rg.velocity = new Vector3(0, setthing.forceJump, 0);
+
+            if (setEffects.GetSX("sxJump") != null)
             {
-                rg.velocity = new Vector3(0, setthing.forceJump, 0);
-                if (setEffects.GetSX("sxJump") != null)
-                {
-                    setEffects.GetSX("sxJump").Play();
-                }
-                if (setEffects.GetFX("fxJump") != null)
-                {
-                    setEffects.GetFX("fxJump").Play();
-                }
+                setEffects.GetSX("sxJump").Play();
+            }
+            if (setEffects.GetFX("fxJump") != null)
+            {
+                setEffects.GetFX("fxJump").Play();
             }
         }
-
-     
     }
 
     void fasterJump()
     {
 
-        if (usePad) {
+        if (!checkers.remoteControl && checkers.canJump && checkers.isGrounded && InputControl.instance.getButtonsControl("Button1"))
+        {
+            rg.velocity = new Vector3(0, setthing.forceJump, 0);
 
-            if (!checkers.remoteControl && checkers.canJump && checkers.isGrounded && Input.GetButtonDown("buttonB"))
+            if (setEffects.GetSX("sxJump") != null)
             {
-                rg.velocity = new Vector3(0, setthing.forceJump, 0);
-
-                if (setEffects.GetSX("sxJump")!=null) {
-
-                    setEffects.GetSX("sxJump").Play();
-                }
-                if (setEffects.GetFX("fxJump") != null)
-                {
-                    setEffects.GetSX("fxJump").Play();
-                }
+                setEffects.GetSX("sxJump").Play();
             }
-        }
-        else {
-
-            if (!checkers.remoteControl && checkers.canJump && checkers.isGrounded && Input.GetButtonDown("Fire1"))
+            if (setEffects.GetFX("fxJump") != null)
             {
-                rg.velocity = new Vector3(0, setthing.forceJump, 0);
-
-                if (setEffects.GetSX("sxJump")!=null) {
-
-                    setEffects.GetSX("sxJump").Play();
-                }
-                if (setEffects.GetFX("fxJump") != null)
-                {
-                    setEffects.GetFX("fxJump").Play();
-                }
+                setEffects.GetSX("fxJump").Play();
             }
         }
 
         if (!checkers.isGrounded)
         {
-            rg.velocity += Vector3.up * Physics.gravity.y * setthing.fallMultiplier  * Time.deltaTime;
+            rg.velocity += Vector3.up * Physics.gravity.y * setthing.fallMultiplier * Time.deltaTime;
         }
-       
+
     }
 
     public void remoteFasterJump()
@@ -294,81 +239,45 @@ public class PlayerControl : MonoBehaviour {
 
     void dash()
     {
-        if (usePad) {
 
-            if (!checkers.remoteControl && Input.GetButtonDown("buttonA"))
-            {
-                Vector3 normaLizeDir = Vector3.zero;
-                Vector3 dir = Vector3.zero;
-
-                if (setEffects.GetSX("sxDash")!=null) {
-                    setEffects.GetSX("sxDash").Play();
-                }
-                if (setEffects.GetFX("fxDash") != null)
-                {
-                    setEffects.GetFX("fxDash").Play();
-                }
-
-                if (!checkers.blockingPass) {
-
-                    dir = dirFacing - transform.position;
-                    normaLizeDir = dir.normalized * setthing.distanceDash;
-
-                    if (usePad && !faceControl)
-                    {
-                        normaLizeDir = inputs * setthing.distanceDash;
-                    }
-                    normaLizeDir = normaLizeDir + transform.position;
-                }
-                else
-                {
-                    normaLizeDir = checkers.getPointBloquing();
-                    Debug.Log(transform.position + "/" + dir);
-
-                }
-
-                normaLizeDir.y = 0.0f;
-                StartCoroutine("dashIE", normaLizeDir);
-            }
-        }
-        else
+        if (!checkers.remoteControl && InputControl.instance.getButtonsControl("button3"))
         {
-            if (!checkers.remoteControl && Input.GetButtonDown("Fire2"))
+            Vector3 normaLizeDir = Vector3.zero;
+            Vector3 dir = Vector3.zero;
+
+            if (setEffects.GetSX("sxDash") != null)
             {
-                Vector3 normaLizeDir = Vector3.zero;
-                Vector3 dir = Vector3.zero;
-
-                if (setEffects.GetSX("sxDash") != null)
-                {
-                    setEffects.GetSX("sxDash").Play();
-                }
-                if (setEffects.GetFX("fxDash") != null)
-                {
-                    setEffects.GetFX("fxDash").Play();
-                }
-                if (!checkers.blockingPass)
-                {
-
-                    dir = dirFacing - transform.position;
-                    normaLizeDir = dir.normalized * setthing.distanceDash;
-
-                    if (usePad && !faceControl)
-                    {
-                        normaLizeDir = inputs * setthing.distanceDash;
-                    }
-                    normaLizeDir = normaLizeDir + transform.position;
-                }
-                else
-                {
-                    normaLizeDir = checkers.getPointBloquing();
-                    Debug.Log(transform.position + "/" + dir);
-
-                }
-
-                normaLizeDir.y = 0.0f;
-                StartCoroutine("dashIE", normaLizeDir);
+                setEffects.GetSX("sxDash").Play();
             }
+            if (setEffects.GetFX("fxDash") != null)
+            {
+                setEffects.GetFX("fxDash").Play();
+            }
+
+            if (!checkers.blockingPass)
+            {
+
+                dir = dirFacing - transform.position;
+                normaLizeDir = dir.normalized * setthing.distanceDash;
+
+                if (Manager.instance.GlobalUsePad && !Manager.instance.faceControl)
+                {
+                    normaLizeDir = inputs * setthing.distanceDash;
+                }
+                normaLizeDir = normaLizeDir + transform.position;
+            }
+            else
+            {
+                normaLizeDir = checkers.getPointBloquing();
+                Debug.Log(transform.position + "/" + dir);
+
+            }
+
+            normaLizeDir.y = 0.0f;
+            StartCoroutine("dashIE", normaLizeDir);
         }
+
+
     }
 
     IEnumerator dashIE(Vector3 dir)
@@ -387,7 +296,8 @@ public class PlayerControl : MonoBehaviour {
 
     void dashPhysics()
     {
-        if (!checkers.remoteControl && (Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("buttonA")))
+
+        if (!checkers.remoteControl && InputControl.instance.getButtonsControl("Button3"))
         {
             if (setEffects.GetSX("sxDash") != null)
             {
@@ -401,8 +311,10 @@ public class PlayerControl : MonoBehaviour {
             normaLizeDir.y = 0.0f;
             StartCoroutine("dashPhysiscIE", normaLizeDir);
         }
+
+
     }
-   
+
     public void remoteDashPhysic()
     {
         Vector3 normaLizeDir = transform.forward * setthing.distanceDash;
@@ -428,7 +340,7 @@ public class PlayerControl : MonoBehaviour {
     {
         Vector3 pointDash = Vector3.zero;
 
-        if (Input.GetKeyDown(KeyCode.L) && checkers.isGrounded)
+        if (InputControl.instance.getButtonsControl("Button1") && checkers.isGrounded)
         {
             Vector3 dir = dirFacing - transform.position;
             Vector3 normaLizeDir = dir.normalized * setthing.distanceJumpArc;
@@ -477,10 +389,10 @@ public class PlayerControl : MonoBehaviour {
        // setCanMove(true);
 
     }
-
-    private void OnCollisionEnter(Collision collision)
+  
+    private void OnCollisionStay(Collision collision)
     {
-        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Wall") && !checkers.isGrounded)
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Wall") /*&& rg.velocity.y>0.1f*/)
         {
             checkers.canMove = false;
         }

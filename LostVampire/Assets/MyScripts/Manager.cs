@@ -25,6 +25,9 @@ public class Manager : MonoBehaviour
     private ModelDialog[] dialogos;
     public PlayerControl playerControl;
     public bool fullStop;
+    public bool GlobalUsePad;
+    public bool faceControl;
+
     [HideInInspector]
     public float life;
     [HideInInspector]
@@ -44,7 +47,7 @@ public class Manager : MonoBehaviour
         mana = playerControl.setthing.mana;
         CanvasManager.instance.healhtBar.setHealht(life);
         CanvasManager.instance.manaBar.setMana(mana);
-
+        
     }
 
     // Update is called once per frame

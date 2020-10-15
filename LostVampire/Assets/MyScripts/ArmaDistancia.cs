@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SetEffects))]
 public class ArmaDistancia : MonoBehaviour
 {
     public enum TypeWeaponDist { normal = 0, clero = 1 };
     public TypeWeaponDist typeWeapon;
     public float DelayShoot;
     public Transform disparador;
-    public GameObject[] prefbBullets;
+    public GameObject prefbBullets;
     public bool canShoot = true;
-   
 
-    // Update is called once per frame
-    void Update()
+    SetEffects setEffects;
+
+    private void Awake()
     {
-        
+        setEffects = GetComponent<SetEffects>();
     }
-
     public void shooting()
     {
 
@@ -40,12 +40,23 @@ public class ArmaDistancia : MonoBehaviour
     public IEnumerator shootNormal()
     {
         //Instantiate your projectile
-        GameObject bullet = Instantiate(prefbBullets[0], disparador.position,disparador.rotation) as GameObject;
+        if (setEffects.GetFX("fxFireBullet") != null)
+        {
+            ParticleSystem bullet = Instantiate(setEffects.GetFX("fxFireBullet"), disparador.position, disparador.rotation);
+            bullet.transform.GetComponent<Bullets>().enabled = true;
+            bullet.Play();
+        }
+        else
+        {
+            GameObject bullet = Instantiate(prefbBullets, disparador.position, disparador.rotation);
 
-         canShoot = false;
-        //wait for some time
-        yield return new WaitForSeconds(DelayShoot);
-        canShoot = true;
+        }
+
+        canShoot = false;
+            //wait for some time
+            yield return new WaitForSeconds(DelayShoot);
+            canShoot = true;
+        
     }
 
     public void ShootingRemote()

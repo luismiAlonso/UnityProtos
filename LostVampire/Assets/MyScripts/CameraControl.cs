@@ -16,9 +16,11 @@ public class CameraControl : MonoBehaviour {
         }
     }
 
-    public LimitCameraFollow limitCameraFollow;
+
     public Transform target;
     public Vector3 offset;
+    public Vector2 limitX;
+    public Vector2 limitZ;
     public Vector3[] shakePoints;
     public float margenDrag;
 	public Vector3 m_Velocity;
@@ -41,7 +43,7 @@ public class CameraControl : MonoBehaviour {
 
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         
         if (state==0)
@@ -79,140 +81,12 @@ public class CameraControl : MonoBehaviour {
         //Keep camera height the same
         targetPos.y = transform.position.y;
         targetPos = Vector3.SmoothDamp(transform.position, targetPos, ref m_Velocity, m_SmoothTime);
+        transform.position = new Vector3(
+            Mathf.Clamp(targetPos.x, limitX.x, limitX.y),
+            targetPos.y,
+            Mathf.Clamp(targetPos.z, limitZ.x, limitZ.y));
 
-        if (limitCameraFollow.getCanMoveCam() && target.GetComponent<PlayerControl>().GetInputMove().x < 0 && limitCameraFollow.getDisCheckLimitCam().left &&
-             target.GetComponent<PlayerControl>().GetInputMove().z ==0)
-        {
-            transform.position = targetPos;
-            limitCameraFollow.setCanMoveCamera(true);
-
-        }
-        else if (limitCameraFollow.getCanMoveCam() && target.GetComponent<PlayerControl>().GetInputMove().x > 0  && limitCameraFollow.getDisCheckLimitCam().right &&
-             target.GetComponent<PlayerControl>().GetInputMove().z == 0)
-        {
-            transform.position = targetPos;
-            limitCameraFollow.setCanMoveCamera(true);
-
-        }
-        else if (limitCameraFollow.getCanMoveCam() && target.GetComponent<PlayerControl>().GetInputMove().z < 0  && limitCameraFollow.getDisCheckLimitCam().down &&
-            target.GetComponent<PlayerControl>().GetInputMove().x==0)
-        {
-            transform.position = targetPos;
-            limitCameraFollow.setCanMoveCamera(true);
-
-        }
-        else if (limitCameraFollow.getCanMoveCam() && target.GetComponent<PlayerControl>().GetInputMove().z > 0 && limitCameraFollow.getDisCheckLimitCam().top &&
-            target.GetComponent<PlayerControl>().GetInputMove().x==0)
-        {
-            transform.position = targetPos;
-            limitCameraFollow.setCanMoveCamera(true);
-
-        }
-        else if (limitCameraFollow.getCanMoveCam() && target.GetComponent<PlayerControl>().GetInputMove().x < 0 && limitCameraFollow.getDisCheckLimitCam().left &&
-                target.GetComponent<PlayerControl>().GetInputMove().z > 0 && !limitCameraFollow.getDisCheckLimitCam().top)
-        {
-            transform.position = new Vector3(targetPos.x,transform.position.y,transform.position.z);
-            limitCameraFollow.setCanMoveCamera(true);
-
-        }
-        else if (limitCameraFollow.getCanMoveCam() && target.GetComponent<PlayerControl>().GetInputMove().x < 0 && limitCameraFollow.getDisCheckLimitCam().left &&
-               target.GetComponent<PlayerControl>().GetInputMove().z > 0 && limitCameraFollow.getDisCheckLimitCam().top)
-        {
-
-            transform.position = new Vector3(targetPos.x, transform.position.y, targetPos.z);
-            limitCameraFollow.setCanMoveCamera(true);
-
-        }
-        else if (limitCameraFollow.getCanMoveCam() && target.GetComponent<PlayerControl>().GetInputMove().x < 0 && !limitCameraFollow.getDisCheckLimitCam().left &&
-              target.GetComponent<PlayerControl>().GetInputMove().z > 0 && limitCameraFollow.getDisCheckLimitCam().top)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, targetPos.z);
-            limitCameraFollow.setCanMoveCamera(true);
-
-        }
-        else if (limitCameraFollow.getCanMoveCam() && target.GetComponent<PlayerControl>().GetInputMove().x > 0 && limitCameraFollow.getDisCheckLimitCam().right &&
-             target.GetComponent<PlayerControl>().GetInputMove().z > 0 && limitCameraFollow.getDisCheckLimitCam().top)
-        {
-            transform.position = new Vector3(targetPos.x, transform.position.y, targetPos.z);
-            limitCameraFollow.setCanMoveCamera(true);
-
-        }
-        else if (limitCameraFollow.getCanMoveCam() && target.GetComponent<PlayerControl>().GetInputMove().x > 0 && limitCameraFollow.getDisCheckLimitCam().right &&
-            target.GetComponent<PlayerControl>().GetInputMove().z > 0 && !limitCameraFollow.getDisCheckLimitCam().top)
-        {
-            transform.position = new Vector3(targetPos.x, transform.position.y, transform.position.z);
-            limitCameraFollow.setCanMoveCamera(true);
-
-        }
-        else if (limitCameraFollow.getCanMoveCam() && target.GetComponent<PlayerControl>().GetInputMove().x > 0 && !limitCameraFollow.getDisCheckLimitCam().right &&
-            target.GetComponent<PlayerControl>().GetInputMove().z > 0 && limitCameraFollow.getDisCheckLimitCam().top)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, targetPos.z);
-            limitCameraFollow.setCanMoveCamera(true);
-
-        }
-        else if (limitCameraFollow.getCanMoveCam() && target.GetComponent<PlayerControl>().GetInputMove().x < 0 && limitCameraFollow.getDisCheckLimitCam().left &&
-                target.GetComponent<PlayerControl>().GetInputMove().z < 0 && !limitCameraFollow.getDisCheckLimitCam().down)
-        {
-            transform.position = new Vector3(targetPos.x, transform.position.y, transform.position.z);
-            limitCameraFollow.setCanMoveCamera(true);
-
-        }
-        else if (limitCameraFollow.getCanMoveCam() && target.GetComponent<PlayerControl>().GetInputMove().x < 0 && limitCameraFollow.getDisCheckLimitCam().left &&
-               target.GetComponent<PlayerControl>().GetInputMove().z < 0 && limitCameraFollow.getDisCheckLimitCam().down)
-        {
-            transform.position = new Vector3(targetPos.x, transform.position.y, targetPos.z);
-            limitCameraFollow.setCanMoveCamera(true);
-
-        }
-        else if (limitCameraFollow.getCanMoveCam() && target.GetComponent<PlayerControl>().GetInputMove().x < 0 && !limitCameraFollow.getDisCheckLimitCam().left &&
-              target.GetComponent<PlayerControl>().GetInputMove().z < 0 && limitCameraFollow.getDisCheckLimitCam().down)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, targetPos.z);
-            limitCameraFollow.setCanMoveCamera(true);
-
-        }
-        else if (limitCameraFollow.getCanMoveCam() && target.GetComponent<PlayerControl>().GetInputMove().x > 0 && limitCameraFollow.getDisCheckLimitCam().right &&
-               target.GetComponent<PlayerControl>().GetInputMove().z < 0 && !limitCameraFollow.getDisCheckLimitCam().down)
-        {
-            transform.position = new Vector3(targetPos.x, transform.position.y, transform.position.z);
-            limitCameraFollow.setCanMoveCamera(true);
-
-        }
-        else if (limitCameraFollow.getCanMoveCam() && target.GetComponent<PlayerControl>().GetInputMove().x > 0 && !limitCameraFollow.getDisCheckLimitCam().right &&
-              target.GetComponent<PlayerControl>().GetInputMove().z < 0 && limitCameraFollow.getDisCheckLimitCam().down)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, targetPos.z);
-            limitCameraFollow.setCanMoveCamera(true);
-
-        }
-        else if (limitCameraFollow.getCanMoveCam() && target.GetComponent<PlayerControl>().GetInputMove().x > 0 && limitCameraFollow.getDisCheckLimitCam().right &&
-             target.GetComponent<PlayerControl>().GetInputMove().z < 0 && limitCameraFollow.getDisCheckLimitCam().down)
-        {
-            transform.position = new Vector3(targetPos.x, transform.position.y, targetPos.z);
-            limitCameraFollow.setCanMoveCamera(true);
-
-        }
-        else
-        {
-            if (!target.GetComponent<PlayerControl>().GetInputMove().Equals(Vector3.zero)) {
-                limitCameraFollow.setCanMoveCamera(false);    
-            }
-        }
-
-        //Debug.Log(Mathf.Abs(target.position.z) - Mathf.Abs(limitCameraFollow.getPointCenter().z));
-
-        if ((Mathf.Abs(target.position.z) - Mathf.Abs(limitCameraFollow.getPointCenter().z))<=0.0f 
-            && target.GetComponent<PlayerControl>().GetInputMove().z!=0)
-        {
-            limitCameraFollow.setCanMoveCamera(true);
-
-        }
-        if ((Mathf.Abs(target.position.x) - Mathf.Abs(limitCameraFollow.getPointCenter().x)) <= 0.0f 
-            && target.GetComponent<PlayerControl>().GetInputMove().x!=0)
-        {
-            limitCameraFollow.setCanMoveCamera(true);
-        }
+        
     }
 
     public void setTarget(Transform _target)

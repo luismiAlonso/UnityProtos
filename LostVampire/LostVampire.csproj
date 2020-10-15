@@ -725,10 +725,11 @@
     <Compile Include="Assets\MyScripts\HealhtBar.cs" />
     <Compile Include="Assets\MyScripts\IatackNPC.cs" />
     <Compile Include="Assets\MyScripts\Ibehaviuour.cs" />
+    <Compile Include="Assets\MyScripts\InputControl.cs" />
     <Compile Include="Assets\MyScripts\Interact.cs" />
     <Compile Include="Assets\MyScripts\Intro.cs" />
+    <Compile Include="Assets\MyScripts\Item.cs" />
     <Compile Include="Assets\MyScripts\KinemaControl.cs" />
-    <Compile Include="Assets\MyScripts\LimitCameraFollow.cs" />
     <Compile Include="Assets\MyScripts\ManaBar.cs" />
     <Compile Include="Assets\MyScripts\Manager.cs" />
     <Compile Include="Assets\MyScripts\ManagerRenderCuller.cs" />

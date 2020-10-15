@@ -65,7 +65,7 @@ public class BodyChange : MonoBehaviour
 
     void AdsorveLife()
     {
-        if (dominate && !isPlayer && !checkers.isDead && (Input.GetKeyDown(KeyCode.L) || Input.GetButtonDown("buttonY")))
+        if (dominate && !isPlayer && !checkers.isDead && InputControl.instance.getButtonsControl("Button2"))
         {
             myPlayerControl.controlInteract.settingLife (myPlayerControl.setthing.life - damageAdsorveLife);
 
@@ -162,7 +162,6 @@ public class BodyChange : MonoBehaviour
                         hitCollider.GetComponent<BodyChange>().setbodyChangeControl(this);
                         hitCollider.GetComponent<BodyChange>().setPlayerControlDominator(myPlayerControl);
                         hitCollider.transform.gameObject.GetComponent<PlayerControl>().enabled = true;
-                        hitCollider.transform.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                         CameraControl.instance.setTarget(hitCollider.transform);
                     }
                 }
@@ -186,38 +185,21 @@ public class BodyChange : MonoBehaviour
         {
             fxBecomeNPC();
             myPlayerControl.enabled = false;
-
         }
     }
 
     void bodyChageBecomeOriginal()
     {
-        if (dominate) {
-
-            if (myPlayerControl.usePad) { //
-
-                if (dominate && !isPlayer && Input.GetButtonDown("buttonB")) {
-
-                    prepareToExpulsion();
-                    if (setEffects.GetFX("fxCaptureNPC") != null)
-                    {
-                        setEffects.GetFX("fxCaptureNPC").Play();
-                    }
-                } 
-            }
-            else
+        if (dominate)
+        {
+            if (dominate && !isPlayer && InputControl.instance.getButtonsControl("Button1"))
             {
-                if (dominate && !isPlayer && Input.GetButtonDown("fire1"))
+                prepareToExpulsion();
+                if (setEffects.GetFX("fxCaptureNPC") != null)
                 {
-                    prepareToExpulsion();
-                    if (setEffects.GetFX("fxCaptureNPC") != null)
-                    {
-                        setEffects.GetFX("fxCaptureNPC").Play();
-                    }
+                    setEffects.GetFX("fxCaptureNPC").Play();
                 }
-               
             }
-
         }
 
         if (expulsion)
@@ -231,44 +213,23 @@ public class BodyChange : MonoBehaviour
         if (dominate)
         {
 
-            if (myPlayerControl.usePad)
+            if (dominate && !isPlayer && InputControl.instance.getButtonsControl("Button3") && simpleIA.typeNPC == SimpleIA.TypeNPC.normal)
             {
+                prepareToThrowNPC();
 
-                if (dominate && !isPlayer && Input.GetButtonDown("buttonA") && simpleIA.typeNPC == SimpleIA.TypeNPC.normal)
+                if (setEffects.GetFX("fxDash") != null)
                 {
-                    prepareToThrowNPC();
-
-                    if (setEffects.GetFX("fxDash") != null)
-                    {
-                        setEffects.GetFX("fxDash").Play();
-                    }
-
+                    setEffects.GetFX("fxDash").Play();
                 }
-                else if (dominate && !isPlayer && Input.GetButtonDown("buttonA") && simpleIA.typeNPC == SimpleIA.TypeNPC.clero)
-                {
-                    simpleIA.settinAtack.Arma[simpleIA.settinAtack.indexArma].ShootingRemote();
-                }
+
             }
-            else
+            else if (dominate && !isPlayer && InputControl.instance.getButtonsControl("Button3") && simpleIA.typeNPC == SimpleIA.TypeNPC.clero)
             {
-                if (dominate && !isPlayer && Input.GetButtonDown("fire2") && simpleIA.typeNPC == SimpleIA.TypeNPC.clero)
-                {
-                    prepareToThrowNPC();
-
-                    if (setEffects.GetFX("fxDash") != null)
-                    {
-                        setEffects.GetFX("fxDash").Play();
-                    }
-                }
-                else if (dominate && !isPlayer && Input.GetButtonDown("buttonA") && simpleIA.typeNPC == SimpleIA.TypeNPC.clero)
-                {
-                    simpleIA.settinAtack.Arma[simpleIA.settinAtack.indexArma].ShootingRemote();
-                }
+                simpleIA.settinAtack.Arma[simpleIA.settinAtack.indexArma].ShootingRemote();
             }
-
         }
     }
-    
+
     void prepareToThrowNPC()
     {
         //myPlayerControl.enabled = false;
@@ -351,6 +312,7 @@ public class BodyChange : MonoBehaviour
         dominate = false;
         myPlayerControl.checkers.isDominated = false;
         dominatorPlayerControl.remoteFasterJump();
+        myPlayerControl.GetRigidbody().isKinematic = true;
         checkers.canJump = true;
         CameraControl.instance.setTarget(dominatorPlayerControl.transform);
     }
@@ -362,12 +324,14 @@ public class BodyChange : MonoBehaviour
         {
             transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, Time.deltaTime * timeToFxBodyChange);
             transform.position = Vector3.Lerp(transform.position, dominatorPlayerControl.transform.position, Time.deltaTime * timeToFxBodyChange);
-
+            
             //transform.position = dominatorPlayerControl.transform.position;
         }
         else
         {
             myPlayerControl.transform.gameObject.SetActive(false);
+            dominatorPlayerControl.GetRigidbody().isKinematic = false;
+
         }
 
     }

@@ -53,9 +53,13 @@ public class ManagerRenderCuller : MonoBehaviour
 
         if (!flag) {
 
-            if (Manager.instance.playerControl.setEffects.GetFX("fxRestaureMana") != null)
+            if (Manager.instance.playerControl.setEffects.GetFX("fxRestaureMana") != null && !Manager.instance.playerControl.setEffects.GetFX("fxRestaureMana").isPlaying)
             {
                 Manager.instance.playerControl.setEffects.GetFX("fxRestaureMana").Play();
+            }
+            if (Manager.instance.playerControl.setEffects.GetFX("fxSunDamage") != null && Manager.instance.playerControl.setEffects.GetFX("fxSunDamage").isPlaying)
+            {
+                Manager.instance.playerControl.setEffects.GetFX("fxSunDamage").Stop();
             }
             Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().settingManaGlobal();
             Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().isInShadow = true;

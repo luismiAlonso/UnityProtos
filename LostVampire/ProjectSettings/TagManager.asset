@@ -10,6 +10,7 @@ TagManager:
   - coffin
   - fx
   - sx
+  - item
   layers:
   - Default
   - TransparentFX
