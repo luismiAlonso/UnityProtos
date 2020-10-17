@@ -173,7 +173,7 @@ public class InputControl : MonoBehaviour
             }
             else if (name == "Button1")
             {
-                input = Input.GetMouseButton(1);
+                input = Input.GetMouseButton(0);
             }
             else if (name == "Button2")
             {
