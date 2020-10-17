@@ -167,22 +167,21 @@ public class InputControl : MonoBehaviour
         }
         else
         {
-            if (name == "Button0")
-            {
-                input = Input.GetKeyDown(KeyCode.Q);
-            }
-            else if (name == "Button1")
-            {
-                input = Input.GetKeyDown(KeyCode.LeftShift);
-
-            }
-            else if (name == "Button2")
+            if (name == "Button0") 
             {
                 input = Input.GetKeyDown(KeyCode.Space);
             }
+            else if (name == "Button1")
+            {
+                input = Input.GetMouseButton(1);
+            }
+            else if (name == "Button2")
+            {
+                input = Input.GetKeyDown(KeyCode.Q);
+            }
             else if (name == "Button3")
             {
-                input = Input.GetKeyDown(KeyCode.E);
+                input = Input.GetMouseButton(1);
             }
         }
 

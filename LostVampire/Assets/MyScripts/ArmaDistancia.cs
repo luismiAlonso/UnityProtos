@@ -55,7 +55,7 @@ public class ArmaDistancia : MonoBehaviour
 
         }
 
-        canShoot = false;
+            canShoot = false;
             //wait for some time
             yield return new WaitForSeconds(DelayShoot);
             canShoot = true;

@@ -39,6 +39,8 @@ public class Checkers
     public bool isDominated = false;
     [HideInInspector]
     public bool isCaptured = false;
+    [HideInInspector]
+    public bool canDash = false;
 
     RaycastHit hit;
     Vector3 pointBlocking;

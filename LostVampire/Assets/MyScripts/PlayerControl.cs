@@ -296,7 +296,7 @@ public class PlayerControl : MonoBehaviour {
     void dashPhysics()
     {
 
-        if (!checkers.remoteControl && InputControl.instance.getButtonsControl("Button3"))
+        if (!checkers.remoteControl && InputControl.instance.getButtonsControl("Button3") && !checkers.canDash)
         {
             if (setEffects.GetSX("sxDash") != null)
             {
@@ -308,9 +308,9 @@ public class PlayerControl : MonoBehaviour {
             }
             Vector3 normaLizeDir = transform.forward * setthing.distanceDash;
             normaLizeDir.y = 0.0f;
+            checkers.canDash = true;
             StartCoroutine("dashPhysiscIE", normaLizeDir);
         }
-
 
     }
 
@@ -332,6 +332,8 @@ public class PlayerControl : MonoBehaviour {
             yield return null;
         }
         rg.velocity = Vector3.zero;
+        yield return new WaitForSeconds(setthing.delayDash);
+        checkers.canDash = false;
 
     }
 

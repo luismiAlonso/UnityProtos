@@ -111,10 +111,10 @@ MonoBehaviour:
     y: 30
     width: 1360
     height: 675
-  m_MinSize: {x: 679, y: 492}
-  m_MaxSize: {x: 12004, y: 14042}
+  m_MinSize: {x: 678, y: 492}
+  m_MaxSize: {x: 12003, y: 14042}
   vertical: 0
-  controlID: 167
+  controlID: 148
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -136,10 +136,10 @@ MonoBehaviour:
     y: 0
     width: 1360
     height: 675
-  m_MinSize: {x: 679, y: 492}
-  m_MaxSize: {x: 12004, y: 14042}
+  m_MinSize: {x: 678, y: 492}
+  m_MaxSize: {x: 12003, y: 14042}
   vertical: 1
-  controlID: 168
+  controlID: 149
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -162,10 +162,10 @@ MonoBehaviour:
     y: 0
     width: 1360
     height: 362
-  m_MinSize: {x: 679, y: 221}
-  m_MaxSize: {x: 12004, y: 4021}
+  m_MinSize: {x: 678, y: 221}
+  m_MaxSize: {x: 12003, y: 4021}
   vertical: 0
-  controlID: 169
+  controlID: 150
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -212,8 +212,8 @@ MonoBehaviour:
     y: 0
     width: 762
     height: 362
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -239,8 +239,8 @@ MonoBehaviour:
     y: 0
     width: 339
     height: 362
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -399,21 +399,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 3495fdff3695fdff4695fdff0ceefdff4cf1fdfff802feff4c03feff0e04feff1404feff1e04feff8e06feff0e0cfeff5868feff6268feffac68feff6e69feff7469feff7e69feffee6bfeffe27afeff48bffeff52bffeff5ec0feff64c0feff6ec0feffaec2feffc0dcfeffc6dcfeffcedcfeff06defeff10defeffdae0feff2c39ffff3239ffff3c39ffff183bffff223bffff2e3cffff343cffff3e3cffff7e3effffc24bffffa054ffffaaf8ffffaef8ffffc2f8ffff4af9fffff4f9ffff16faffff60fbffff0a370000a4a0010004bf0100b8bf0100ccf9010020fa010064fa010078fa010094fa0100
+      m_ExpandedIDs: 60fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: NPC_1
-        m_OriginalName: NPC_1
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -135668
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 4
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -451,7 +451,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -135936
+  m_LastSelectedObjectID: -1782
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -488,9 +488,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -51.07, y: 2.8709998, z: 11.3}
+    m_Target: {x: 21.697266, y: 2.28125, z: -7.7734375}
     speed: 2
-    m_Value: {x: -51.07, y: 2.8709998, z: 11.3}
+    m_Value: {x: 21.697266, y: 2.28125, z: -7.7734375}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -536,13 +536,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.58535606, y: 0.11215621, z: -0.08220168, w: 0.7988034}
+    m_Target: {x: 0.43310758, y: -0.09970857, z: 0.048260313, w: 0.89454603}
     speed: 2
-    m_Value: {x: 0.58533716, y: 0.11215259, z: -0.08219903, w: 0.7987776}
+    m_Value: {x: 0.4330934, y: -0.0997053, z: 0.04825873, w: 0.8945167}
   m_Size:
-    m_Target: 3.7572813
+    m_Target: 38.300346
     speed: 2
-    m_Value: 3.7572813
+    m_Value: 38.300346
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -786,20 +786,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/MyScripts
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/MyScripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\luismi\Documents\ProyectosGit\LostVampire
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 308}
-    m_SelectedIDs: f29d0100
-    m_LastClickedID: 105970
-    m_ExpandedIDs: 00000000d23c0000d43c0000d63c0000d83c0000da3c0000dc3c0000de3c0000e03c0000e23c0000e43c0000e63c0000e83c0000ea3c0000ec3c0000e89d0100f09d0100fc9d010000ca9a3b
+    scrollPos: {x: 0, y: 20}
+    m_SelectedIDs: e03c0000
+    m_LastClickedID: 15584
+    m_ExpandedIDs: 00000000a23c0000a43c0000a63c0000a83c0000aa3c0000ac3c0000ae3c0000b03c0000b23c0000b43c0000b63c0000b83c0000ba3c0000bc3c0000be3c000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -827,7 +827,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d23c0000d43c0000d63c0000d83c0000da3c0000dc3c0000de3c0000e03c0000e23c0000e43c0000e63c0000e83c0000ea3c0000ec3c0000
+    m_ExpandedIDs: 00000000a23c0000a43c0000a63c0000a83c0000aa3c0000ac3c0000ae3c0000b03c0000b23c0000b43c0000b63c0000b83c0000ba3c0000bc3c0000be3c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -858,18 +858,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: 7e00000076240000942400001a060000be10f9ffac4a0000d43c0000ea74020000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: SOUNDS
-      m_OriginalName: SOUNDS
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 105978
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 11}
     m_CreateAssetUtility:
@@ -879,7 +879,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 539}
     m_GridSize: 16
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 195
