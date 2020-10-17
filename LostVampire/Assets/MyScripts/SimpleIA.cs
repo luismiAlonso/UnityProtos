@@ -12,7 +12,7 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
     public TypeNPC typeNPC;
     public SettingAtacksIA settinAtack;
     public SettingBehaviourIA settinBehaviour;
-
+    public bool activeGizmos=true;
     private NavMeshAgent agent;
     private int targetPoint;
     private int indexRotation;
@@ -55,6 +55,7 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 
             }
         }
+      //  Debug.Log(detectado+"//"+transform.name);
     }
 
     public NavMeshAgent getNavMeshAgent()
@@ -69,6 +70,7 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 
     void stateMachine()
     {
+
         if (state == 0)
         {
             PatrullaWayPointsAndStop();
@@ -103,23 +105,21 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
                         stop = true;
                         actackMelee();
                         
-                    }else if ((Vector3.Distance(transform.position, target.position) <= settinAtack.distanceAtackMelee) && !playerControl.checkers.canAtack)
+                    }
+                    /*else if ((Vector3.Distance(transform.position, target.position) <= settinAtack.distanceAtackMelee) && !playerControl.checkers.canAtack)
                     {
                         stop = true;
                         transform.LookAt(target);
                         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
 
-                    }
+                    }*/
                     else
                     {
-                        transform.LookAt(target);
-                        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
                         stop = false;
                         moveto(target);
                     }
                 }
 
-                //ActionRangeAlerta();
             }
         }
         else if (state == 2)
@@ -135,12 +135,14 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, settinBehaviour.rangeAlerta, settinBehaviour.layerRangeALerta);
         bool check = false;
 
-        foreach (var hitCollider in hitColliders)
+        for (int i=0;i < hitColliders.Length;i++)
         {
 
-            if (hitCollider.tag == "PLayer")
+            if (hitColliders[i].transform.tag == "Player")
             {
                 check = true;
+                return check;
+                
             }
 
             /* else if (hitCollider.tag == "NPC" && hitCollider.transform.GetComponent<BodyChange>().dominate)
@@ -148,7 +150,6 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
                  check = true;
              }*/
         }
-
         return check;
     }
 
@@ -342,8 +343,14 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 
     public void setDetectado(bool _detectado)
     {
-        Manager.instance.playerControl.checkers.isDetectado = _detectado;
-        detectado = _detectado;
+        if (!playerControl.checkers.isStuned) {
+            Manager.instance.playerControl.checkers.isDetectado = _detectado;
+            detectado = _detectado;
+        }
+        else
+        {
+            detectado = false;
+        }
     }
 
     public bool getDetectado()
@@ -358,7 +365,7 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 
     public void actackDistance()
     {
-        if (typeNPC==TypeNPC.clero && playerControl.checkers.canAtack)
+        if (typeNPC==TypeNPC.clero && playerControl.checkers.canAtack && !playerControl.checkers.isDominated)
         {
             StartCoroutine("IatackDistance");
 
@@ -398,7 +405,7 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 
     public void resetAreaMelee()
     {
-        
+
     }
 
     public void runAway()
@@ -431,22 +438,25 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, settinBehaviour.rangeAlerta);
+        if (activeGizmos) {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, settinBehaviour.rangeAlerta);
+            
+        }
     }
 
 
     private void OnCollisionEnter(Collision collision)
     {
 
-        if (collision.transform.tag=="Player")
+        if (collision.transform.tag=="Player" )
         {
 
-            setDetectado(true);
+            /*setDetectado(true);
             setTarget(collision.transform);
             transform.LookAt(collision.transform);
             transform.eulerAngles=new Vector3(0,transform.eulerAngles.y,transform.eulerAngles.z);
-            setState(1);
+            setState(1);*/
         }
     }
 

@@ -41,9 +41,12 @@ public class ManagerRenderCuller : MonoBehaviour
                 {
                     Manager.instance.playerControl.setEffects.GetFX("fxSunDamage").Play();
                 }
-                Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().settingDamageLifeBySun();
-                Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().isInShadow = false;
-                flag=true;
+                if (!Manager.instance.playerControl.checkers.isCaptured) {
+                    Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().settingDamageLifeBySun();
+                    Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().isInShadow = false;
+                }
+               
+                flag =true;
             }
             else
             {
@@ -63,6 +66,8 @@ public class ManagerRenderCuller : MonoBehaviour
             }
             Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().settingManaGlobal();
             Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().isInShadow = true;
+            Debug.Log("no quita");
+
         }
     }
 }

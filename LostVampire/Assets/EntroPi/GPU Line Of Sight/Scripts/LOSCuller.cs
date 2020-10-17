@@ -94,7 +94,7 @@ namespace LOS
 
             if (objMesh.tag=="Player" && LOSHelper.CheckBoundsVisibility(losSource, objMesh.GetComponent<Renderer>().bounds, layerMask) && objMesh.transform.parent.gameObject.activeSelf)
             {
-                //Debug.Log("te veo");
+                 //Debug.Log("te veo");
                 _target.GetComponent<SimpleIA>().setTarget(objMesh.transform);
                 _target.GetComponent<SimpleIA>().setDetectado(true);
                 //Debug.Log("te veo");
@@ -109,10 +109,9 @@ namespace LOS
                 if (!_target.GetComponent<SimpleIA>().ActionRangeAlerta()) { 
                     _target.GetComponent<SimpleIA>().setDetectado(false);
                     _target.GetComponent<SimpleIA>().setState(2);
-                   // Debug.Log("sale de rango");
+
                 }
 
-                //  Debug.Log("sale de rango");
             }
             else if (objMesh.tag == "NPC" && _target.GetComponent<SimpleIA>().typeNPC==SimpleIA.TypeNPC.clero && objMesh.transform.parent.GetComponent<BodyChange>().dominate && !_target.GetComponent<BodyChange>().dominate &&
                 LOSHelper.CheckBoundsVisibility(losSource, objMesh.GetComponent<Renderer>().bounds, layerMask))

@@ -66,7 +66,7 @@ public class ControlSouls : MonoBehaviour
                     countSouls++;
                 }
             }
-            Debug.Log(imgSoulsList.Count+"//"+ countSouls);
+            //Debug.Log(imgSoulsList.Count+"//"+ countSouls);
             //todas las posesiones de almas completadas creamos puerta
             if (imgSoulsList.Count == countSouls)
             {

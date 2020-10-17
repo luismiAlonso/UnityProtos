@@ -31,11 +31,11 @@ public class CombatPLayer : MonoBehaviour
         }
         else
         {
-            if (InputControl.instance.getButtonsControl("Button2"))
+           /* if (InputControl.instance.getButtonsControl("Button2"))
             {
                // Debug.Log("en sombra");
                 
-            }
+            }*/
         }
     }
 

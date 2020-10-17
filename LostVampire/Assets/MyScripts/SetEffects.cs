@@ -4,33 +4,67 @@ using UnityEngine;
 
 public class SetEffects : MonoBehaviour
 {
-    public Transform VFX;
-    public Transform SFX;
-
+    public enum TypeCharacter { player = 0, cleroE = 1, baseE=2, itemMana=3 };
+    public TypeCharacter typeCharacter;
+    public Transform soundsScene;
     private List<Transform> listVFX = new List<Transform>();
     private List<Transform> listSFX = new List<Transform>();
 
     private void Start()
     {
+        soundsScene = GameObject.Find("soundManager").transform;
         setList();
     }
 
     void setList()
     {
-        Transform[] prelistVFX = VFX.GetComponentsInChildren<Transform>(true);
-        foreach (Transform tfx in prelistVFX)
+        //load sounds scene
+        Transform[] sfx = soundsScene.transform.GetComponentsInChildren<Transform>(true);
+        foreach (Transform tsx in sfx)
         {
-            if (tfx.tag=="fx") {
-                listVFX.Add(tfx);
+            if (tsx.tag == "sx")
+            {
+                listSFX.Add(tsx);
             }
         }
 
-        Transform[] prelistSFX = SFX.GetComponentsInChildren<Transform>(true);
-        foreach (Transform tfx in prelistSFX)
+        if (typeCharacter== TypeCharacter.baseE)
         {
-            if (tfx.tag == "sx") {
-                listSFX.Add(tfx);
+            Transform[] vfx = Resources.LoadAll<Transform>("MyPrefabs/vfxSfx/base/VFX/");
+            foreach (Transform tvfx in vfx)
+            {
+                listVFX.Add(tvfx);
             }
+           
+        }
+        else if (typeCharacter == TypeCharacter.cleroE)
+        {
+            Transform[] vfx = Resources.LoadAll<Transform>("MyPrefabs/vfxSfx/clero/VFX/");
+            foreach (Transform tvfx in vfx)
+            {
+                listVFX.Add(tvfx);
+            }
+            
+        }
+        else if (typeCharacter == TypeCharacter.player)
+        {
+            Transform[] vfx = Resources.LoadAll<Transform>("MyPrefabs/vfxSfx/player/VFX/");
+
+            foreach(Transform tvfx in vfx)
+            {
+                listVFX.Add(tvfx);
+            }
+            
+        }
+
+        if (typeCharacter == TypeCharacter.baseE)
+        {
+            Transform[] vfx = Resources.LoadAll<Transform>("MyPrefabs/vfxSfx/itemMAna/VFX/");
+            foreach (Transform tvfx in vfx)
+            {
+                listVFX.Add(tvfx);
+            }
+
         }
     }
 
@@ -40,8 +74,10 @@ public class SetEffects : MonoBehaviour
 
         foreach (Transform tfx in listVFX)
         {
+            
             if (nameFX== tfx.name)
             {
+                
                 if (tfx.GetComponent<ParticleSystem>()!=null) {
                     pS = tfx.GetComponent<ParticleSystem>();
                 }
@@ -56,6 +92,7 @@ public class SetEffects : MonoBehaviour
 
         foreach (Transform tsx in listSFX)
         {
+
             if (nameSX == tsx.name)
             {
                 if (tsx.GetComponent<AudioSource>() != null)

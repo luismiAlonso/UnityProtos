@@ -37,6 +37,8 @@ public class Checkers
     public bool isStuned = false;
     [HideInInspector]
     public bool isDominated = false;
+    [HideInInspector]
+    public bool isCaptured = false;
 
     RaycastHit hit;
     Vector3 pointBlocking;
@@ -58,6 +60,7 @@ public class Checkers
     public bool isTraspasable()
     {
         blockingPass = Physics.SphereCast(parentObj.position, radiusCheckFront, parentObj.forward, out hit, maxDistanceFront, layerMaskWall, QueryTriggerInteraction.UseGlobal);
+
         if (blockingPass)
         {
             currentHitDistanceFront = hit.distance;

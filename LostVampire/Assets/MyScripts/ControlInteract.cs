@@ -18,12 +18,13 @@ public class ControlInteract : MonoBehaviour
     private bool stunnedControl;
     SetEffects setEffects;
     Coroutine coStun;
-
+    SimpleIA simpleIA;
     // Start is called before the first frame update
     private void Start()
     {
         playerControl = GetComponent<PlayerControl>();
         setEffects = GetComponent<SetEffects>();
+        simpleIA = GetComponent<SimpleIA>();
     }
 
     // Update is called once per frame
@@ -51,7 +52,8 @@ public class ControlInteract : MonoBehaviour
         if (CanvasManager.instance.healhtBar.getActualHealth() <= 0 && !playerControl.checkers.isDead && !playerControl.checkers.invulnerability)
         {
             // rPGCharacterControllerFREE.Death();
-            dead();
+                dead();
+           
         }
         else if(!playerControl.checkers.isDead && !playerControl.checkers.invulnerability)
         {
@@ -68,8 +70,11 @@ public class ControlInteract : MonoBehaviour
 
         if (playerControl.setthing.life<=0)
         {
-            playerControl.checkers.isDead = true;
-            dead();
+            if (GetComponent<BodyChange>().isPlayer) {
+                playerControl.checkers.isDead = true;
+                dead();
+            }
+            
         }
     }
 
@@ -172,7 +177,7 @@ public class ControlInteract : MonoBehaviour
     IEnumerator timeForRestart()
     {
         playerControl.transform.eulerAngles = new Vector3(90, 0, 0);
-        playerControl.transform.GetComponent<Rigidbody>().useGravity = true;
+        playerControl.GetRigidbody().useGravity = true;
         //playerControl.transform.GetComponent<Collider>().isTrigger = true;
         //GetComponent<BodyChange>().enabled = false;
         playerControl.enabled = false;
@@ -208,10 +213,12 @@ public class ControlInteract : MonoBehaviour
 
     IEnumerator IstunnedNPC(float t,SimpleIA sIA)
     {
-        while (t>0)
+        while (t>0 && !playerControl.checkers.isDominated)
         {
+
             transform.Rotate(0, 1000 * Time.deltaTime, 0);
             t -= Time.deltaTime;
+
             playerControl.checkers.isStuned = true;
             yield return null;
         }

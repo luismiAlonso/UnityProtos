@@ -138,7 +138,7 @@ public class PlayerControl : MonoBehaviour {
 
     void move3d() {
       
-        if (!checkers.remoteControl && checkers.canMove) {
+        if (checkers.canMove) {
        
                 inputs = new Vector3(InputControl.instance.getAxisControl().x, 0, InputControl.instance.getAxisControl().y);
                 inputs = Vector3.ClampMagnitude(inputs, 1f);
@@ -204,7 +204,6 @@ public class PlayerControl : MonoBehaviour {
 
     void fasterJump()
     {
-
         if (!checkers.remoteControl && checkers.canJump && checkers.isGrounded && InputControl.instance.getButtonsControl("Button1"))
         {
             rg.velocity = new Vector3(0, setthing.forceJump, 0);
@@ -326,7 +325,7 @@ public class PlayerControl : MonoBehaviour {
     {
         float time = setthing.TimeDurationDash;
 
-        while (time >= 0)
+        while (time >= 0 && !checkers.isTraspasable())
         {       
             rg.MovePosition(transform.position + dir * Time.deltaTime * setthing.forceDash); 
             time -= Time.deltaTime;
@@ -392,12 +391,18 @@ public class PlayerControl : MonoBehaviour {
   
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Wall") /*&& rg.velocity.y>0.1f*/)
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Wall") && !checkers.isGrounded)
         {
             checkers.canMove = false;
         }
     }
-
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Wall") && !checkers.isGrounded)
+        {
+            checkers.canMove = true;
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         /*Debug.Log(other.transform.tag+"-"+ other.transform.name);
@@ -407,10 +412,7 @@ public class PlayerControl : MonoBehaviour {
         }*/
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-       
-    }
+    
 
     public Rigidbody GetRigidbody()
     {
