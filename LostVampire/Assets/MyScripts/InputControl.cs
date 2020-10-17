@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using System;
 
 public class InputControl : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class InputControl : MonoBehaviour
     public enum ControllerTypeConnected { Xbox, Playstation,KeyBoard, Other }
     [HideInInspector]
     public ControllerTypeConnected controllerTypeConnected;
-
+    public bool forceChangeControllerInput;
     string diviceName;
 
     private void Start()
@@ -64,10 +65,13 @@ public class InputControl : MonoBehaviour
 
     private string getControllerType()
     {
+
+
         string[] joystickNames = Input.GetJoystickNames();
 
         foreach (string joystickName in joystickNames)
         {
+
             if (joystickName.ToLower().Contains("xbox"))
             {
                 return "XBOX";
@@ -85,7 +89,7 @@ public class InputControl : MonoBehaviour
                 return "OTHER";
             }
         }
-        return "OTHER";
+        return "UNKNOWN";
     }
 
     public Vector2 getAxisControl()
@@ -94,7 +98,16 @@ public class InputControl : MonoBehaviour
 
         if (Manager.instance.GlobalUsePad)
         {
-            axis = new Vector2(Input.GetAxisRaw("PadAxisH"), Input.GetAxisRaw("PadAxisV"));
+            if (!forceChangeControllerInput && (diviceName== "XBOX" || diviceName== "OTHER")) {
+
+                axis = new Vector2(Input.GetAxisRaw("PadAxisH"), Input.GetAxisRaw("PadAxisV"));
+
+            }
+            else if(forceChangeControllerInput)
+            {
+                axis = new Vector2(Input.GetAxisRaw("PadAxisH_play"), Input.GetAxisRaw("PadAxisV_play"));
+
+            }
         }
         else
         {
@@ -110,21 +123,46 @@ public class InputControl : MonoBehaviour
 
         if (Manager.instance.GlobalUsePad)
         {
-            if (name=="Button0") {
 
-                input = Input.GetButtonDown("buttonY");
+            if (!forceChangeControllerInput) {
 
-            }else if (name=="Button1")
+                if (name == "Button0") {
+
+                    input = Input.GetButtonDown("buttonY");
+
+                } else if (name == "Button1")
+                {
+                    input = Input.GetButtonDown("buttonB");
+
+                } else if (name == "Button2")
+                {
+                    input = Input.GetButtonDown("buttonX");
+
+                } else if (name == "Button3")
+                {
+                    input = Input.GetButtonDown("buttonA");
+                }
+
+            }else
             {
-                input = Input.GetButtonDown("buttonB");
+                if (name == "Button0")
+                {
+                    input = Input.GetButtonDown("buttonA");
+                }
+                else if (name == "Button1")
+                {
+                    input = Input.GetButtonDown("buttonX");
 
-            }else if (name == "Button2")
-            {
-                input = Input.GetButtonDown("buttonX");
+                }
+                else if (name == "Button2")
+                {
+                    input = Input.GetButtonDown("buttonY");
 
-            }else if (name == "Button3")
-            {
-                input = Input.GetButtonDown("buttonA");
+                }
+                else if (name == "Button3")
+                {
+                    input = Input.GetButtonDown("buttonB");
+                }
             }
         }
         else
@@ -167,4 +205,26 @@ public class InputControl : MonoBehaviour
 
         return freePos;
     }
+
+    /*List<USBDeviceInfo> GetUSBDevices()
+    {
+        List<USBDeviceInfo> devices = new List<USBDeviceInfo>();
+
+        System.Management.ManagementObjectCollection  collection;
+        using (var searcher = new System.Management.ManagementObjectSearcher(@"Select * From Win32_USBHub"))
+            collection = searcher.Get();
+
+        foreach (var device in collection)
+        {
+            devices.Add(new USBDeviceInfo(
+            (string)device.GetPropertyValue("DeviceID"),
+            (string)device.GetPropertyValue("PNPDeviceID"),
+            (string)device.GetPropertyValue("Description")
+            ));
+        }
+
+        collection.Dispose();
+        return devices;
+    }*/
+
 }

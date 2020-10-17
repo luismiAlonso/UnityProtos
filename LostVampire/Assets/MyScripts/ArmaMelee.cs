@@ -49,7 +49,7 @@ public class ArmaMelee : MonoBehaviour
     }
 
 
-    void resetShieldArea()
+    public void resetShieldArea()
     {
         switch (typeWeapon)
         {
@@ -64,12 +64,10 @@ public class ArmaMelee : MonoBehaviour
                 ; break;
             case TypeWeaponMelee.areaShieldIA:
 
-                if (!Manager.instance.playerControl.checkers.isDetectado && !MyPlayerControl.checkers.canAtack)
+                if (!Manager.instance.playerControl.checkers.isDetectado && !MyPlayerControl.checkers.canAtack && !active)
                 {
                     StopAllCoroutines();
                     StartCoroutine("IresetShield");
-                    MyPlayerControl.checkers.canAtack = true;
-                    active = false;
                 }
 
                 ; break;
@@ -78,13 +76,21 @@ public class ArmaMelee : MonoBehaviour
        
     }
 
+    public bool isActiveShield()
+    {
+        return active;
+    }
+
     IEnumerator IresetShield()
     {
-        while (Vector3.Distance(transform.localScale, scaleOriginalCollisionArea) > 0.1f)
+        while (Vector3.Distance(transform.localScale, scaleOriginalCollisionArea) > 0.01f)
         {
+            active = false;
             transform.localScale = Vector3.Lerp(transform.localScale, scaleOriginalCollisionArea, Time.deltaTime * timeTransitionAreaAtack);
             yield return null;
         }
+        active = true;
+        MyPlayerControl.checkers.canAtack = true;
     }
 
     void makeAreaShield()
@@ -94,18 +100,19 @@ public class ArmaMelee : MonoBehaviour
 
     IEnumerator ImakeAreaShield()
     {
-        while (Vector3.Distance(transform.localScale, maxArea) > 0.1f)
+        while (Vector3.Distance(transform.localScale, maxArea) > 0.01f)
         {
-            active = true;
             transform.localScale = Vector3.Lerp(transform.localScale, maxArea, Time.deltaTime * timeTransitionAreaAtack);
+            active = true;
             yield return null;
         }
-
+        active = false;
     }
 
     void takeDamageMeleeOnTrigger(Collider other)
     {
-        if (other!=null) {
+        if (other!=null && active) {
+
             other.GetComponent<ControlInteract>().settingLife(CanvasManager.instance.healhtBar.getActualHealth() - Damage);
             Vector3 dir = transform.position - other.transform.position;
             dir = -dir.normalized;
@@ -131,7 +138,7 @@ public class ArmaMelee : MonoBehaviour
                 ; break;
             case TypeWeaponMelee.areaShieldIA:
 
-                if (other.transform.name == "player")
+                if (other.transform.name == "player" && active)
                 {
                     takeDamageMeleeOnTrigger(other);
                 }

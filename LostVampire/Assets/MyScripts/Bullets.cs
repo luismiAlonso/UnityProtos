@@ -15,6 +15,7 @@ public class Bullets : MonoBehaviour {
     private Rigidbody rg;
     [SerializeField]
     private int indexWeapon;
+    int IdInstanceParent;
 
     void Start () {
        rg= GetComponent<Rigidbody>();
@@ -40,6 +41,11 @@ public class Bullets : MonoBehaviour {
     
     }
 
+    public void setIdParent(int id)
+    {
+        IdInstanceParent = id;
+    }
+
     public void setNameWeapon(int nameW)
     {
         indexWeapon = nameW;
@@ -54,15 +60,13 @@ public class Bullets : MonoBehaviour {
     void OnTriggerEnter(Collider collision)
     {
        // Debug.Log(collision.transform.position+"/"+collision.transform.localPosition);
-        if (collision.transform.tag == "Player")
+        if (collision.transform.tag == "Player" )
         {
-            collision.transform.GetComponent<ControlInteract>().settingLife(collision.transform.GetComponent<ControlInteract>().getLife()- damage);
-            Debug.Log("colisiono con Player");
+            Manager.instance.playerControl.transform.GetComponent<ControlInteract>().transform.GetComponent<ControlInteract>().settingLife(Manager.instance.playerControl.transform.GetComponent<ControlInteract>().transform.GetComponent<ControlInteract>().getLife()- damage);
             Destroy(gameObject);
 
-        }else if (collision.transform.tag == "NPC" && collision.GetComponent<BodyChange>()!=null && collision.GetComponent<BodyChange>().dominate)
+        }else if (collision.transform.tag == "NPC" && collision.GetComponent<BodyChange>()!=null && !collision.GetComponent<BodyChange>().dominate && IdInstanceParent!= collision.gameObject.GetInstanceID())
         {
-            Debug.Log("colisiono con NPC");
             Manager.instance.playerControl.transform.GetComponent<ControlInteract>().settingMana(0);
             collision.transform.GetComponent<BodyChange>().prepareToExpulsion();
         }

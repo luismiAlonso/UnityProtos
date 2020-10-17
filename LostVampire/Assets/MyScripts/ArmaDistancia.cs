@@ -42,13 +42,16 @@ public class ArmaDistancia : MonoBehaviour
         //Instantiate your projectile
         if (setEffects.GetFX("fxFireBullet") != null)
         {
-            ParticleSystem bullet = Instantiate(setEffects.GetFX("fxFireBullet"), disparador.position, disparador.rotation);
+           
+            GameObject bullet = Instantiate(setEffects.GetFX("fxFireBullet").gameObject, disparador.position, disparador.rotation);
+            bullet.GetComponent<Bullets>().setIdParent(transform.parent.gameObject.GetInstanceID());
             bullet.transform.GetComponent<Bullets>().enabled = true;
-            bullet.Play();
+            bullet.GetComponent<ParticleSystem>().Play();
         }
         else
         {
             GameObject bullet = Instantiate(prefbBullets, disparador.position, disparador.rotation);
+            bullet.GetComponent<Bullets>().setIdParent(transform.parent.gameObject.GetInstanceID());
 
         }
 

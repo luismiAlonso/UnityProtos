@@ -31,8 +31,7 @@ public class Item : MonoBehaviour
 
                 if (setEffects.GetSX("sxAddMana") != null)
                 {
-                    Debug.Log("Otros");
-
+                   // Debug.Log("Otros");
                     setEffects.GetSX("sxAddMana").Play();
                 }
 
