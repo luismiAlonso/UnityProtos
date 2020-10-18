@@ -4404,6 +4404,11 @@ PrefabInstance:
       propertyPath: checkers.maxDistanceFront
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 380786957624048338, guid: 46eba957efcfdc94db3c89963b312524,
+        type: 3}
+      propertyPath: setthing.delayDash
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 380786957624048339, guid: 46eba957efcfdc94db3c89963b312524,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5314,7 +5319,7 @@ PrefabInstance:
     - target: {fileID: 7674719056084807457, guid: 3aabe748d6b3c0047a51f324d14727db,
         type: 3}
       propertyPath: forceChangeControllerInput
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7674719056084807458, guid: 3aabe748d6b3c0047a51f324d14727db,
         type: 3}
