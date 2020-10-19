@@ -24,8 +24,7 @@ public class GeneratorLevel : MonoBehaviour
     public Vector3 offsetCenterMap;
 
     public int indexLevel;
-
-    List<Vector3> listPoints = new List<Vector3>();
+    GameObject superParentGrid;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,9 +39,9 @@ public class GeneratorLevel : MonoBehaviour
 
     void GenerateMap()
     {
-        GameObject newEmptyGameObject = new GameObject("Grid");
+        superParentGrid = new GameObject("Grid");
         // following line is probably not neccessary
-
+        superParentGrid.AddComponent<DataLevel>();
         int widthMap = mapsNodeToGenerate[indexLevel].getMapLayer("grounds").width;
         int heightMap = mapsNodeToGenerate[indexLevel].getMapLayer("grounds").height;
 
@@ -55,36 +54,38 @@ public class GeneratorLevel : MonoBehaviour
                 GameObject cloneG = createGround(x,y, mapsNodeToGenerate[indexLevel]);
                 if (cloneG != null)
                 {
-                   cloneG.transform.parent = newEmptyGameObject.transform;
+                   cloneG.transform.parent = superParentGrid.transform;
                    Vector3 positions = new Vector3(cloneG.transform.position.x, 0, cloneG.transform.position.z);
-                   listPoints.Add(positions);
+                   superParentGrid.GetComponent<DataLevel>().listPoints.Add(positions);
                 }
 
                 GameObject cloneW=createWalls(x, y, mapsNodeToGenerate[indexLevel]);
                 if (cloneW!=null)
                 {
-                    cloneW.transform.parent= newEmptyGameObject.transform;
+                    cloneW.transform.parent= superParentGrid.transform;
+                    if (filterWallCheck(cloneW.transform)!=null) {
+                        superParentGrid.GetComponent<DataLevel>().allCheckWalls.Add(filterWallCheck(cloneW.transform));
+                    }
                 }
 
                 GameObject cloneI=createItems(x, y, mapsNodeToGenerate[indexLevel]);
                 if (cloneI!=null)
                 {
-                    cloneI.transform.parent = newEmptyGameObject.transform;
+                    cloneI.transform.parent = superParentGrid.transform;
 
                 }
                 GameObject cloneE=createEnemies(x, y, mapsNodeToGenerate[indexLevel]);
                 if (cloneE!=null)
                 {
-                    cloneE.transform.parent = newEmptyGameObject.transform;
+                    cloneE.transform.parent = superParentGrid.transform;
 
                 }
             }
 
 
         }
-        newEmptyGameObject.transform.position = offsetCenterMap;
-
-
+        superParentGrid.transform.position = offsetCenterMap;
+        
     }
 
     GameObject createGround(int x, int y, MapNode mpnd)
@@ -181,5 +182,26 @@ public class GeneratorLevel : MonoBehaviour
             }
         }
         return go;
+    }
+
+    CheckWall filterWallCheck(Transform w)
+    {
+        CheckWall checkwall = null;
+        Transform[] objs = w.GetComponentsInChildren<Transform>(true);
+
+        foreach (Transform cw in objs)
+        {
+            if (cw.gameObject.activeSelf &&  cw.GetComponent<CheckWall>()!=null)
+            {
+                checkwall = cw.GetComponent<CheckWall>();
+            }
+        }
+
+        return checkwall;
+    }
+
+    public GameObject getSuperParentGrid()
+    {
+        return superParentGrid;
     }
 }

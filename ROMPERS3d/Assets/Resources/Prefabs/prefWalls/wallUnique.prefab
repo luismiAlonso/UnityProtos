@@ -215,7 +215,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dirwall: 2
   idCode: 0
+  TimeResetRomper: 0
   listMasterWall: []
+  isGroup: 0
 --- !u!1 &1632204962817067526
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,7 +475,7 @@ GameObject:
   - component: {fileID: 1632204963065465209}
   m_Layer: 8
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: movilWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -596,7 +598,7 @@ GameObject:
   - component: {fileID: 1632204963113723757}
   m_Layer: 8
   m_Name: rightWall
-  m_TagString: movilWall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -648,7 +650,7 @@ GameObject:
   - component: {fileID: 1632204963113867836}
   m_Layer: 8
   m_Name: leftWall
-  m_TagString: movilWall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -927,7 +929,7 @@ GameObject:
   - component: {fileID: 1632204963626334562}
   m_Layer: 8
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: movilWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1109,7 +1111,7 @@ GameObject:
   - component: {fileID: 1632204963795547179}
   m_Layer: 8
   m_Name: topWall
-  m_TagString: movilWall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1164,7 +1166,7 @@ GameObject:
   - component: {fileID: 1632204963960906447}
   m_Layer: 8
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: movilWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1829,7 +1831,7 @@ GameObject:
   - component: {fileID: 1632204964565948715}
   m_Layer: 8
   m_Name: downWall
-  m_TagString: movilWall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

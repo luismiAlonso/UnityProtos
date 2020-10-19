@@ -86,10 +86,11 @@ public class wallNode : MonoBehaviour
     {
         if (wallIsDown)
         {
-            if (timeAuxResetWall==timeToresetWall)
+            if (timeAuxResetWall >=timeToresetWall)
             {
                 //sin animacion o fx
                 transform.rotation = oldRotation;
+                timeAuxResetWall = 0;
                 wallIsDown = false;
             }
             else

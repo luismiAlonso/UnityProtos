@@ -22,7 +22,7 @@ public class SetMasterWall : Editor
             myScript.UnparentChilds();
             DestroyImmediate(myScript.gameObject);
         }
-    }
 
+    }
 
 }

@@ -24,6 +24,7 @@ public class Manager : MonoBehaviour
     public bool fullStop;
     public PlayerController playerControl;
     public bool GlobalUsePad;
+    public DataLevel[] levels;
 
     // Start is called before the first frame update
     void Start()
@@ -36,4 +37,8 @@ public class Manager : MonoBehaviour
     {
         
     }
+
+
+
+
 }

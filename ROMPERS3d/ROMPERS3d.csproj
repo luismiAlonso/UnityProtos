@@ -650,14 +650,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\IAcontrol.cs" />
     <Compile Include="Assets\Scripts\Bomb.cs" />
     <Compile Include="Assets\Scripts\CheckFallWall.cs" />
     <Compile Include="Assets\Scripts\CheckWall.cs" />
     <Compile Include="Assets\Scripts\Checkers.cs" />
     <Compile Include="Assets\Scripts\ColorToPrefab.cs" />
     <Compile Include="Assets\Scripts\ControlInteract.cs" />
+    <Compile Include="Assets\Scripts\DataLevel.cs" />
     <Compile Include="Assets\Scripts\GeneratorLevel.cs" />
+    <Compile Include="Assets\Scripts\IAcontrol.cs" />
     <Compile Include="Assets\Scripts\InputControl.cs" />
     <Compile Include="Assets\Scripts\Manager.cs" />
     <Compile Include="Assets\Scripts\MapNode.cs" />

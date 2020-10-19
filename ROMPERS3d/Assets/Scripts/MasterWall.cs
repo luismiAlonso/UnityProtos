@@ -17,7 +17,7 @@ public class MasterWall : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        
+        setActivaTeWalls();
     }
 
     // Update is called once per frame
@@ -66,6 +66,7 @@ public class MasterWall : MonoBehaviour
             transform.parent = objParent.transform;
             objParent.GetComponent<MasterWall>().listMasterWall.Add(this);
             objParent.GetComponent<MasterWall>().setActivaTeWalls();
+            objParent.transform.parent = GeneratorLevel.instance.getSuperParentGrid().transform;
             setIsGroup(true);
             //GetComponent<MasterWall>().enabled = false;
         }
@@ -81,88 +82,105 @@ public class MasterWall : MonoBehaviour
     public void setActivaTeWalls()
     {
         Transform[] movilWalls = transform.GetComponentsInChildren<Transform>(true);
-        Debug.Log(this);
+
         foreach (Transform mw in movilWalls)
         {
-            if (mw.tag=="movilWall")
+
+            if (mw.name == "leftWall" && dirwall != DirWall.left)
             {
-                if (mw.name== "leftWall" && dirwall!=DirWall.left)
-                {
-                    mw.gameObject.SetActive(false);
-                }
-                else if(mw.name == "leftWall" && dirwall == DirWall.left)
-                {
-                    mw.gameObject.SetActive(true);
-                    mw.GetComponent<CheckWall>().wallNode.setIdCode(idCode);
-                    mw.GetComponent<CheckWall>().wallNode.masterWall = this;
-
-                    listCheckWall.Add(mw.GetComponent<CheckWall>());
-                }
-
-                if (mw.name == "rightWall" && dirwall != DirWall.right)
-                {
-                    mw.gameObject.SetActive(false);
-                }
-                else if (mw.name == "rightWall" && dirwall == DirWall.right)
-                {
-                    mw.gameObject.SetActive(true);
-                    mw.GetComponent<CheckWall>().wallNode.setIdCode(idCode);
-                    mw.GetComponent<CheckWall>().wallNode.masterWall = this;
-                    listCheckWall.Add(mw.GetComponent<CheckWall>());
-
-                }
-
-                if (mw.name == "topWall" && dirwall != DirWall.top)
-                {
-                    mw.gameObject.SetActive(false);
-                }
-                else if (mw.name == "topWall" && dirwall == DirWall.top)
-                {
-                    mw.gameObject.SetActive(true);
-                    mw.GetComponent<CheckWall>().wallNode.setIdCode(idCode);
-                    mw.GetComponent<CheckWall>().wallNode.masterWall = this;
-                    listCheckWall.Add(mw.GetComponent<CheckWall>());
-
-                }
-
-                if (mw.name == "downWall" && dirwall != DirWall.down)
-                {
-                    mw.gameObject.SetActive(false);
-                }
-                else if (mw.name == "downWall" && dirwall == DirWall.down)
-                {
-                    mw.gameObject.SetActive(true);
-                    mw.GetComponent<CheckWall>().wallNode.setIdCode(idCode);
-                    mw.GetComponent<CheckWall>().wallNode.masterWall = this;
-                    listCheckWall.Add(mw.GetComponent<CheckWall>());
-
-                }
+                mw.gameObject.SetActive(false);
             }
+            else if (mw.name == "leftWall" && dirwall == DirWall.left)
+            {
+                mw.gameObject.SetActive(true);
+                mw.GetComponent<CheckWall>().wallNode.setIdCode(idCode);
+                mw.GetComponent<CheckWall>().wallNode.masterWall = this;
+                mw.GetComponent<CheckWall>().wallNode.setTimeToResetRomper(TimeResetRomper);
+                listCheckWall.Add(mw.GetComponent<CheckWall>());
+            }
+
+            if (mw.name == "rightWall" && dirwall != DirWall.right)
+            {
+                mw.gameObject.SetActive(false);
+            }
+            else if (mw.name == "rightWall" && dirwall == DirWall.right)
+            {
+                mw.gameObject.SetActive(true);
+                mw.GetComponent<CheckWall>().wallNode.setIdCode(idCode);
+                mw.GetComponent<CheckWall>().wallNode.masterWall = this;
+                mw.GetComponent<CheckWall>().wallNode.setTimeToResetRomper(TimeResetRomper);
+
+                listCheckWall.Add(mw.GetComponent<CheckWall>());
+
+            }
+
+            if (mw.name == "topWall" && dirwall != DirWall.top)
+            {
+                mw.gameObject.SetActive(false);
+            }
+            else if (mw.name == "topWall" && dirwall == DirWall.top)
+            {
+                mw.gameObject.SetActive(true);
+                mw.GetComponent<CheckWall>().wallNode.setIdCode(idCode);
+                mw.GetComponent<CheckWall>().wallNode.masterWall = this;
+                mw.GetComponent<CheckWall>().wallNode.setTimeToResetRomper(TimeResetRomper);
+
+                listCheckWall.Add(mw.GetComponent<CheckWall>());
+
+            }
+
+            if (mw.name == "downWall" && dirwall != DirWall.down)
+            {
+                mw.gameObject.SetActive(false);
+            }
+            else if (mw.name == "downWall" && dirwall == DirWall.down)
+            {
+                mw.gameObject.SetActive(true);
+                mw.GetComponent<CheckWall>().wallNode.setIdCode(idCode);
+                mw.GetComponent<CheckWall>().wallNode.masterWall = this;
+                mw.GetComponent<CheckWall>().wallNode.setTimeToResetRomper(TimeResetRomper);
+
+                listCheckWall.Add(mw.GetComponent<CheckWall>());
+
+            }
+
         }
     }
 
     public void fallwallNodes(Vector3 pointContact)
     {
-       // Debug.Log(pointContact);
+
+       // Debug.Log(listCheckWall.Count);
 
         for (int i=0;i< listCheckWall.Count;i++) {
 
             if (pointContact.x!=0 && pointContact.x > 0 && !listCheckWall[i].getCollisionCheckWall("front"))
             {
                 listCheckWall[i].wallNode.fallWall( "front");
+               // Debug.Log("frontx");
             }
             else if(pointContact.x != 0 && pointContact.x < 0 && !listCheckWall[i].getCollisionCheckWall("back"))
             {
                 listCheckWall[i].wallNode.fallWall( "back");
+                //Debug.Log("backx");
+
             }
             else if (pointContact.z != 0 && pointContact.z > 0 && !listCheckWall[i].getCollisionCheckWall("front"))
             {
                 listCheckWall[i].wallNode.fallWall("front");
+               // Debug.Log("frontz");
+
             }
             else if (pointContact.z != 0 && pointContact.z < 0 && !listCheckWall[i].getCollisionCheckWall("back"))
             {
                 listCheckWall[i].wallNode.fallWall("back");
+               // Debug.Log("backz");
+
             }
         }
     }
+
+    
+
+   
 }

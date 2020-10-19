@@ -7,21 +7,63 @@ public class Bomb : MonoBehaviour
 
     public float maxExplosion;
     public LayerMask layerMask;
+    public float TimeToExplosion;
+    public float speedExplosion;
 
+    float currentSpeedExplosion;
+    float currentTimeToExplosion;
     float radioActual;
     RaycastHit hit;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    bool activeExplosion;
+   
     void FixedUpdate()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, radioActual, layerMask);
+        if (activeExplosion) {
+
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, radioActual, layerMask);
+
+            for (int i=0;i<hitColliders.Length;i++)
+            {
+                if (hitColliders[i].transform.tag=="PLayer")
+                {
+                   // Destroy(hitColliders[i].gameObject);
+                }
+            }
+        }
       
     }
 
+    private void Update()
+    {
+        if (currentTimeToExplosion >= TimeToExplosion)
+        {
+            activeExplosion = true;
+            makeRangeExplosion();
+        }
+        else
+        {
+            currentTimeToExplosion += Time.deltaTime;
+
+        }
+    }
+
+    void makeRangeExplosion()
+    {
+
+        currentSpeedExplosion = Mathf.Clamp01(currentSpeedExplosion + (0.2f * Time.deltaTime));
+        float t = currentSpeedExplosion / speedExplosion;
+        radioActual = Mathf.Lerp(radioActual,maxExplosion, t);
+
+        if (t >= 1)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, radioActual);
+    }
 
 }

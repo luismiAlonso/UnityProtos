@@ -7,7 +7,8 @@ public class CheckFallWall : MonoBehaviour
     public enum DirWall { front, back }
     public DirWall dirwall;
     private bool collisionWallSolid;
-    
+    private bool palyerCheckWall;
+
     public bool isCollisionWall()
     {
         return collisionWallSolid;
@@ -20,5 +21,23 @@ public class CheckFallWall : MonoBehaviour
            // Debug.Log("collision con solido");
             collisionWallSolid = true;
         }
+        if (other.transform.tag=="Player")
+        {
+            palyerCheckWall = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.tag == "Player")
+        {
+            palyerCheckWall = false;
+
+        }
+    }
+
+    public bool getPlayerCheck()
+    {
+        return palyerCheckWall;
     }
 }

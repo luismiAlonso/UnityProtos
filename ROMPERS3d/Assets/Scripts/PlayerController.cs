@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public Checkers checkers;
     InputControl inputControl;
     Rigidbody rb;
+    float speed;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,8 +46,8 @@ public class PlayerController : MonoBehaviour
         {
             asix = Vector3.zero;
         }
-
-        rb.velocity = new Vector3(asix.x * playerSettings.speedMove, rb.velocity.y, asix.z * playerSettings.speedMove);
+        speed = playerSettings.speedMove * Time.deltaTime;
+        rb.velocity = new Vector3(asix.x * speed, rb.velocity.y, asix.z * speed);
         if (!asix.Equals(Vector3.zero))
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(asix,Vector3.up), Time.deltaTime * 40f);
