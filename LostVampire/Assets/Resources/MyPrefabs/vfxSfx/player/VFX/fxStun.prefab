@@ -14441,6 +14441,7 @@ GameObject:
   - component: {fileID: 5614271553735351081}
   - component: {fileID: 2122888573139705135}
   - component: {fileID: 2864090681063160764}
+  - component: {fileID: 2176698855296162930}
   m_Layer: 0
   m_Name: fxStun
   m_TagString: fx
@@ -19185,3 +19186,17 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &2176698855296162930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614271553735351082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ac159cc3c56ac4cb7c9f7b6ea61a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLocalObject: 1
+  isPermanent: 0

@@ -196,7 +196,7 @@ public class ControlInteract : MonoBehaviour
         {
             if (setEffects.GetFX("fxStun") != null)
             {
-                setEffects.GetFX("fxStun").Play();
+                setEffects.PlayFx("fxStun");
             }
             stunnedControl = true;
             simpleIA.getNavMeshAgent().enabled = false;
@@ -222,7 +222,7 @@ public class ControlInteract : MonoBehaviour
             playerControl.checkers.isStuned = true;
             yield return null;
         }
-
+        setEffects.noneFx("fxStun");
         playerControl.checkers.isStuned = false;
         sIA.getNavMeshAgent().enabled = true;
         sIA.enabled = false;

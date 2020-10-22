@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3185530146871608570}
   - component: {fileID: 3185530146871608569}
   - component: {fileID: 3185530146871608568}
+  - component: {fileID: 2260192692986251230}
   m_Layer: 0
   m_Name: armaArea0
   m_TagString: Untagged
@@ -49,13 +50,14 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3185530146871608575}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -67,6 +69,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -109,4 +112,19 @@ MonoBehaviour:
   timeTransitionAreaAtack: 3.5
   MyPlayerControl: {fileID: 0}
   Damage: 0.1
-  canAtack: 1
+  active: 0
+--- !u!114 &2260192692986251230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3185530146871608575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4067ede6fb85b9843b0dfb546fb503ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeCharacter: 0
+  soundsScene: {fileID: 905367774944038170, guid: c7028492b0a5e4446857a36cbdf12327,
+    type: 3}

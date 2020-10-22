@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6298011003456472721}
   - component: {fileID: 6298011003456472720}
   - component: {fileID: 6298011003456472734}
+  - component: {fileID: -8311434508150363619}
   m_Layer: 0
   m_Name: fxFireBullet
   m_TagString: fx
@@ -4808,3 +4809,17 @@ MonoBehaviour:
     m_Bits: 6144
   type: 0
   indexWeapon: 0
+--- !u!114 &-8311434508150363619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6298011003456472722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ac159cc3c56ac4cb7c9f7b6ea61a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLocalObject: 0
+  useDurabilityParticle: 0

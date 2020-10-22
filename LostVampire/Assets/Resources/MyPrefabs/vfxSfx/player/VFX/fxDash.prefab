@@ -4810,6 +4810,7 @@ GameObject:
   - component: {fileID: 4035856129210393768}
   - component: {fileID: 5178655067283141554}
   - component: {fileID: 4439986703021962213}
+  - component: {fileID: 9087731266831189710}
   m_Layer: 0
   m_Name: fxDash
   m_TagString: fx
@@ -9555,6 +9556,20 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &9087731266831189710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4035856129210393769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ac159cc3c56ac4cb7c9f7b6ea61a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLocalObject: 1
+  isPermanent: 1
 --- !u!1 &8872882690063528781
 GameObject:
   m_ObjectHideFlags: 0

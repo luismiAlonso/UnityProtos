@@ -217,7 +217,7 @@ namespace LOS
                 {
                    
                     if (LOSHelper.CheckRayCast(currentCamera, meshBounds, losSource.SourceInfo.w, layerMask))
-                    {                   
+                    {
                         return true;
                     }
                 }

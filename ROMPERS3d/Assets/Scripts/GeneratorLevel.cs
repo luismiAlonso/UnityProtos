@@ -74,11 +74,15 @@ public class GeneratorLevel : MonoBehaviour
                     cloneI.transform.parent = superParentGrid.transform;
 
                 }
+
                 GameObject cloneE=createEnemies(x, y, mapsNodeToGenerate[indexLevel]);
+
                 if (cloneE!=null)
                 {
                     cloneE.transform.parent = superParentGrid.transform;
-
+                    cloneE.GetComponent<IAcontrol>().GetNavMesh().enabled = false;
+                    cloneE.GetComponent<IAcontrol>().setDataLevel(superParentGrid.GetComponent<DataLevel>());
+                    superParentGrid.GetComponent<DataLevel>().allEnemies.Add(cloneE.GetComponent<IAcontrol>());
                 }
             }
 
@@ -191,7 +195,7 @@ public class GeneratorLevel : MonoBehaviour
 
         foreach (Transform cw in objs)
         {
-            if (cw.gameObject.activeSelf &&  cw.GetComponent<CheckWall>()!=null)
+            if (cw.gameObject.activeSelf &&  cw.GetComponent<CheckWall>()!=null && cw.GetComponent<CheckWall>().checkersWall.Length>0)
             {
                 checkwall = cw.GetComponent<CheckWall>();
             }

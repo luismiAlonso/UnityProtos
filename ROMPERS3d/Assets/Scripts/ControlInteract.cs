@@ -32,7 +32,7 @@ public class ControlInteract : MonoBehaviour
             if (hit.transform != null && hit.transform.GetComponent<wallNode>() != null)
             {
                 hit.transform.GetComponent<wallNode>().prepareFallWall(hit.normal);
-                Debug.Log("hit");
+
             }
         }
     }

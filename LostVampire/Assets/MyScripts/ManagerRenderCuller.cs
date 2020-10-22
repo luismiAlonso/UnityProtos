@@ -39,13 +39,17 @@ public class ManagerRenderCuller : MonoBehaviour
             {
                 if (Manager.instance.playerControl.setEffects.GetFX("fxSunDamage") != null)
                 {
-                    Manager.instance.playerControl.setEffects.GetFX("fxSunDamage").Play();
+                    Manager.instance.playerControl.setEffects.PlayFx("fxSunDamage");
+                }
+                if (Manager.instance.playerControl.setEffects.GetFX("fxRestaureMana") != null)
+                {
+                    Manager.instance.playerControl.setEffects.noneFx("fxRestaureMana");
                 }
                 if (!Manager.instance.playerControl.checkers.isCaptured) {
                     Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().settingDamageLifeBySun();
                     Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().isInShadow = false;
                 }
-               
+                //Debug.Log(artificialSun[i].transform.rotation.eulerAngles);
                 flag =true;
             }
             else
@@ -56,17 +60,16 @@ public class ManagerRenderCuller : MonoBehaviour
 
         if (!flag) {
 
-            if (Manager.instance.playerControl.setEffects.GetFX("fxRestaureMana") != null && !Manager.instance.playerControl.setEffects.GetFX("fxRestaureMana").isPlaying)
+            if (Manager.instance.playerControl.setEffects.GetFX("fxRestaureMana") != null )
             {
-                Manager.instance.playerControl.setEffects.GetFX("fxRestaureMana").Play();
+                Manager.instance.playerControl.setEffects.PlayFx("fxRestaureMana");
             }
-            if (Manager.instance.playerControl.setEffects.GetFX("fxSunDamage") != null && Manager.instance.playerControl.setEffects.GetFX("fxSunDamage").isPlaying)
+            if (Manager.instance.playerControl.setEffects.GetFX("fxSunDamage") != null )
             {
-                Manager.instance.playerControl.setEffects.GetFX("fxSunDamage").Stop();
+                Manager.instance.playerControl.setEffects.noneFx("fxSunDamage");
             }
             Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().settingManaGlobal();
             Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().isInShadow = true;
-            Debug.Log("no quita");
 
         }
     }

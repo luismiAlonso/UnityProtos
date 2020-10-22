@@ -21,17 +21,17 @@ public class CheckFallWall : MonoBehaviour
            // Debug.Log("collision con solido");
             collisionWallSolid = true;
         }
-        if (other.transform.tag=="Player")
+       /* if (other.transform.tag=="Player")
         {
             palyerCheckWall = true;
-        }
+        }*/
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.transform.tag == "Player")
         {
-            palyerCheckWall = false;
+          //  palyerCheckWall = false;
 
         }
     }

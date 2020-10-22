@@ -10,7 +10,6 @@ public class CheckWall : MonoBehaviour
     public bool getCollisionCheckWall(string dirFall)
     {
         bool checkWall=false;
-
         for (int i=0;i<checkersWall.Length;i++)
         {
             if (dirFall == "front" &&  checkersWall[i].dirwall !=CheckFallWall.DirWall.front && checkersWall[i].isCollisionWall())
@@ -21,6 +20,7 @@ public class CheckWall : MonoBehaviour
                 checkWall = true;
             }
         }
+        Debug.Log(checkWall);
 
         return checkWall;
     }

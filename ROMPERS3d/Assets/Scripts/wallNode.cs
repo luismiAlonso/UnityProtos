@@ -56,16 +56,14 @@ public class wallNode : MonoBehaviour
         else if (dirHit == "back" && (dirwall == DirWall.left || dirwall == DirWall.right))
         {
             targetAngle = Quaternion.Euler(0, 90, 0);
-
-        }else if (dirHit == "front" && (dirwall == DirWall.top || dirwall == DirWall.down))
+        }
+        else if (dirHit == "front" && (dirwall == DirWall.top || dirwall == DirWall.down))
         {
             targetAngle = Quaternion.Euler(-180, 0, 0);
-           // Debug.Log("top");
 
         }else if (dirHit == "back"  && (dirwall == DirWall.top || dirwall == DirWall.down))
         {
             targetAngle = Quaternion.Euler(0, 0, 0);
-           // Debug.Log("back");
 
         }
 

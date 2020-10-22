@@ -72,7 +72,7 @@ public class BodyChange : MonoBehaviour
             myPlayerControl.controlInteract.settingLife (myPlayerControl.setthing.life - damageAdsorveLife);
 
             if (setEffects.GetFX("fxDamageBlood")!=null) {
-                setEffects.GetFX("fxDamageBlood").Play();
+                setEffects.PlayFx("fxDamageBlood");
             }
             if (myPlayerControl.setthing.life<=0) {
 
@@ -149,8 +149,13 @@ public class BodyChange : MonoBehaviour
                             ControlSouls.instance.activeImgSouls();
                         }
 
-                        if (setEffects.GetFX("fxCaptureNPC")!=null) {
-                            setEffects.GetFX("fxCaptureNPC").Play();
+                        if (hitCollider.GetComponent<SetEffects>().GetFX("fxCaptureNPC")!=null) {
+                            hitCollider.GetComponent<SetEffects>().PlayFx("fxCaptureNPC");
+                        }
+
+                        if (GetComponent<SetEffects>().GetFX("fxJump"))
+                        {
+                            GetComponent<SetEffects>().noneFx("fxJump");
                         }
 
                         hitCollider.GetComponent<BodyChange>().simpleIA.getNavMeshAgent().enabled = false;
@@ -178,9 +183,13 @@ public class BodyChange : MonoBehaviour
                             ControlSouls.instance.activeImgSouls();
                         }
 
-                        if (setEffects.GetFX("fxCaptureNPC") != null)
+                        if (hitCollider.GetComponent<SetEffects>().GetFX("fxCaptureNPC") != null)
                         {
-                            setEffects.GetFX("fxCaptureNPC").Play();
+                            hitCollider.GetComponent<SetEffects>().PlayFx("fxCaptureNPC");
+                        }
+                        if (GetComponent<SetEffects>().GetFX("fxJump"))
+                        {
+                            GetComponent<SetEffects>().noneFx("fxJump");
                         }
 
                         hitCollider.GetComponent<BodyChange>().simpleIA.getNavMeshAgent().enabled = false;
@@ -229,7 +238,7 @@ public class BodyChange : MonoBehaviour
                 prepareToExpulsion();
                 if (setEffects.GetFX("fxCaptureNPC") != null)
                 {
-                    setEffects.GetFX("fxCaptureNPC").Play();
+                    setEffects.PlayFx("fxCaptureNPC");
                 }
             }
         }
@@ -251,7 +260,7 @@ public class BodyChange : MonoBehaviour
 
                 if (setEffects.GetFX("fxDash") != null)
                 {
-                    setEffects.GetFX("fxDash").Play();
+                    setEffects.PlayFx("fxDash");
                 }
 
             }
@@ -314,6 +323,11 @@ public class BodyChange : MonoBehaviour
             {
                 myPlayerControl.checkers.checkCollisionONthrow().objColl.GetComponent<ControlInteract>().stunnedNPC(myPlayerControl.checkers.checkCollisionONthrow().objColl.GetComponent<SimpleIA>(), 6);
                 time =0 ;
+
+                if (setEffects.GetFX("fxDash") != null)
+                {
+                    setEffects.noneFx("fxDash");
+                }
             }
             yield return null;
         }
@@ -346,6 +360,10 @@ public class BodyChange : MonoBehaviour
         dominate = false;
         myPlayerControl.checkers.isDominated = false;
         checkers.canJump = true;
+        if (setEffects.GetFX("fxDash") != null)
+        {
+            setEffects.noneFx("fxDash");
+        }
         CameraControl.instance.setTarget(dominatorPlayerControl.transform);
     }
 

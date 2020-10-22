@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     public Checkers checkers;
     InputControl inputControl;
     Rigidbody rb;
-    float speed;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +25,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         LinealMove();
-        checkers.canMove = false;
+       // checkers.canMove = false;
     }
 
     public void LinealMove()
@@ -36,21 +35,20 @@ public class PlayerController : MonoBehaviour
         if (InputControl.instance.getAxisControl().x > 0 || InputControl.instance.getAxisControl().x < 0)
         {
             asix = new Vector3(InputControl.instance.getAxisControl().x,0,0);
+            //asix = Vector3.ClampMagnitude(asix, 1f);
         }
         else if (InputControl.instance.getAxisControl().y > 0 || InputControl.instance.getAxisControl().y < 0)
         {
             asix = new Vector3(0, 0, InputControl.instance.getAxisControl().y);
+            //asix = Vector3.ClampMagnitude(asix, 1f);
 
         }
-        else
-        {
-            asix = Vector3.zero;
-        }
-        speed = playerSettings.speedMove * Time.deltaTime;
-        rb.velocity = new Vector3(asix.x * speed, rb.velocity.y, asix.z * speed);
+
+        rb.MovePosition( transform.position + (asix * playerSettings.speedMove * Time.fixedDeltaTime));
+       // rb.velocity = new Vector3(asix.x*speed,rb.velocity.y,asix.z*speed);
         if (!asix.Equals(Vector3.zero))
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(asix,Vector3.up), Time.deltaTime * 40f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(asix), Time.deltaTime * 40f);
 
         }
     }

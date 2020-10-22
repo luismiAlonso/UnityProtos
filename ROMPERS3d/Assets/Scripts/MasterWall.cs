@@ -60,13 +60,16 @@ public class MasterWall : MonoBehaviour
             {
                 mw.transform.parent = objParent.transform;
                 mw.setIsGroup(true);
+                mw.dirwall = objParent.GetComponent<MasterWall>().dirwall;
                 objParent.GetComponent<MasterWall>().listMasterWall.Add(mw);
                //mw.GetComponent<MasterWall>().enabled = false;
             }
             transform.parent = objParent.transform;
+
             objParent.GetComponent<MasterWall>().listMasterWall.Add(this);
             objParent.GetComponent<MasterWall>().setActivaTeWalls();
             objParent.transform.parent = GeneratorLevel.instance.getSuperParentGrid().transform;
+            GetComponent<MasterWall>().dirwall = objParent.GetComponent<MasterWall>().dirwall;
             setIsGroup(true);
             //GetComponent<MasterWall>().enabled = false;
         }
@@ -150,32 +153,46 @@ public class MasterWall : MonoBehaviour
     public void fallwallNodes(Vector3 pointContact)
     {
 
-       // Debug.Log(listCheckWall.Count);
+        //Debug.Log(listCheckWall.Count +" : " + pointContact);
+        List<CheckWall> posibleWallFall = new List<CheckWall>();
+        string dirFall = "";
 
         for (int i=0;i< listCheckWall.Count;i++) {
 
             if (pointContact.x!=0 && pointContact.x > 0 && !listCheckWall[i].getCollisionCheckWall("front"))
             {
-                listCheckWall[i].wallNode.fallWall( "front");
+                posibleWallFall.Add(listCheckWall[i]);
+                dirFall = "front";
                // Debug.Log("frontx");
             }
             else if(pointContact.x != 0 && pointContact.x < 0 && !listCheckWall[i].getCollisionCheckWall("back"))
             {
-                listCheckWall[i].wallNode.fallWall( "back");
-                //Debug.Log("backx");
+                posibleWallFall.Add(listCheckWall[i]);
+                dirFall = "back";
+               // Debug.Log("backx");
 
             }
             else if (pointContact.z != 0 && pointContact.z > 0 && !listCheckWall[i].getCollisionCheckWall("front"))
             {
-                listCheckWall[i].wallNode.fallWall("front");
-               // Debug.Log("frontz");
+                posibleWallFall.Add(listCheckWall[i]);
+                dirFall = "front";
+                Debug.Log("frontz");
 
             }
             else if (pointContact.z != 0 && pointContact.z < 0 && !listCheckWall[i].getCollisionCheckWall("back"))
             {
-                listCheckWall[i].wallNode.fallWall("back");
-               // Debug.Log("backz");
+                posibleWallFall.Add(listCheckWall[i]);
+                dirFall = "back";
+                Debug.Log("backz");
 
+            }
+        }
+
+        if (posibleWallFall.Count == listCheckWall.Count) {
+
+            foreach (CheckWall wn in posibleWallFall)
+            {
+                wn.wallNode.fallWall(dirFall);
             }
         }
     }

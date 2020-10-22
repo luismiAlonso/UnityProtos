@@ -1276,13 +1276,18 @@ PrefabInstance:
     - target: {fileID: 7674719056084807457, guid: 3aabe748d6b3c0047a51f324d14727db,
         type: 3}
       propertyPath: forceChangeControllerInput
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7758347735300516062, guid: 3aabe748d6b3c0047a51f324d14727db,
         type: 3}
       propertyPath: playerControl
       value: 
       objectReference: {fileID: 1677427867}
+    - target: {fileID: 7758347735300516062, guid: 3aabe748d6b3c0047a51f324d14727db,
+        type: 3}
+      propertyPath: faceControl
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aabe748d6b3c0047a51f324d14727db, type: 3}
 --- !u!1 &1124512122

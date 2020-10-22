@@ -151,6 +151,7 @@ public class PlayerControl : MonoBehaviour {
         if (checkers.isGrounded && checkers.canAtack)
         {
             checkers.canMove = true;
+          //  setEffects.noneFx("fxJump");
         }
     }
 
@@ -213,9 +214,10 @@ public class PlayerControl : MonoBehaviour {
                 setEffects.GetSX("sxJump").Play();
             }
             if (setEffects.GetFX("fxJump") != null)
-            {
-                setEffects.GetSX("fxJump").Play();
+            {               
+                setEffects.PlayFx("fxJump");
             }
+
         }
 
         if (!checkers.isGrounded)
@@ -229,6 +231,14 @@ public class PlayerControl : MonoBehaviour {
     {
         rg.velocity = new Vector3(rg.velocity.x, setthing.forceJump, rg.velocity.z);
 
+        if (setEffects.GetSX("sxJump") != null)
+        {
+            setEffects.GetSX("sxJump").Play();
+        }
+        if (setEffects.GetFX("fxJump") != null)
+        {
+            setEffects.PlayFx("fxJump");
+        }
         if (!checkers.isGrounded)
         {
             rg.velocity += Vector3.up * Physics.gravity.y * setthing.fallMultiplier * Time.deltaTime;
@@ -304,8 +314,9 @@ public class PlayerControl : MonoBehaviour {
             }
             if (setEffects.GetFX("fxDash") != null)
             {
-                setEffects.GetFX("fxDash").Play();
+                setEffects.PlayFx("fxDash");
             }
+
             Vector3 normaLizeDir = transform.forward * setthing.distanceDash;
             normaLizeDir.y = 0.0f;
             checkers.canDash = true;
@@ -332,6 +343,7 @@ public class PlayerControl : MonoBehaviour {
             yield return null;
         }
         rg.velocity = Vector3.zero;
+        setEffects.noneFx("fxDash");
         yield return new WaitForSeconds(setthing.delayDash);
         checkers.canDash = false;
 

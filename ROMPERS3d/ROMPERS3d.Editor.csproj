@@ -683,7 +683,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Editor\SetMasterEnemy.cs" />
     <Compile Include="Assets\Editor\SetMasterWall.cs" />
   </ItemGroup>
   <ItemGroup>

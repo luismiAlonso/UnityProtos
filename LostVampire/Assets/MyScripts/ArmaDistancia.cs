@@ -45,6 +45,7 @@ public class ArmaDistancia : MonoBehaviour
            
             GameObject bullet = Instantiate(setEffects.GetFX("fxFireBullet").gameObject, disparador.position, disparador.rotation);
             bullet.GetComponent<Bullets>().setIdParent(transform.parent.gameObject.GetInstanceID());
+            bullet.SetActive(true);
             bullet.transform.GetComponent<Bullets>().enabled = true;
             bullet.GetComponent<ParticleSystem>().Play();
         }

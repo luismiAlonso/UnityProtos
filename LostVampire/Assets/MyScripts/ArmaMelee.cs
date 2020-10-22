@@ -14,10 +14,12 @@ public class ArmaMelee : MonoBehaviour
 
     private Vector3 scaleOriginalCollisionArea;
     private Vector3 maxArea;
+    private SetEffects setEffects;
 
     // Start is called before the first frame update
     void Start()
     {
+        setEffects = GetComponent<SetEffects>();
         scaleOriginalCollisionArea = transform.localScale;
         maxArea = new Vector3(maxRangeAreaAtack, maxRangeAreaAtack, maxRangeAreaAtack);
         if (MyPlayerControl == null)
@@ -42,6 +44,10 @@ public class ArmaMelee : MonoBehaviour
             case TypeWeaponMelee.combo:
                 ; break;
             case TypeWeaponMelee.areaShieldIA:
+                if (setEffects.GetFX("fxCupule"))
+                {
+                    setEffects.PlayFx("fxCupule");
+                }
                 makeAreaShield();
                 ; break;
         }
@@ -66,6 +72,15 @@ public class ArmaMelee : MonoBehaviour
 
                 if (!Manager.instance.playerControl.checkers.isDetectado && !MyPlayerControl.checkers.canAtack && !active)
                 {
+                    if (setEffects.GetFX("fxCupule"))
+                    {
+                        setEffects.noneFx("fxCupule");
+                    }
+                    if (setEffects.GetFX("fxCupuleDead"))
+                    {
+                        setEffects.PlayFx("fxCupuleDead");
+                    }
+
                     StopAllCoroutines();
                     StartCoroutine("IresetShield");
                 }

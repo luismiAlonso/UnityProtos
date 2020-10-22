@@ -31,9 +31,28 @@ public class SetEffects : MonoBehaviour
         if (typeCharacter== TypeCharacter.baseE)
         {
             Transform[] vfx = Resources.LoadAll<Transform>("MyPrefabs/vfxSfx/base/VFX/");
+
             foreach (Transform tvfx in vfx)
             {
-                listVFX.Add(tvfx);
+
+                if (tvfx.GetComponent<FxControl>() != null && tvfx.GetComponent<FxControl>().isLocalObject)
+                {
+
+                    Transform objFx = Instantiate(tvfx, transform.position, Quaternion.identity);
+                    objFx.transform.parent = transform;
+                    objFx.name = tvfx.name;
+                    objFx.gameObject.SetActive(false);
+                    listVFX.Add(objFx);
+
+                }
+                else if (tvfx.GetComponent<FxControl>() != null && !tvfx.GetComponent<FxControl>().isLocalObject)
+                {
+
+                    Transform objFx = Instantiate(tvfx, transform.position, Quaternion.identity);
+                    objFx.name = tvfx.name;
+                    objFx.gameObject.SetActive(false);
+                    listVFX.Add(objFx);
+                }
             }
            
         }
@@ -42,7 +61,24 @@ public class SetEffects : MonoBehaviour
             Transform[] vfx = Resources.LoadAll<Transform>("MyPrefabs/vfxSfx/clero/VFX/");
             foreach (Transform tvfx in vfx)
             {
-                listVFX.Add(tvfx);
+                if (tvfx.GetComponent<FxControl>() != null && tvfx.GetComponent<FxControl>().isLocalObject)
+                {
+
+                    Transform objFx = Instantiate(tvfx, transform.position, Quaternion.identity);
+                    objFx.transform.parent = transform;
+                    objFx.name = tvfx.name;
+                    objFx.gameObject.SetActive(false);
+                    listVFX.Add(objFx);
+
+                }
+                else if (tvfx.GetComponent<FxControl>() != null && !tvfx.GetComponent<FxControl>().isLocalObject)
+                {
+
+                    Transform objFx = Instantiate(tvfx, transform.position, Quaternion.identity);
+                    objFx.name = tvfx.name;
+                    objFx.gameObject.SetActive(false);
+                    listVFX.Add(objFx);
+                }
             }
             
         }
@@ -52,38 +88,47 @@ public class SetEffects : MonoBehaviour
 
             foreach(Transform tvfx in vfx)
             {
-                listVFX.Add(tvfx);
+                if (tvfx.GetComponent<FxControl>()!=null && tvfx.GetComponent<FxControl>().isLocalObject) {
+
+                    Transform objFx = Instantiate(tvfx, transform.position, Quaternion.identity);
+                    objFx.transform.parent = transform;
+                    objFx.name = tvfx.name;
+                    objFx.gameObject.SetActive(false);
+                    listVFX.Add(objFx);
+
+                }
+                else if (tvfx.GetComponent<FxControl>() != null && !tvfx.GetComponent<FxControl>().isLocalObject)
+                {
+
+                    Transform objFx = Instantiate(tvfx, transform.position, Quaternion.identity);
+                    objFx.name = tvfx.name;
+                    objFx.gameObject.SetActive(false);
+                    listVFX.Add(objFx);
+                }
             }
             
-        }
-
-        if (typeCharacter == TypeCharacter.baseE)
-        {
-            Transform[] vfx = Resources.LoadAll<Transform>("MyPrefabs/vfxSfx/itemMAna/VFX/");
-            foreach (Transform tvfx in vfx)
-            {
-                listVFX.Add(tvfx);
-            }
-
+  
         }
     }
 
     public ParticleSystem GetFX(string nameFX)
     {
-        ParticleSystem pS = null;
+        ParticleSystem pFx = null;
 
         foreach (Transform tfx in listVFX)
         {
             
             if (nameFX== tfx.name)
             {
-                
                 if (tfx.GetComponent<ParticleSystem>()!=null) {
-                    pS = tfx.GetComponent<ParticleSystem>();
+
+                    pFx = tfx.GetComponent<ParticleSystem>();
+                    return pFx;
                 }
             }
         }
-        return pS;
+       
+        return pFx;
     }
 
     public AudioSource GetSX(string nameSX)
@@ -102,5 +147,43 @@ public class SetEffects : MonoBehaviour
             }
         }
         return aS;
+    }
+
+    public void PlayFx(string nameFX)
+    {
+        foreach (Transform tfx in listVFX)
+        {
+
+            if (nameFX == tfx.name && tfx.GetComponent<FxControl>().isLocalObject)
+            {            
+                tfx.gameObject.SetActive(true);
+                tfx.GetComponent<ParticleSystem>().Play();
+
+            }else if (nameFX == tfx.name && !tfx.GetComponent<FxControl>().isLocalObject)
+            {
+                tfx.gameObject.SetActive(true);
+                tfx.transform.position = transform.position;
+                tfx.GetComponent<ParticleSystem>().Play();
+            }
+        }
+    }
+
+    public void noneFx(string nameFX)
+    {
+        foreach (Transform tfx in listVFX)
+        {
+           // Debug.Log(tfx.name + "/" + nameFX);
+
+            if (nameFX == tfx.name && tfx.GetComponent<FxControl>().isLocalObject)
+            {
+                tfx.gameObject.SetActive(false);
+
+            }
+            else if (nameFX == tfx.name && !tfx.GetComponent<FxControl>().isLocalObject)
+            {
+                tfx.gameObject.SetActive(true);
+               
+            }
+        }
     }
 }
