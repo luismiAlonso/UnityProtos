@@ -173,7 +173,7 @@ public class InputControl : MonoBehaviour
             }
             else if (name == "Button1")
             {
-                input = Input.GetMouseButton(0);
+                input = Input.GetButtonDown("Fire2");
             }
             else if (name == "Button2")
             {
@@ -181,7 +181,7 @@ public class InputControl : MonoBehaviour
             }
             else if (name == "Button3")
             {
-                input = Input.GetMouseButton(1);
+                input = Input.GetButtonDown("Fire1");
             }
         }
 

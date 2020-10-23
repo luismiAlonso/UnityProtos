@@ -70,7 +70,7 @@ public class ArmaMelee : MonoBehaviour
                 ; break;
             case TypeWeaponMelee.areaShieldIA:
 
-                if (!Manager.instance.playerControl.checkers.isDetectado && !MyPlayerControl.checkers.canAtack && !active)
+                if (Manager.instance.playerControl!=null && !Manager.instance.playerControl.checkers.isDetectado && !MyPlayerControl.checkers.canAtack && active)
                 {
                     if (setEffects.GetFX("fxCupule"))
                     {
@@ -78,6 +78,7 @@ public class ArmaMelee : MonoBehaviour
                     }
                     if (setEffects.GetFX("fxCupuleDead"))
                     {
+                        Debug.Log("entro");
                         setEffects.PlayFx("fxCupuleDead");
                     }
 
@@ -121,7 +122,6 @@ public class ArmaMelee : MonoBehaviour
             active = true;
             yield return null;
         }
-        active = false;
     }
 
     void takeDamageMeleeOnTrigger(Collider other)

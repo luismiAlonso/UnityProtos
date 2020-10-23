@@ -181,7 +181,7 @@ public class SetEffects : MonoBehaviour
             }
             else if (nameFX == tfx.name && !tfx.GetComponent<FxControl>().isLocalObject)
             {
-                tfx.gameObject.SetActive(true);
+                tfx.gameObject.SetActive(false);
                
             }
         }

@@ -197,6 +197,7 @@ public class ControlInteract : MonoBehaviour
             if (setEffects.GetFX("fxStun") != null)
             {
                 setEffects.PlayFx("fxStun");
+                Debug.Log("llamando fxStun");
             }
             stunnedControl = true;
             simpleIA.getNavMeshAgent().enabled = false;
@@ -207,6 +208,7 @@ public class ControlInteract : MonoBehaviour
         if (playerControl.checkers.isDominated)
         {
             StopCoroutine(coStun);
+            setEffects.noneFx("fxStun");
 
         }
     }
@@ -222,7 +224,9 @@ public class ControlInteract : MonoBehaviour
             playerControl.checkers.isStuned = true;
             yield return null;
         }
+        Debug.Log("antes de cancelar");
         setEffects.noneFx("fxStun");
+        Debug.Log("despues de cancelar");
         playerControl.checkers.isStuned = false;
         sIA.getNavMeshAgent().enabled = true;
         sIA.enabled = false;

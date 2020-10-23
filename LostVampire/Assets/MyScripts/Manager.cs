@@ -21,9 +21,8 @@ public class Manager : MonoBehaviour
     }
 
     #endregion Singleton
-    
-    private ModelDialog[] dialogos;
     public PlayerControl playerControl;
+    private ModelDialog[] dialogos;
     public bool fullStop;
     public bool GlobalUsePad;
     public bool faceControl;
@@ -39,6 +38,8 @@ public class Manager : MonoBehaviour
     private void Awake()
     {
         ReadSequences();
+
+         DontDestroyOnLoad(this.gameObject);
     }
     // Start is called before the first frame update
     void Start()

@@ -52,7 +52,7 @@ public class BodyChange : MonoBehaviour
     void Update()
     {
         checkBodyChange();
-        reduceMana();
+        currentState();
         AdsorveLife();
         usingAtackDominate();
     }
@@ -106,19 +106,25 @@ public class BodyChange : MonoBehaviour
         Debug.Log("fin sleep");
     }
 
-    void reduceMana()
+    void currentState()
     {
         if (dominate && !isPlayer)
         {
             dominatorPlayerControl.controlInteract.settingDamageManaGlobal();
+
             if (dominatorPlayerControl.setthing.mana<=0)
             {
                 prepareToExpulsion();
             }
+            myPlayerControl.enabled = true;
+           // Debug.Log("Si estoy dominado");
+
         }
         else if(!dominate && !isPlayer)
         {
-           // 
+            // 
+            myPlayerControl.enabled = false;
+           // Debug.Log("no estoy dominado");
         }
     }
 
@@ -346,7 +352,6 @@ public class BodyChange : MonoBehaviour
     {
 
         myPlayerControl.GetRigidbody().isKinematic = true;
-        myPlayerControl.enabled = false;
         simpleIA.getNavMeshAgent().enabled = true;
         simpleIA.enabled = true;
         dominatorPlayerControl.transform.gameObject.SetActive(true);

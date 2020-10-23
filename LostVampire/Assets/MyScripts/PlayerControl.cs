@@ -28,6 +28,7 @@ public class PlayerControl : MonoBehaviour {
     }
 
     void Start() {
+
         rg = GetComponent<Rigidbody>();
         setEffects = GetComponent<SetEffects>();
         controlInteract = GetComponent<ControlInteract>();
@@ -343,7 +344,7 @@ public class PlayerControl : MonoBehaviour {
             yield return null;
         }
         rg.velocity = Vector3.zero;
-        setEffects.noneFx("fxDash");
+        //setEffects.noneFx("fxDash");
         yield return new WaitForSeconds(setthing.delayDash);
         checkers.canDash = false;
 

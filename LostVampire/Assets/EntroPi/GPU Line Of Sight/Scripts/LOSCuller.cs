@@ -91,7 +91,8 @@ namespace LOS
 
         private static bool CustomCull(Transform _target, LOSSource losSource, GameObject objMesh, int layerMask)
         {
-
+            //Debug.Log("Target: "+_target.GetComponent<SimpleIA>().typeNPC + " losSource: "+ losSource+" objMesh: "+objMesh.transform.parent.GetComponent<BodyChange>());
+            //Debug.Log(_target.name+" "+ objMesh.transform.name);
             if (objMesh.tag=="Player" && LOSHelper.CheckBoundsVisibility(losSource, objMesh.GetComponent<Renderer>().bounds, layerMask) && objMesh.transform.parent.gameObject.activeSelf)
             {
                  //Debug.Log("te veo");
