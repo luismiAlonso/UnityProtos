@@ -40,6 +40,7 @@ public class MasterWall : MonoBehaviour
                 mw.transform.parent = null;
                 mw.setIsGroup(false);
                 mw.setActivaTeWalls();
+                mw.transform.parent = GeneratorLevel.instance.getSuperParentGrid().transform;
                 // mw.GetComponent<MasterWall>().enabled = false;
             }
         }
