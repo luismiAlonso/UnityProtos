@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4067ede6fb85b9843b0dfb546fb503ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeCharacter: 0
+  typeCharacter: 2
   soundsScene: {fileID: 905367774944038170, guid: c7028492b0a5e4446857a36cbdf12327,
     type: 3}
 --- !u!1 &4962103619545682941
