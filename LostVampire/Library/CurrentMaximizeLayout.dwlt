@@ -20,10 +20,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 679, y: 442}
-  m_MaxSize: {x: 12004, y: 8042}
+  m_MinSize: {x: 678, y: 442}
+  m_MaxSize: {x: 12003, y: 8042}
   vertical: 0
-  controlID: 29279
+  controlID: 55701
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -137,10 +137,10 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 947
-  m_MinSize: {x: 679, y: 442}
-  m_MaxSize: {x: 12004, y: 8042}
+  m_MinSize: {x: 678, y: 442}
+  m_MaxSize: {x: 12003, y: 8042}
   vertical: 1
-  controlID: 29280
+  controlID: 55702
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -163,10 +163,10 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 522
-  m_MinSize: {x: 679, y: 221}
-  m_MaxSize: {x: 12004, y: 4021}
+  m_MinSize: {x: 678, y: 221}
+  m_MaxSize: {x: 12003, y: 4021}
   vertical: 0
-  controlID: 29281
+  controlID: 55703
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -222,10 +222,10 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 32}
+      scrollPos: {x: 0, y: 208}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 36f9ffff40f9ffff34fbffff1c380000
+      m_ExpandedIDs: f485fefffe85feff78f9fffffcf9ffff34fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -13432
+  m_LastSelectedObjectID: -96780
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -341,9 +341,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -8.008606, y: 38.882812, z: -26.3125}
+    m_Target: {x: 6.5546875, y: 22.926758, z: 29.267578}
     speed: 2
-    m_Value: {x: -8.008606, y: 38.882812, z: -26.3125}
+    m_Value: {x: 6.5546875, y: 22.926758, z: 29.267578}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -389,13 +389,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.44630224, y: -0.02952299, z: 0.014730986, w: 0.89427894}
+    m_Target: {x: 0.08941835, y: -0.7769656, z: 0.11337386, w: 0.6127714}
     speed: 2
-    m_Value: {x: 0.4463002, y: -0.029522857, z: 0.014730919, w: 0.8942749}
+    m_Value: {x: 0.08941774, y: -0.7769603, z: 0.11337309, w: 0.6127672}
   m_Size:
-    m_Target: 42.29311
+    m_Target: 21.285765
     speed: 2
-    m_Value: 42.29311
+    m_Value: 21.285765
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -544,12 +544,12 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_PreviewResizer:
-    m_CachedPref: 264
+    m_CachedPref: -264
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
-  m_LastInspectedObjectInstanceID: 14762
-  m_LastVerticalScrollValue: 0
+  m_LastInspectedObjectInstanceID: -1712
+  m_LastVerticalScrollValue: 93
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -696,20 +696,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Materials
+    - Assets/Resources/MyPrefabs/vfxSfx/SOUNDS
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Materials
+  - Assets/Resources/MyPrefabs/vfxSfx/SOUNDS
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\MimindersProjects\GitRepository\UnityProtos\LostVampire
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 95}
-    m_SelectedIDs: 9e3d0000
-    m_LastClickedID: 15774
-    m_ExpandedIDs: 00000000743d0000763d0000903d0000963d0000ac3d000000ca9a3b
+    scrollPos: {x: 0, y: 32}
+    m_SelectedIDs: dc480000
+    m_LastClickedID: 18652
+    m_ExpandedIDs: 00000000763e0000863e0000f2420000fc420000da48000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -737,7 +737,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000743d000000ca9a3b
+    m_ExpandedIDs: 00000000763e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -762,8 +762,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: aa390000
-    m_LastClickedInstanceID: 14762
+    m_SelectedInstanceIDs: 50f9ffff
+    m_LastClickedInstanceID: -1712
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 7e00000076240000942400001a060000be10f9ffac4a0000d43c0000ea74020000000000
     m_RenameOverlay:
@@ -832,20 +832,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/MyPrefabs/vfxSfx/player/VFX
+    - Assets/Resources/MyPrefabs/vfxSfx/base/VFX
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/MyPrefabs/vfxSfx/player/VFX
+  - Assets/Resources/MyPrefabs/vfxSfx/base/VFX
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\MimindersProjects\GitRepository\UnityProtos\LostVampire
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: be3d0000
-    m_LastClickedID: 15806
-    m_ExpandedIDs: 00000000743d000000ca9a3b
+    m_SelectedIDs: e0480000
+    m_LastClickedID: 18656
+    m_ExpandedIDs: 00000000763e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -873,7 +873,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000743d000000ca9a3b
+    m_ExpandedIDs: 00000000763e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
