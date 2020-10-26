@@ -660,6 +660,7 @@
     <Compile Include="Assets\Scripts\GeneratorLevel.cs" />
     <Compile Include="Assets\Scripts\IAcontrol.cs" />
     <Compile Include="Assets\Scripts\InputControl.cs" />
+    <Compile Include="Assets\Scripts\InstanceWall.cs" />
     <Compile Include="Assets\Scripts\Manager.cs" />
     <Compile Include="Assets\Scripts\MapNode.cs" />
     <Compile Include="Assets\Scripts\MasterWall.cs" />

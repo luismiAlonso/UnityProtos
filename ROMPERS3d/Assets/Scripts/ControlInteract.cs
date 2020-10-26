@@ -24,6 +24,7 @@ public class ControlInteract : MonoBehaviour
         CheckFront();
     }
 
+
     void CheckFront()
     {
         if (InputControl.instance.getButtonsControl("Button1")) {
