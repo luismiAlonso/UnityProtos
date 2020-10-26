@@ -110,6 +110,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: sxSunDamage
       objectReference: {fileID: 0}
+    - target: {fileID: 5296219775749305899, guid: d85933f71ef54484aafe43eeb5a8b661,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.78
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d85933f71ef54484aafe43eeb5a8b661, type: 3}
 --- !u!4 &5170960163297834170 stripped
@@ -129,6 +134,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: sxMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 6747131473947239482, guid: 2c76da92e86dd1f4981a6e303668f512,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6747131473947239483, guid: 2c76da92e86dd1f4981a6e303668f512,
         type: 3}
@@ -255,6 +265,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7794194828627532807, guid: 694d0b8a62b444d47a213776434bdddb,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7794194828627532809, guid: 694d0b8a62b444d47a213776434bdddb,
         type: 3}
       propertyPath: m_Name
@@ -275,6 +290,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5170960164380964152}
     m_Modifications:
+    - target: {fileID: 7595737624926249130, guid: 78e407bfbe63f5d4b93cbab8ef683fcb,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7595737624926249132, guid: 78e407bfbe63f5d4b93cbab8ef683fcb,
         type: 3}
       propertyPath: m_Name
@@ -405,6 +425,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8539951599959898349, guid: 06d16e50047b22a42b8528f888251721,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8539951599959898349, guid: 06d16e50047b22a42b8528f888251721,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.137
+      objectReference: {fileID: 0}
     - target: {fileID: 8539951599959898351, guid: 06d16e50047b22a42b8528f888251721,
         type: 3}
       propertyPath: m_Name
@@ -425,6 +455,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5170960164380964152}
     m_Modifications:
+    - target: {fileID: 8420275876745774290, guid: 561f5e20b5c82fe4fbe02b83199f81ba,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.661
+      objectReference: {fileID: 0}
     - target: {fileID: 8420275876745774292, guid: 561f5e20b5c82fe4fbe02b83199f81ba,
         type: 3}
       propertyPath: m_Name
@@ -560,6 +595,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9136998350853465150, guid: 6c703c59e8ab98544aa0682ba070fe84,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9136998350853465150, guid: 6c703c59e8ab98544aa0682ba070fe84,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.192
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c703c59e8ab98544aa0682ba070fe84, type: 3}
 --- !u!4 &5170960164243977918 stripped
@@ -634,6 +679,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748712746506645106, guid: 97286c3bbfe3a1c44938259cf0279e00,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.237
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97286c3bbfe3a1c44938259cf0279e00, type: 3}
@@ -729,6 +779,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: sxJump
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407639637134250214, guid: 861a8c658362de843994278af00416f3,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.307
       objectReference: {fileID: 0}
     - target: {fileID: 3407639637134250215, guid: 861a8c658362de843994278af00416f3,
         type: 3}
@@ -935,6 +990,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3892240143268224290, guid: f2630adbe8aa3584ba937dab16811559,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.092
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2630adbe8aa3584ba937dab16811559, type: 3}
 --- !u!4 &5170960164708028626 stripped
@@ -950,6 +1010,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5170960164380964152}
     m_Modifications:
+    - target: {fileID: 3742527929465384026, guid: 97cfa79432af7fb4bb50725452289973,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3742527929465384028, guid: 97cfa79432af7fb4bb50725452289973,
         type: 3}
       propertyPath: m_Name
