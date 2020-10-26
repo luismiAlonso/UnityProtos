@@ -46,7 +46,7 @@ namespace LOS
 
         private void Update()
         {
-            for (int i=0;i<ManagerRenderCuller.instance.listRendersCullers.Length;i++) {
+            for (int i=0;i<ManagerRenderCuller.instance.listRendersCullers.Count;i++) {
                 CustomCull(target, Mysource, ManagerRenderCuller.instance.listRendersCullers[i], m_RaycastLayerMask.value);
             }
         }

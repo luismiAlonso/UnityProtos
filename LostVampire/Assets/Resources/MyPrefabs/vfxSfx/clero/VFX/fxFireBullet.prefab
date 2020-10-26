@@ -9601,6 +9601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLocalObject: 1
+  useInLoop: 0
 --- !u!199 &644615318943667131
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -14427,6 +14428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLocalObject: 1
+  useInLoop: 0
 --- !u!199 &2033621609800382852
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -19291,7 +19293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 548277a808910fb4eabbc9576563d002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0.5
+  damage: 0.02
   speedBullet: 40
   bloodParticle: {fileID: 0}
   particleImpactBlood: {fileID: 0}
@@ -19314,6 +19316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLocalObject: 0
+  useInLoop: 0
 --- !u!1 &6931239841120792519
 GameObject:
   m_ObjectHideFlags: 0
@@ -28893,6 +28896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLocalObject: 1
+  useInLoop: 0
 --- !u!199 &4556033916631357
 ParticleSystemRenderer:
   serializedVersion: 6

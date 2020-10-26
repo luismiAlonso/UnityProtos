@@ -74,6 +74,10 @@ public class BodyChange : MonoBehaviour
             if (setEffects.GetFX("fxDamageBlood")!=null) {
                 setEffects.PlayFx("fxDamageBlood");
             }
+            if (setEffects.GetSX("sxDamageBlood") != null)
+            {
+                setEffects.GetSX("sxDamageBlood").Play();
+            }
             if (myPlayerControl.setthing.life<=0) {
 
                 myPlayerControl.controlInteract.settingLife(0);
@@ -158,7 +162,10 @@ public class BodyChange : MonoBehaviour
                         if (hitCollider.GetComponent<SetEffects>().GetFX("fxCaptureNPC")!=null) {
                             hitCollider.GetComponent<SetEffects>().PlayFx("fxCaptureNPC");
                         }
-
+                        if (hitCollider.GetComponent<SetEffects>().GetSX("sxCaptureNPC") != null)
+                        {
+                            hitCollider.GetComponent<SetEffects>().GetSX("sxCaptureNPC").Play();
+                        }
                         if (GetComponent<SetEffects>().GetFX("fxJump"))
                         {
                             GetComponent<SetEffects>().noneFx("fxJump");
@@ -192,6 +199,10 @@ public class BodyChange : MonoBehaviour
                         if (hitCollider.GetComponent<SetEffects>().GetFX("fxCaptureNPC") != null)
                         {
                             hitCollider.GetComponent<SetEffects>().PlayFx("fxCaptureNPC");
+                        }
+                        if (hitCollider.GetComponent<SetEffects>().GetSX("sxCaptureNPC") != null)
+                        {
+                            hitCollider.GetComponent<SetEffects>().GetSX("sxCaptureNPC").Play();
                         }
                         if (GetComponent<SetEffects>().GetFX("fxJump"))
                         {

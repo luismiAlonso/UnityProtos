@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Bullets : MonoBehaviour {
 
-    public float damage = 0.5f;
-    public float speedBullet = 0.5f;
+    public float damage = 0.02f;
+    public float speedBullet =40f;
     public ParticleSystem bloodParticle;
     public GameObject particleImpactBlood;
     public bool playerEnemi;
@@ -62,7 +62,8 @@ public class Bullets : MonoBehaviour {
        // Debug.Log(collision.transform.position+"/"+collision.transform.localPosition);
         if (collision.transform.tag == "Player" )
         {
-            Manager.instance.playerControl.transform.GetComponent<ControlInteract>().transform.GetComponent<ControlInteract>().settingLife(Manager.instance.playerControl.transform.GetComponent<ControlInteract>().transform.GetComponent<ControlInteract>().getLife()- damage);
+            Manager.instance.playerControl.transform.GetComponent<ControlInteract>().transform.GetComponent<ControlInteract>().settingLife(Manager.instance.playerControl.transform.GetComponent<ControlInteract>().getLife()- damage);
+
             Destroy(gameObject);
 
         }else if (collision.transform.tag == "NPC" && collision.GetComponent<BodyChange>()!=null && !collision.GetComponent<BodyChange>().dominate && IdInstanceParent!= collision.gameObject.GetInstanceID())

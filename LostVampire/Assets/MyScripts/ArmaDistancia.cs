@@ -40,6 +40,11 @@ public class ArmaDistancia : MonoBehaviour
     public IEnumerator shootNormal()
     {
         //Instantiate your projectile
+        if (setEffects.GetSX("sxFireBullet")!=null)
+        {
+            setEffects.GetSX("sxFireBullet").Play();
+        }
+
         if (setEffects.GetFX("fxFireBullet") != null)
         {
            

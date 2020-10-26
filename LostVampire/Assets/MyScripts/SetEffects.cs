@@ -149,21 +149,68 @@ public class SetEffects : MonoBehaviour
         return aS;
     }
 
+    public void PlaySx(string nameSX)
+    {
+        foreach (Transform tsx in listSFX)
+        {
+
+            if (nameSX == tsx.name)
+            {
+                if (nameSX == tsx.name && !tsx.GetComponent<AudioSource>().isPlaying )
+                {
+                    tsx.GetComponent<AudioSource>().Play();
+                }
+            }
+        }
+    }
+
+    public void noneSx(string nameSX)
+    {
+        foreach (Transform tsx in listSFX)
+        {
+
+            if (nameSX == tsx.name)
+            {
+                if (nameSX == tsx.name && tsx.GetComponent<AudioSource>().isPlaying)
+                {
+                    tsx.GetComponent<AudioSource>().Stop();
+                }
+            }
+        }
+    }
+
     public void PlayFx(string nameFX)
     {
         foreach (Transform tfx in listVFX)
         {
 
-            if (nameFX == tfx.name && tfx.GetComponent<FxControl>().isLocalObject)
+            if (nameFX == tfx.name && !tfx.GetComponent<FxControl>().useInLoop && tfx.GetComponent<FxControl>().isLocalObject)
             {            
                 tfx.gameObject.SetActive(true);
                 tfx.GetComponent<ParticleSystem>().Play();
 
-            }else if (nameFX == tfx.name && !tfx.GetComponent<FxControl>().isLocalObject)
+            }else if (nameFX == tfx.name && !tfx.GetComponent<FxControl>().useInLoop  && !tfx.GetComponent<FxControl>().isLocalObject)
             {
                 tfx.gameObject.SetActive(true);
                 tfx.transform.position = transform.position;
                 tfx.GetComponent<ParticleSystem>().Play();
+            }
+            else if (nameFX == tfx.name && tfx.GetComponent<FxControl>().useInLoop && tfx.GetComponent<FxControl>().isLocalObject)
+            {
+                if (!tfx.GetComponent<FxControl>().isFxActive()) {
+                    tfx.gameObject.SetActive(true);
+                    tfx.GetComponent<ParticleSystem>().Play();
+                }
+
+            }
+            else if (nameFX == tfx.name && tfx.GetComponent<FxControl>().useInLoop && !tfx.GetComponent<FxControl>().isLocalObject)
+            {
+                if (!tfx.GetComponent<FxControl>().isFxActive())
+                {
+                    tfx.gameObject.SetActive(true);
+                    tfx.transform.position = transform.position;
+                    tfx.GetComponent<ParticleSystem>().Play();
+                }
             }
         }
     }
@@ -174,12 +221,12 @@ public class SetEffects : MonoBehaviour
         {
            // Debug.Log(tfx.name + "/" + nameFX);
 
-            if (nameFX == tfx.name && tfx.GetComponent<FxControl>().isLocalObject)
+            if (nameFX == tfx.name  && tfx.GetComponent<FxControl>().isLocalObject)
             {
                 tfx.gameObject.SetActive(false);
 
             }
-            else if (nameFX == tfx.name && !tfx.GetComponent<FxControl>().isLocalObject)
+            else if (nameFX == tfx.name  && !tfx.GetComponent<FxControl>().isLocalObject)
             {
                 tfx.gameObject.SetActive(false);
                

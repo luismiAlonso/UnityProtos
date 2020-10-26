@@ -6,6 +6,7 @@ public class FxControl : MonoBehaviour
 {
 
     public bool isLocalObject;
+    public bool useInLoop;
    // public bool useDurabilityParticle;
 
     private ParticleSystem particleSystem;
@@ -34,5 +35,20 @@ public class FxControl : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
+    }
+
+    public bool isFxActive()
+    {
+        bool check=false;
+
+        if (particleSystem != null)
+        {
+            if (particleSystem.IsAlive())
+            {
+                check = true;
+            }
+        }
+
+        return check;
     }
 }

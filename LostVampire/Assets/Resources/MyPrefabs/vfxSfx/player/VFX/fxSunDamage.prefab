@@ -9610,6 +9610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLocalObject: 1
+  useInLoop: 1
 --- !u!1 &1899646157024887593
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.AI;
 
 public class ControlSouls : MonoBehaviour
@@ -26,9 +25,13 @@ public class ControlSouls : MonoBehaviour
     public GameObject doorExit;
     private bool doorExist;
 
+    private void Awake()
+    {
+
+    }
+
     void Start()
     {
-        generateSoulsPanel();
     }
 
     // Update is called once per frame
@@ -37,12 +40,15 @@ public class ControlSouls : MonoBehaviour
         
     }
 
-    void generateSoulsPanel()
+    public void generateSoulsPanel()
     {
-        for (int i=0; i<ManagerRenderCuller.instance.listRendersCullers.Length;i++)
+        resetSouls();
+        imgSoulsList = new List<soulsImg>();
+        Debug.Log(ManagerRenderCuller.instance.listRendersCullers.Count);
+
+        for (int i=0; i<ManagerRenderCuller.instance.listRendersCullers.Count;i++)
         {
             if (ManagerRenderCuller.instance.listRendersCullers[i].tag!="Player") {
-
                 soulsImg imgSouls = Instantiate(Resources.Load<soulsImg>("MyPrefabs/components/soulsImage")) as soulsImg;
                 imgSouls.transform.parent = transform;
                 imgSoulsList.Add(imgSouls);
@@ -72,6 +78,10 @@ public class ControlSouls : MonoBehaviour
             {
                 Manager.instance.indexLevel++;
                 GameObject coffin = Instantiate(doorExit);
+                if (Manager.instance.playerControl.setEffects.GetSX("sxCoffinSpawn") !=null)
+                {
+                    Manager.instance.playerControl.setEffects.GetSX("sxCoffinSpawn").Play();
+                }
                 Vector3 randPos = RandomNavmeshLocation(6.5f);
                 coffin.transform.position = new Vector3(randPos.x, 2, randPos.z);
                 doorExist = true;
@@ -91,5 +101,14 @@ public class ControlSouls : MonoBehaviour
             finalPosition = hit.position;
         }
         return finalPosition;
+    }
+
+    public void resetSouls()
+    {
+        for (int i = 0; i < imgSoulsList.Count ; i++)
+        {
+            Debug.Log(imgSoulsList[i].name);
+            Destroy(imgSoulsList[i]);         
+        }
     }
 }

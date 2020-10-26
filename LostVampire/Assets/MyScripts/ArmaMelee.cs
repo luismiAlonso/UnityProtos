@@ -44,9 +44,13 @@ public class ArmaMelee : MonoBehaviour
             case TypeWeaponMelee.combo:
                 ; break;
             case TypeWeaponMelee.areaShieldIA:
-                if (setEffects.GetFX("fxCupule"))
+                if (setEffects.GetFX("fxCupule")!=null)
                 {
                     setEffects.PlayFx("fxCupule");
+                }
+                if (setEffects.GetSX("sxCupula")!=null && !active)
+                {
+                    setEffects.GetSX("sxCupula").Play();
                 }
                 makeAreaShield();
                 ; break;
@@ -72,14 +76,17 @@ public class ArmaMelee : MonoBehaviour
 
                 if (Manager.instance.playerControl!=null && !Manager.instance.playerControl.checkers.isDetectado && !MyPlayerControl.checkers.canAtack && active)
                 {
-                    if (setEffects.GetFX("fxCupule"))
+                    if (setEffects.GetFX("fxCupule")!=null)
                     {
                         setEffects.noneFx("fxCupule");
                     }
-                    if (setEffects.GetFX("fxCupuleDead"))
+                    if (setEffects.GetFX("fxCupuleDead")!=null)
                     {
-                        Debug.Log("entro");
                         setEffects.PlayFx("fxCupuleDead");
+                    }
+                    if (setEffects.GetSX("sxCupulaFin")!=null && active)
+                    {
+                        setEffects.GetSX("sxCupulaFin").Play();
                     }
 
                     StopAllCoroutines();
@@ -99,13 +106,13 @@ public class ArmaMelee : MonoBehaviour
 
     IEnumerator IresetShield()
     {
+        active = false;
+
         while (Vector3.Distance(transform.localScale, scaleOriginalCollisionArea) > 0.01f)
         {
-            active = false;
             transform.localScale = Vector3.Lerp(transform.localScale, scaleOriginalCollisionArea, Time.deltaTime * timeTransitionAreaAtack);
             yield return null;
         }
-        active = true;
         MyPlayerControl.checkers.canAtack = true;
     }
 
@@ -127,6 +134,11 @@ public class ArmaMelee : MonoBehaviour
     void takeDamageMeleeOnTrigger(Collider other)
     {
         if (other!=null && active) {
+
+            if (setEffects.GetSX("sxCupulaRepulsion")!=null)
+            {
+                setEffects.GetSX("sxCupulaRepulsion").Play();
+            }
 
             other.GetComponent<ControlInteract>().settingLife(CanvasManager.instance.healhtBar.getActualHealth() - Damage);
             Vector3 dir = transform.position - other.transform.position;

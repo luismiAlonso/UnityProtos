@@ -19,14 +19,48 @@ public class ManagerRenderCuller : MonoBehaviour
     }
 
     #endregion Singleton
-    public GameObject[] listRendersCullers;
+    public List<GameObject> listRendersCullers=new List<GameObject>();
     public LOS.LOSSource[] artificialSun;
     public Renderer meshCullerPlayer;
     public LayerMask layerMask;
 
+    private void Start()
+    {
+        setRendersCuller();
+    }
+
     private void Update()
     {
         cullerSunAndShadows();
+    }
+
+
+    void setRendersCuller()
+    {
+        listRendersCullers = new List<GameObject>();
+
+        GameObject[] npcs = GameObject.FindGameObjectsWithTag("NPC");
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Transform[] ply = player.GetComponentsInChildren<Transform>(true);
+
+        foreach (Transform t in ply)
+        {
+            if (t.name == "meshCuller")
+            {
+                listRendersCullers.Add(t.gameObject);
+            }
+        }
+
+        foreach (GameObject npc in npcs)
+        {
+            if (npc.GetComponent<LOS.LOSCuller>() != null)
+            {
+                listRendersCullers.Add(npc);
+            }
+        }
+
+        ControlSouls.instance.generateSoulsPanel();
+
     }
 
     void cullerSunAndShadows()
@@ -35,20 +69,22 @@ public class ManagerRenderCuller : MonoBehaviour
 
         for (int i=0;i< artificialSun.Length && !flag; i++)
         {
+
            if(LOS.LOSHelper.CheckBoundsVisibility(artificialSun[i], meshCullerPlayer.bounds, layerMask))
             {
-                if (Manager.instance.playerControl.setEffects.GetFX("fxSunDamage") != null)
+                if (Manager.instance.playerControl!=null && Manager.instance.playerControl.setEffects.GetFX("fxSunDamage") != null)
                 {
                     Manager.instance.playerControl.setEffects.PlayFx("fxSunDamage");
                 }
-                if (Manager.instance.playerControl.setEffects.GetFX("fxRestaureMana") != null)
+                if (Manager.instance.playerControl != null && Manager.instance.playerControl.setEffects.GetFX("fxRestaureMana") != null)
                 {
                     Manager.instance.playerControl.setEffects.noneFx("fxRestaureMana");
                 }
-                if (!Manager.instance.playerControl.checkers.isCaptured) {
+                if (Manager.instance.playerControl != null && !Manager.instance.playerControl.checkers.isCaptured) {
                     Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().settingDamageLifeBySun();
                     Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().isInShadow = false;
                 }
+
                 //Debug.Log(artificialSun[i].transform.rotation.eulerAngles);
                 flag =true;
             }
@@ -60,14 +96,15 @@ public class ManagerRenderCuller : MonoBehaviour
 
         if (!flag) {
 
-            if (Manager.instance.playerControl.setEffects.GetFX("fxRestaureMana") != null )
+            if (Manager.instance.playerControl != null && Manager.instance.playerControl.setEffects.GetFX("fxRestaureMana") != null )
             {
                 Manager.instance.playerControl.setEffects.PlayFx("fxRestaureMana");
             }
-            if (Manager.instance.playerControl.setEffects.GetFX("fxSunDamage") != null )
+            if (Manager.instance.playerControl != null && Manager.instance.playerControl.setEffects.GetFX("fxSunDamage") != null )
             {
                 Manager.instance.playerControl.setEffects.noneFx("fxSunDamage");
             }
+
             Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().settingManaGlobal();
             Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().isInShadow = true;
 

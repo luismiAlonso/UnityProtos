@@ -10,6 +10,7 @@ public class ExitLevel : MonoBehaviour
     {
         if (other.transform.name == "player")
         {
+            ControlSouls.instance.resetSouls();
             SceneManager.LoadScene("level"+Manager.instance.indexLevel);
         }
     }

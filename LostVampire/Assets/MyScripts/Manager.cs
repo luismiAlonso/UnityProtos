@@ -21,40 +21,64 @@ public class Manager : MonoBehaviour
     }
 
     #endregion Singleton
-    public PlayerControl playerControl;
     private ModelDialog[] dialogos;
     public bool fullStop;
     public bool GlobalUsePad;
     public bool faceControl;
-
+    public AudioSource[] themesLevel;
+    
     [HideInInspector]
     public float life;
     [HideInInspector]
     public float mana;
     [HideInInspector]
     public int indexLevel;
+    [HideInInspector]
+    public PlayerControl playerControl;
 
 
     private void Awake()
     {
         ReadSequences();
-
-         DontDestroyOnLoad(this.gameObject);
+        findTargetPlayer();
     }
+
     // Start is called before the first frame update
     void Start()
     {
         life = playerControl.setthing.life;
         mana = playerControl.setthing.mana;
-        CanvasManager.instance.healhtBar.setHealht(life);
-        CanvasManager.instance.manaBar.setMana(mana);
-        
+        CanvasManager cvm = GameObject.Find("Canvas").GetComponent<CanvasManager>();
+        cvm.healhtBar.setHealht(life);
+        cvm.manaBar.setMana(mana);
+        StartMusicLevel();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (playerControl==null)
+        {
+            findTargetPlayer();
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            indexLevel++;
+            SceneManager.LoadScene("level" + indexLevel);
+        }
+    }
+
+    void findTargetPlayer()
+    {
+        playerControl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+    }
+
+    void StartMusicLevel()
+    {
+        if (themesLevel.Length>0) {
+            themesLevel[indexLevel].Play();
+        }
     }
 
     void ReadSequences()

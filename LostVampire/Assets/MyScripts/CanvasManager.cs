@@ -20,5 +20,14 @@ public class CanvasManager : MonoBehaviour
     public HealhtBar healhtBar;
     public ManaBar manaBar;
 
-    
+    private void Awake()
+    {
+        //DontDestroyOnLoad(this);
+    }
+
+    private void Start()
+    {
+
+    }
+
 }

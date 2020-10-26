@@ -9608,6 +9608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLocalObject: 1
+  useInLoop: 1
 --- !u!1 &2202186264273711871
 GameObject:
   m_ObjectHideFlags: 0
@@ -28779,6 +28780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLocalObject: 1
+  useInLoop: 0
 --- !u!199 &538189725041447403
 ParticleSystemRenderer:
   serializedVersion: 6

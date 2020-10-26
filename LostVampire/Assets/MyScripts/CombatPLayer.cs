@@ -22,7 +22,7 @@ public class CombatPLayer : MonoBehaviour
 
     void atackMeleeBase()
     {
-        if (Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().isInShadow)
+       /* if (Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().isInShadow)
         {
             if (InputControl.instance.getButtonsControl("Button2"))
             {
@@ -31,12 +31,12 @@ public class CombatPLayer : MonoBehaviour
         }
         else
         {
-           /* if (InputControl.instance.getButtonsControl("Button2"))
+           if (InputControl.instance.getButtonsControl("Button2"))
             {
                // Debug.Log("en sombra");
                 
-            }*/
-        }
+            }
+        }*/
     }
 
     IEnumerator IatackMeleeBase()

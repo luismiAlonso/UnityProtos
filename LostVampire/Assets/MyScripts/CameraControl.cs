@@ -17,7 +17,7 @@ public class CameraControl : MonoBehaviour {
     }
 
 
-    public Transform target;
+     
     public Vector3 offset;
     public Vector2 limitX;
     public Vector2 limitZ;
@@ -32,7 +32,7 @@ public class CameraControl : MonoBehaviour {
     private int screenBoundsWidth;
 	private int screenBoundsHeight;
     private int indexPoints = 0;
-   
+    private Transform target;
 
     void Start () {
 
@@ -40,7 +40,7 @@ public class CameraControl : MonoBehaviour {
         screenBoundsWidth = Screen.width;
 		screenBoundsHeight = Screen.height;
 		screenRect = new Rect (0, 0, screenBoundsWidth, screenBoundsHeight);//marco limitador de pantalla
-
+        findTargetPlayer();
     }
 
     private void Update()
@@ -67,6 +67,10 @@ public class CameraControl : MonoBehaviour {
     }
 
    
+    void findTargetPlayer()
+    {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 
     public void setState(int _state)
     {
@@ -77,15 +81,17 @@ public class CameraControl : MonoBehaviour {
     {
         //transform.position = new Vector3(player.transform.position.x + position.x, transform.position.y, player.transform.position.z + position.z);
         //transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.position.x + offset.x, transform.position.y, target.position.z + offset.z), Time.deltaTime * speed);
-        Vector3 targetPos = target.position;
-        //Keep camera height the same
-        targetPos.y = transform.position.y;
-        targetPos = Vector3.SmoothDamp(transform.position, targetPos, ref m_Velocity, m_SmoothTime);
-        transform.position = new Vector3(
-            Mathf.Clamp(targetPos.x, limitX.x, limitX.y),
-            targetPos.y,
-            Mathf.Clamp(targetPos.z, limitZ.x, limitZ.y));
-
+        if (target!=null) {
+            Vector3 targetPos = target.position;
+            //Keep camera height the same
+            targetPos.y = transform.position.y;
+            targetPos = Vector3.SmoothDamp(transform.position, targetPos, ref m_Velocity, m_SmoothTime);
+            transform.position = new Vector3(
+                Mathf.Clamp(targetPos.x, limitX.x, limitX.y),
+                targetPos.y,
+                Mathf.Clamp(targetPos.z, limitZ.x, limitZ.y));
+        }
+        
         
     }
 
