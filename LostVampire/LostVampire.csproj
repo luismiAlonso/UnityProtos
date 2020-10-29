@@ -718,6 +718,7 @@
     <Compile Include="Assets\MyScripts\ArmaDistancia.cs" />
     <Compile Include="Assets\MyScripts\ArmaMelee.cs" />
     <Compile Include="Assets\MyScripts\BodyChange.cs" />
+    <Compile Include="Assets\MyScripts\Bomb.cs" />
     <Compile Include="Assets\MyScripts\Bullets.cs" />
     <Compile Include="Assets\MyScripts\CameraControl.cs" />
     <Compile Include="Assets\MyScripts\CameraControlIso.cs" />
@@ -743,7 +744,7 @@
     <Compile Include="Assets\MyScripts\Manager.cs" />
     <Compile Include="Assets\MyScripts\ManagerRenderCuller.cs" />
     <Compile Include="Assets\MyScripts\MeshDestroy.cs" />
-    <Compile Include="Assets\MyScripts\NewBehaviourScript.cs" />
+    <Compile Include="Assets\MyScripts\NoWalkable.cs" />
     <Compile Include="Assets\MyScripts\ParticleDestroy.cs" />
     <Compile Include="Assets\MyScripts\PlayerControl.cs" />
     <Compile Include="Assets\MyScripts\SequenceCreator.cs" />
@@ -792,6 +793,13 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\shader\StandardBlockXRay.shader" />
+    <None Include="Assets\shader\StandardSpecularBlockXRay.shader" />
+    <None Include="Assets\shader\StandardSpecularXRay.shader" />
+    <None Include="Assets\shader\StandardSpecularXRayUnblockable.shader" />
+    <None Include="Assets\shader\StandardXRay.shader" />
+    <None Include="Assets\shader\StandardXRayUnblockable.shader" />
+    <None Include="Assets\shader\XRay.cginc" />
     <None Include="Packages\com.unity.2d.sprite\Editor\UI\SpriteEditor\PolygonChangeShapeWindow.uxml" />
     <None Include="Packages\com.unity.2d.sprite\Editor\UI\SpriteEditor\SpriteEditor.uss" />
     <None Include="Packages\com.unity.2d.sprite\Editor\UI\SpriteEditor\SpriteFrameModuleInspector.uxml" />

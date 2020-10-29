@@ -10,6 +10,7 @@ public class SettingAtacksIA
     public float distanceAtackMelee;
     public float timeUseArmaDistancia;
     public float timeUseMelee;
+    public bool isPrepareNextAtack;
     public int indexArma;
     public ArmaDistancia[] Arma;
     public ArmaMelee[] ArmaMelee;

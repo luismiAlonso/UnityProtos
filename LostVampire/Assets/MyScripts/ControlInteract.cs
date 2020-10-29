@@ -52,7 +52,7 @@ public class ControlInteract : MonoBehaviour
         if (CanvasManager.instance.healhtBar.getActualHealth() <= 0 && !playerControl.checkers.isDead && !playerControl.checkers.invulnerability)
         {
             // rPGCharacterControllerFREE.Death();
-                dead();
+            dead();
            
         }
         else if(!playerControl.checkers.isDead && !playerControl.checkers.invulnerability)
@@ -203,6 +203,7 @@ public class ControlInteract : MonoBehaviour
                 setEffects.GetSX("sxStun").Play();
             }
             stunnedControl = true;
+            simpleIA.setVisor(false);
             simpleIA.getNavMeshAgent().enabled = false;
             simpleIA.enabled = false;
             coStun= StartCoroutine(IstunnedNPC(timeStunned,simpleIA));
@@ -232,11 +233,13 @@ public class ControlInteract : MonoBehaviour
         //Debug.Log("despues de cancelar");
         playerControl.checkers.isStuned = false;
         sIA.getNavMeshAgent().enabled = true;
-        sIA.enabled = false;
+        sIA.enabled = true;
+        sIA.setVisor(true);
         stunnedControl = false;
     }
 
+ 
     #endregion NPC Methods
 
-   
+
 }

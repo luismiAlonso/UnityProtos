@@ -44,7 +44,7 @@ public class ControlSouls : MonoBehaviour
     {
         resetSouls();
         imgSoulsList = new List<soulsImg>();
-        Debug.Log(ManagerRenderCuller.instance.listRendersCullers.Count);
+        //Debug.Log(ManagerRenderCuller.instance.listRendersCullers.Count);
 
         for (int i=0; i<ManagerRenderCuller.instance.listRendersCullers.Count;i++)
         {

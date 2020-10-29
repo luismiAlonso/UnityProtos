@@ -84,7 +84,8 @@ public class Checkers
         
         foreach (var hitCollider in hitColliders)
         {
-            if (hitCollider.transform.name!=parentObj.name && hitCollider.transform.GetComponent<SimpleIA>()!=null)
+            if (hitCollider.transform.name!=parentObj.name && hitCollider.transform.GetComponent<SimpleIA>()!=null && 
+                hitCollider.transform.GetComponent<SimpleIA>().typeNPC!=SimpleIA.TypeNPC.tanque)
             {
                 objColl.checkCollThrow = true;
                 objColl.objColl = hitCollider.transform;

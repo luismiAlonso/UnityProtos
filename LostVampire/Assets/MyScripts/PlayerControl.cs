@@ -22,9 +22,13 @@ public class PlayerControl : MonoBehaviour {
     Vector3 dirFacing;
     Vector3 inputs;
 
+    private float speedMove;
+    private float forceJump;
+
+
     void Awake() {
-        cam = Camera.main.GetComponent<CameraControl>();    
-        
+        cam = Camera.main.GetComponent<CameraControl>();
+        speedMove = setthing.speedMove;
     }
 
     void Start() {
@@ -38,7 +42,6 @@ public class PlayerControl : MonoBehaviour {
     void FixedUpdate()
     {
        
-
     }
 
     private void LateUpdate()
@@ -143,7 +146,7 @@ public class PlayerControl : MonoBehaviour {
        
                 inputs = new Vector3(InputControl.instance.getAxisControl().x, 0, InputControl.instance.getAxisControl().y);
                 inputs = Vector3.ClampMagnitude(inputs, 1f);
-                rg.velocity = new Vector3(inputs.x * setthing.speedMove, rg.velocity.y, inputs.z * setthing.speedMove);
+                rg.velocity = new Vector3(inputs.x * speedMove, rg.velocity.y, inputs.z * speedMove);
                 //If face control activated but not use, direction arrow rotate player
                 rotateToDirectionNotFacingMouse(inputs);     
         }
@@ -330,6 +333,7 @@ public class PlayerControl : MonoBehaviour {
     {
         Vector3 normaLizeDir = transform.forward * setthing.distanceDash;
         normaLizeDir.y = 0.0f;
+        checkers.canDash = true;
         StartCoroutine("dashPhysiscIE", normaLizeDir);
     }
 
@@ -392,7 +396,10 @@ public class PlayerControl : MonoBehaviour {
         StartCoroutine("delayToMove", setthing.timeDelayToMove);*/
     }
   
-
+    public void setSpeedMove(float speed)
+    {
+        speedMove = speed;
+    }
 
     //END INTERFACE
    

@@ -183,7 +183,8 @@ public class BodyChange : MonoBehaviour
 
                     }else if (hitCollider.GetComponent<SimpleIA>()!=null && 
                         !hitCollider.GetComponent<SimpleIA>().getDetectado() &&
-                        hitCollider.GetComponent<SimpleIA>().typeNPC == SimpleIA.TypeNPC.clero &&
+                        (hitCollider.GetComponent<SimpleIA>().typeNPC == SimpleIA.TypeNPC.clero 
+                        || hitCollider.GetComponent<SimpleIA>().typeNPC == SimpleIA.TypeNPC.tanque) &&
                         hitCollider.transform.gameObject.GetComponent<PlayerControl>().checkers.isStuned)
                     {
 
@@ -274,12 +275,6 @@ public class BodyChange : MonoBehaviour
             if (dominate && !isPlayer && InputControl.instance.getButtonsControl("Button3") && simpleIA.typeNPC == SimpleIA.TypeNPC.normal)
             {
                 prepareToThrowNPC();
-
-                if (setEffects.GetFX("fxDash") != null)
-                {
-                    setEffects.PlayFx("fxDash");
-                }
-
             }
             else if (dominate && !isPlayer && InputControl.instance.getButtonsControl("Button3") && simpleIA.typeNPC == SimpleIA.TypeNPC.clero)
             {
@@ -299,6 +294,10 @@ public class BodyChange : MonoBehaviour
         dominatorPlayerControl.checkers.isCaptured = false;
         bodyChangeControl.expulsion = true;
         dominatorPlayerControl.transform.position = transform.position; // new Vector3(transform.position.x, 2.5f, transform.position.z);
+        if (setEffects.GetFX("fxDash") != null)
+        {
+            setEffects.PlayFx("fxDash");
+        }
         ThrowNPC();
         checkers.canJump = true;
         dominate = false;
@@ -312,9 +311,10 @@ public class BodyChange : MonoBehaviour
         Vector3 dir = Vector3.zero;
         normaLizeDir = transform.forward * myPlayerControl.setthing.distanceDash;
         normaLizeDir.y = 0.0f;
+        checkers.canDash = true;
         StartCoroutine("ThrowIE", normaLizeDir);
     }
-    
+
     IEnumerator ThrowIE(Vector3 dir)
     {
         /*myPlayerControl.setthing.distanceToBlockingDash = Vector3.Distance(transform.position, dir);
@@ -335,29 +335,80 @@ public class BodyChange : MonoBehaviour
             {
                 myPlayerControl.GetRigidbody().MovePosition(transform.position + dir * Time.deltaTime * myPlayerControl.setthing.forceDash);
                 time -= Time.deltaTime;
+
             }
             else
             {
-                myPlayerControl.checkers.checkCollisionONthrow().objColl.GetComponent<ControlInteract>().stunnedNPC(myPlayerControl.checkers.checkCollisionONthrow().objColl.GetComponent<SimpleIA>(), 6);
-                time =0 ;
 
-                if (setEffects.GetFX("fxDash") != null)
-                {
-                    setEffects.noneFx("fxDash");
-                }
+                myPlayerControl.checkers.checkCollisionONthrow().objColl.GetComponent<ControlInteract>().stunnedNPC(myPlayerControl.checkers.checkCollisionONthrow().objColl.GetComponent<SimpleIA>(), 6);
+                //stune self
+                time = 0;
+                myPlayerControl.checkers.remoteControl = false;
+                myPlayerControl.GetRigidbody().isKinematic = true;
+                transform.GetComponent<ControlInteract>().stunnedNPC(simpleIA, 6);
+
+                // StartCoroutine("IEreboteDash", dir);
+
+                /* if (setEffects.GetFX("fxDash") != null)
+                 {
+                     setEffects.noneFx("fxDash");
+                 }*/
             }
             yield return null;
         }
 
-         myPlayerControl.GetRigidbody().velocity = Vector3.zero;
-         myPlayerControl.GetRigidbody().isKinematic = true;
-         myPlayerControl.checkers.remoteControl = false;
-         myPlayerControl.GetRigidbody().velocity = Vector3.zero;
-         myPlayerControl.enabled = false;
-         simpleIA.getNavMeshAgent().enabled = true;
-         simpleIA.enabled = true;
+        if (!myPlayerControl.checkers.checkCollisionONthrow().checkCollThrow)
+        {
+            myPlayerControl.GetRigidbody().velocity = Vector3.zero;
+            myPlayerControl.GetRigidbody().isKinematic = true;
+            myPlayerControl.checkers.remoteControl = false;
+            myPlayerControl.enabled = false;
+            simpleIA.getNavMeshAgent().enabled = true;
+            simpleIA.enabled = true;
+            checkers.canDash = true;
+        }
+
     }
 
+    IEnumerator IEreboteDash(Vector3 direction)
+    {
+        float time = myPlayerControl.setthing.TimeDurationPropulsion;
+
+        while (time > 0)
+        {
+            Debug.Log("entro");
+            Vector3 dir = direction - transform.position;
+            // We then get the opposite (-Vector3) and normalize it
+            dir = -dir.normalized;
+            // And finally we add force in the direction of dir and multiply it by force. 
+            // This will push back the player
+            GetComponent<Rigidbody>().AddForce(dir * 135);
+            time -= Time.deltaTime;
+
+            yield return null;
+        }
+
+        myPlayerControl.GetRigidbody().velocity = Vector3.zero;
+        myPlayerControl.GetRigidbody().isKinematic = true;
+        myPlayerControl.checkers.remoteControl = false;
+        myPlayerControl.GetRigidbody().velocity = Vector3.zero;
+        myPlayerControl.enabled = false;
+        simpleIA.getNavMeshAgent().enabled = true;
+        simpleIA.enabled = true;
+        checkers.canDash = true;
+
+    }
+
+    void reboteDash(Vector3 direction)
+    {
+        Debug.Log("hola");
+        Vector3 dir = direction - transform.position;
+        // We then get the opposite (-Vector3) and normalize it
+        dir = -dir.normalized;
+        // And finally we add force in the direction of dir and multiply it by force. 
+        // This will push back the player
+        GetComponent<Rigidbody>().AddForce(dir * 35);
+    }
 
     public void prepareToExpulsion()
     {
@@ -376,6 +427,7 @@ public class BodyChange : MonoBehaviour
         dominate = false;
         myPlayerControl.checkers.isDominated = false;
         checkers.canJump = true;
+
         if (setEffects.GetFX("fxDash") != null)
         {
             setEffects.noneFx("fxDash");

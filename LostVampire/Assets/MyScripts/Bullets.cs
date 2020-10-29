@@ -9,7 +9,8 @@ public class Bullets : MonoBehaviour {
     public float speedBullet =40f;
     public ParticleSystem bloodParticle;
     public GameObject particleImpactBlood;
-    public bool playerEnemi;
+    [HideInInspector]
+    public bool enemyDominated;
     public LayerMask layerMask;
     public int type = 0;
     private Rigidbody rg;
@@ -63,13 +64,18 @@ public class Bullets : MonoBehaviour {
         if (collision.transform.tag == "Player" )
         {
             Manager.instance.playerControl.transform.GetComponent<ControlInteract>().transform.GetComponent<ControlInteract>().settingLife(Manager.instance.playerControl.transform.GetComponent<ControlInteract>().getLife()- damage);
-
             Destroy(gameObject);
 
-        }else if (collision.transform.tag == "NPC" && collision.GetComponent<BodyChange>()!=null && !collision.GetComponent<BodyChange>().dominate && IdInstanceParent!= collision.gameObject.GetInstanceID())
+        }else if (collision.transform.tag == "NPC" && collision.GetComponent<BodyChange>()!=null && collision.GetComponent<BodyChange>().dominate && IdInstanceParent!= collision.gameObject.GetInstanceID())
         {
             Manager.instance.playerControl.transform.GetComponent<ControlInteract>().settingMana(0);
             collision.transform.GetComponent<BodyChange>().prepareToExpulsion();
+
+        }else if (collision.transform.tag == "NPC" && enemyDominated && IdInstanceParent != collision.gameObject.GetInstanceID())
+        {
+            if (collision.transform.GetComponent<SimpleIA>()!=null) {
+                collision.transform.GetComponent<ControlInteract>().stunnedNPC(collision.transform.GetComponent<SimpleIA>(),6);
+            }
         }
         
     }

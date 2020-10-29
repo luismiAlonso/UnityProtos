@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArmaMelee : MonoBehaviour
 {
-    public enum TypeWeaponMelee { hit = 0, combo=1, areaShieldIA = 2 };
+    public enum TypeWeaponMelee { hit = 0, combo=1, areaShieldIA = 2,stump=3 };
     public TypeWeaponMelee typeWeapon;
     public float maxRangeAreaAtack;
     public float timeTransitionAreaAtack;
@@ -15,7 +15,6 @@ public class ArmaMelee : MonoBehaviour
     private Vector3 scaleOriginalCollisionArea;
     private Vector3 maxArea;
     private SetEffects setEffects;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +30,7 @@ public class ArmaMelee : MonoBehaviour
 
     private void Update()
     {
-        resetShieldArea();
+        resetArea();
     }
 
     public void hitMelee()
@@ -44,6 +43,7 @@ public class ArmaMelee : MonoBehaviour
             case TypeWeaponMelee.combo:
                 ; break;
             case TypeWeaponMelee.areaShieldIA:
+
                 if (setEffects.GetFX("fxCupule")!=null)
                 {
                     setEffects.PlayFx("fxCupule");
@@ -53,13 +53,26 @@ public class ArmaMelee : MonoBehaviour
                     setEffects.GetSX("sxCupula").Play();
                 }
                 makeAreaShield();
+
+                ; break;
+            case TypeWeaponMelee.stump:
+
+                if (setEffects.GetFX("fxStump") != null)
+                {
+                    setEffects.PlayFx("fxStump");
+                }
+                if (setEffects.GetSX("sxStump") != null && !active)
+                {
+                    setEffects.GetSX("sxStump").Play();
+                }
+                makeStump();
                 ; break;
         }
 
     }
 
 
-    public void resetShieldArea()
+    public void resetArea()
     {
         switch (typeWeapon)
         {
@@ -94,7 +107,12 @@ public class ArmaMelee : MonoBehaviour
                 }
 
                 ; break;
-           
+
+            case TypeWeaponMelee.stump:
+
+               
+                ; break;
+
         }
        
     }
@@ -121,6 +139,33 @@ public class ArmaMelee : MonoBehaviour
         StartCoroutine("ImakeAreaShield");     
     }
 
+    void makeStump()
+    {
+
+        StartCoroutine("ImakeStump");
+
+    }
+
+    IEnumerator ImakeStump()
+    {
+        while (Vector3.Distance(transform.localScale, maxArea) > 0.01f)
+        {
+            transform.localScale = Vector3.Lerp(transform.localScale, maxArea, Time.deltaTime * timeTransitionAreaAtack);
+            active = true;
+            yield return null;
+        }
+
+        active = false;
+
+        while (Vector3.Distance(transform.localScale, Vector3.zero) > 0.01f)
+        {
+            Debug.Log("disminuye");
+            transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, Time.deltaTime * timeTransitionAreaAtack);
+            yield return null;
+        }
+    }
+
+    
     IEnumerator ImakeAreaShield()
     {
         while (Vector3.Distance(transform.localScale, maxArea) > 0.01f)
@@ -171,8 +216,22 @@ public class ArmaMelee : MonoBehaviour
                 }
 
                 ; break;
+            case TypeWeaponMelee.stump:
+
+                if (other.transform.tag == "Player" && active)
+                {
+                   // takeDamageMeleeOnTrigger(other);
+
+                }else if (other.transform.tag == "NPC" && active)
+                {
+
+                }
+
+                ; break;
 
         }
        
     }
+
+    
 }

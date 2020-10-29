@@ -8,11 +8,13 @@ using UnityEngine.AI;
 public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 {
     public WayPoints[] wayPoits;
-    public enum TypeNPC { normal=0,clero=1 };
+    public enum TypeNPC { normal=0,clero=1,tanque=2 };
     public TypeNPC typeNPC;
     public SettingAtacksIA settinAtack;
     public SettingBehaviourIA settinBehaviour;
+    public GameObject source;
     public bool activeGizmos=true;
+
     private NavMeshAgent agent;
     private int targetPoint;
     private int indexRotation;
@@ -29,12 +31,14 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 
     PlayerControl playerControl;
     SetEffects setEffects;
+    Rigidbody rb;
 
     private void Start()
     {
         setEffects = GetComponent<SetEffects>();
         agent = GetComponent<NavMeshAgent>();
         playerControl = GetComponent<PlayerControl>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -118,6 +122,22 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
                         stop = false;
                         moveto(target);
                     }
+
+                }else if (typeNPC == TypeNPC.tanque)
+                {
+                    if ((Vector3.Distance(transform.position, target.position) <= settinAtack.distanceAtackMelee) && playerControl.checkers.canAtack)
+                    {
+                       
+                        StartCoroutine("doJumpBomb");
+
+                    }
+                    else if((Vector3.Distance(transform.position, target.position) > settinAtack.distanceAtackMelee) && playerControl.checkers.canAtack)
+                    {
+                        stop = false;
+                        moveto(target);
+                    }
+
+                   
                 }
 
             }
@@ -307,13 +327,16 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 
     public void stopped()
     {
-        if (!stop)
-        {
-            agent.isStopped = false;
-        }
-        else
-        {
-            agent.isStopped = true;
+        if (agent.isActiveAndEnabled) {
+
+            if (!stop)
+            {
+                agent.isStopped = false;
+            }
+            else
+            {
+                agent.isStopped = true;
+            }
         }
     }
 
@@ -383,6 +406,53 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
         playerControl.checkers.canAtack = true;
     }
 
+    IEnumerator IdelayJumpAtack()
+    {
+        yield return new WaitForSeconds(1.5f);
+        agent.enabled = true;
+        playerControl.checkers.canAtack = true;
+        settinAtack.isPrepareNextAtack = false;
+
+    }
+
+    IEnumerator doJumpBomb()
+    {
+        stop = true;
+        playerControl.checkers.canAtack = false;
+        agent.enabled = false;
+        bool finished = false;
+        float beforeJump = transform.position.y;
+        Vector3 jumpPoint = transform.position + transform.up * 6;
+
+        while (!settinAtack.isPrepareNextAtack)
+        {
+            if (!finished) {
+
+                transform.position = Vector3.Lerp(transform.position, jumpPoint, Time.deltaTime * 20);
+
+                if (Vector3.Distance(transform.position, jumpPoint) < 0.1f)
+                {
+                    finished = true;
+                }
+            }
+            else if (finished)
+            {
+                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x,beforeJump,transform.position.z), Time.deltaTime * 30);
+
+                if (Vector3.Distance(transform.position, new Vector3(transform.position.x, beforeJump, transform.position.z)) < 0.1f)
+                {
+                    settinAtack.isPrepareNextAtack = true;
+                    settinAtack.ArmaMelee[settinAtack.indexArma].hitMelee();
+                }
+            }
+            
+            yield return null;
+        }
+
+        StartCoroutine("IdelayJumpAtack");
+       
+    }
+
     public void actackMelee()
     {
         //throw new System.NotImplementedException();
@@ -400,12 +470,26 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
             }
 
             playerControl.checkers.canAtack = false;
+
+        }else if (typeNPC == TypeNPC.tanque && playerControl.checkers.canAtack)
+        {
+            //rb.isKinematic = false;
+            agent.enabled = false;
+
         }
     }
+
+
 
     public void resetAreaMelee()
     {
 
+    }
+
+    public void setVisor(bool active)
+    {
+        source.SetActive(active);
+        
     }
 
     public void runAway()
@@ -421,6 +505,10 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
             StartCoroutine("IwaitAndGo");
 
         }else if (typeNPC == TypeNPC.clero)
+        {
+            StartCoroutine("IwaitAndGo");
+        }
+        else if (typeNPC == TypeNPC.tanque)
         {
             StartCoroutine("IwaitAndGo");
         }

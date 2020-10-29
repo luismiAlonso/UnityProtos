@@ -80,18 +80,16 @@ public class ManagerRenderCuller : MonoBehaviour
                 {
                     Manager.instance.playerControl.setEffects.noneFx("fxRestaureMana");
                 }
+
                 if (Manager.instance.playerControl != null && !Manager.instance.playerControl.checkers.isCaptured) {
                     Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().settingDamageLifeBySun();
                     Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().isInShadow = false;
                 }
 
-                //Debug.Log(artificialSun[i].transform.rotation.eulerAngles);
+                //Debug.Log("Te veo");
                 flag =true;
             }
-            else
-            {
             
-            }
         }
 
         if (!flag) {
@@ -104,7 +102,7 @@ public class ManagerRenderCuller : MonoBehaviour
             {
                 Manager.instance.playerControl.setEffects.noneFx("fxSunDamage");
             }
-
+            //Debug.Log("No Te veo");
             Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().settingManaGlobal();
             Manager.instance.playerControl.gameObject.GetComponent<ControlInteract>().isInShadow = true;
 

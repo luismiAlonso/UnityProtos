@@ -47,7 +47,7 @@ namespace LOS
         private void Update()
         {
             for (int i=0;i<ManagerRenderCuller.instance.listRendersCullers.Count;i++) {
-                CustomCull(target, Mysource, ManagerRenderCuller.instance.listRendersCullers[i], m_RaycastLayerMask.value);
+               bool check= CustomCull(target, Mysource, ManagerRenderCuller.instance.listRendersCullers[i], m_RaycastLayerMask.value);
             }
         }
 
@@ -92,27 +92,37 @@ namespace LOS
         private static bool CustomCull(Transform _target, LOSSource losSource, GameObject objMesh, int layerMask)
         {
             //Debug.Log("Target: "+_target.GetComponent<SimpleIA>().typeNPC + " losSource: "+ losSource+" objMesh: "+objMesh.transform.parent.GetComponent<BodyChange>());
-            //Debug.Log(_target.name+" "+ objMesh.transform.name);
+            //Debug.Log(objMesh.transform.parent.gameObject.name +" "+objMesh.transform.parent.gameObject.activeSelf);
             if (objMesh.tag=="Player" && LOSHelper.CheckBoundsVisibility(losSource, objMesh.GetComponent<Renderer>().bounds, layerMask) && objMesh.transform.parent.gameObject.activeSelf)
             {
-                 //Debug.Log("te veo");
+                 //Debug.Log("te veo "+ objMesh.transform.parent.gameObject.name+" activo "+ objMesh.transform.parent.gameObject.activeSelf);
                 _target.GetComponent<SimpleIA>().setTarget(objMesh.transform);
                 _target.GetComponent<SimpleIA>().setDetectado(true);
                 //Debug.Log("te veo");
 
                 return true;
             }
-            else if(objMesh.tag == "Player" && !LOSHelper.CheckBoundsVisibility(losSource, objMesh.GetComponent<Renderer>().bounds, layerMask) && 
-                objMesh.transform.parent.gameObject.activeSelf && _target.GetComponent<SimpleIA>().getDetectado())
+            else if(objMesh.tag == "Player" && !LOSHelper.CheckBoundsVisibility(losSource, objMesh.GetComponent<Renderer>().bounds, layerMask) 
+                && _target.GetComponent<SimpleIA>().getDetectado() && objMesh.transform.parent.gameObject.activeSelf)
             {
-
+                //Debug.Log("No te veo " + objMesh.transform.parent.gameObject.name);
                 //verifico con rango alerta
                 if (!_target.GetComponent<SimpleIA>().ActionRangeAlerta()) { 
                     _target.GetComponent<SimpleIA>().setDetectado(false);
                     _target.GetComponent<SimpleIA>().setState(2);
 
                 }
-
+                return true;
+            }
+            else if (objMesh.tag == "Player" && LOSHelper.CheckBoundsVisibility(losSource, objMesh.GetComponent<Renderer>().bounds, layerMask) && !objMesh.transform.parent.gameObject.activeSelf)
+            {
+                //Debug.Log("No te veo " + objMesh.transform.parent.gameObject.name);
+                //verifico con rango alerta
+                
+                    _target.GetComponent<SimpleIA>().setDetectado(false);
+                    _target.GetComponent<SimpleIA>().setState(2);
+                
+                return true;
             }
             else if (objMesh.tag == "NPC" && _target.GetComponent<SimpleIA>().typeNPC==SimpleIA.TypeNPC.clero && objMesh.transform.parent.GetComponent<BodyChange>().dominate && !_target.GetComponent<BodyChange>().dominate &&
                 LOSHelper.CheckBoundsVisibility(losSource, objMesh.GetComponent<Renderer>().bounds, layerMask))
@@ -129,8 +139,9 @@ namespace LOS
                // Debug.Log("no veo impostor"+ objMesh.transform.parent.name+" "+ _target.name);
                 _target.GetComponent<SimpleIA>().setDetectado(false);
                 _target.GetComponent<SimpleIA>().setState(2);
-
+                return true;
             }
+           
 
             return false;
         }

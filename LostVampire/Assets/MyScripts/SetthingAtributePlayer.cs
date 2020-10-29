@@ -17,6 +17,7 @@ public class SetthingAtributePlayer
     public float damageSunLight;
     public float TimeDurationArcJump;
     public float TimeDurationDash;
+    public float TimeDurationPropulsion;
     public float delayDash;
     public float forceDash;
     public float distanceDash;

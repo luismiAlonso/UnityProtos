@@ -5,17 +5,19 @@ using UnityEngine;
 [RequireComponent(typeof(SetEffects))]
 public class ArmaDistancia : MonoBehaviour
 {
-    public enum TypeWeaponDist { normal = 0, clero = 1 };
+    public enum TypeWeaponDist { normal = 0, clero = 1,tanque=2 };
     public TypeWeaponDist typeWeapon;
     public float DelayShoot;
     public Transform disparador;
     public GameObject prefbBullets;
     public bool canShoot = true;
 
+    PlayerControl playerControl;
     SetEffects setEffects;
 
     private void Awake()
     {
+        playerControl = transform.parent.GetComponent<PlayerControl>();
         setEffects = GetComponent<SetEffects>();
     }
     public void shooting()
@@ -33,11 +35,32 @@ public class ArmaDistancia : MonoBehaviour
                     StartCoroutine("shootNormal");
                    // Debug.Log("clero");
                     ; break;
+                case TypeWeaponDist.tanque:
+                    dropBomb();
+                   // Debug.Log("clero");
+                   ; break;
             }
         }
     }
 
-    public IEnumerator shootNormal()
+    void dropBomb()
+    {
+        //Instantiate your projectile
+        if (setEffects.GetSX("sxStump") != null)
+        {
+            setEffects.GetSX("sxStump").Play();
+        }
+
+        if (setEffects.GetFX("fxStump") != null)
+        {
+            //setEffects.PlayFx("fxStump");
+            //Debug.Log(setEffects.GetFX("fxBomb"));
+
+           // GameObject bomb = Instantiate(setEffects.GetFX("fxBomb").gameObject, disparador.position, disparador.rotation);
+        }
+    }
+
+    IEnumerator shootNormal()
     {
         //Instantiate your projectile
         if (setEffects.GetSX("sxFireBullet")!=null)
@@ -50,6 +73,7 @@ public class ArmaDistancia : MonoBehaviour
            
             GameObject bullet = Instantiate(setEffects.GetFX("fxFireBullet").gameObject, disparador.position, disparador.rotation);
             bullet.GetComponent<Bullets>().setIdParent(transform.parent.gameObject.GetInstanceID());
+            bullet.GetComponent<Bullets>().enemyDominated = playerControl.checkers.isDominated;
             bullet.SetActive(true);
             bullet.transform.GetComponent<Bullets>().enabled = true;
             bullet.GetComponent<ParticleSystem>().Play();
@@ -58,6 +82,7 @@ public class ArmaDistancia : MonoBehaviour
         {
             GameObject bullet = Instantiate(prefbBullets, disparador.position, disparador.rotation);
             bullet.GetComponent<Bullets>().setIdParent(transform.parent.gameObject.GetInstanceID());
+            bullet.GetComponent<Bullets>().enemyDominated = playerControl.checkers.isDominated;
 
         }
 
