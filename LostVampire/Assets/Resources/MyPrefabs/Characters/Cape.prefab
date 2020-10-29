@@ -280,25 +280,25 @@ Cloth:
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 1
+  - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 1
+  - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 1
+  - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 1
+  - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 1
-    collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 1.5
-    collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 1
+  - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 1.5
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 1
+  - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
-  - maxDistance: 1
+  - maxDistance: 1.5
+    collisionSphereDistance: 3.4028235e+38
+  - maxDistance: 0
+    collisionSphereDistance: 3.4028235e+38
+  - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
