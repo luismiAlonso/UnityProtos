@@ -121,12 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 92aed17a8f756e64ab8435322f368981, type: 2}
---- !u!82 &27068903 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 5170960162853195050, guid: c7028492b0a5e4446857a36cbdf12327,
-    type: 3}
-  m_PrefabInstance: {fileID: 5170960162861778125}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &27287737
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +263,7 @@ Transform:
   - {fileID: 1119918730}
   - {fileID: 176294504}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &176294503
 PrefabInstance:
@@ -981,12 +975,13 @@ GameObject:
   - component: {fileID: 619209960}
   - component: {fileID: 619209959}
   - component: {fileID: 619209958}
-  m_Layer: 0
+  - component: {fileID: 619209961}
+  m_Layer: 10
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!23 &619209958
 MeshRenderer:
@@ -1049,6 +1044,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &619209961
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619209957}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4013275331872712965, guid: cd59ac267ac334e488a94772c92312ef, type: 3}
 --- !u!114 &669192826 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7567984284937660457, guid: 9e5ccf7884a745e428a2fc850f3518bb,
@@ -1488,12 +1497,13 @@ GameObject:
   - component: {fileID: 840351422}
   - component: {fileID: 840351421}
   - component: {fileID: 840351420}
-  m_Layer: 0
+  - component: {fileID: 840351423}
+  m_Layer: 10
   m_Name: Rock.123
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!23 &840351420
 MeshRenderer:
@@ -1556,6 +1566,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 94.28, y: 75.504, z: 197.345}
+--- !u!64 &840351423
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840351419}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -378493522229401141, guid: 4fb246ddd6ccf094c8478f55ea0cfc5c, type: 3}
 --- !u!1 &886996497
 GameObject:
   m_ObjectHideFlags: 0
@@ -1567,12 +1591,13 @@ GameObject:
   - component: {fileID: 886996500}
   - component: {fileID: 886996499}
   - component: {fileID: 886996498}
-  m_Layer: 0
+  - component: {fileID: 886996501}
+  m_Layer: 10
   m_Name: Rock.122
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!23 &886996498
 MeshRenderer:
@@ -1635,6 +1660,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 94.28, y: 169.043, z: 197.345}
+--- !u!64 &886996501
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886996497}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5826935429309088326, guid: dce9e181433c3d14ab0dc025ee6000b0, type: 3}
 --- !u!114 &990034965 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 380786957624048338, guid: 46eba957efcfdc94db3c89963b312524,
@@ -1679,7 +1718,7 @@ Transform:
   - {fileID: 550519273}
   - {fileID: 1222129365}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1037544083 stripped
 MonoBehaviour:
@@ -1809,12 +1848,13 @@ GameObject:
   - component: {fileID: 1078152506}
   - component: {fileID: 1078152505}
   - component: {fileID: 1078152504}
-  m_Layer: 0
+  - component: {fileID: 1078152507}
+  m_Layer: 10
   m_Name: Rock.123 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!23 &1078152504
 MeshRenderer:
@@ -1877,6 +1917,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 94.28, y: 75.504, z: 197.345}
+--- !u!64 &1078152507
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078152503}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -378493522229401141, guid: 4fb246ddd6ccf094c8478f55ea0cfc5c, type: 3}
 --- !u!1001 &1086937588
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1948,7 +2002,7 @@ PrefabInstance:
         type: 3}
       propertyPath: soundsScene
       value: 
-      objectReference: {fileID: 1720578549}
+      objectReference: {fileID: 0}
     - target: {fileID: 4962103620144139390, guid: 76c0025ecae57a446b2d2ee6645ed06f,
         type: 3}
       propertyPath: m_TargetTexture
@@ -2020,7 +2074,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1099793505
 PrefabInstance:
@@ -2077,7 +2131,7 @@ PrefabInstance:
     - target: {fileID: 5988323885097157710, guid: 5f2fe5a29a5bbbf43a311cec74e49454,
         type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 5988323885097157710, guid: 5f2fe5a29a5bbbf43a311cec74e49454,
         type: 3}
@@ -2357,7 +2411,7 @@ Transform:
   - {fileID: 1634508158}
   - {fileID: 380231076}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1196831320
 GameObject:
@@ -2391,7 +2445,7 @@ Transform:
   - {fileID: 1962529243}
   - {fileID: 1543623183}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1207717604
 GameObject:
@@ -2647,7 +2701,7 @@ PrefabInstance:
     - target: {fileID: 5988323885097157710, guid: 5f2fe5a29a5bbbf43a311cec74e49454,
         type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5988323885097157710, guid: 5f2fe5a29a5bbbf43a311cec74e49454,
         type: 3}
@@ -2677,12 +2731,13 @@ GameObject:
   - component: {fileID: 1343337222}
   - component: {fileID: 1343337221}
   - component: {fileID: 1343337220}
-  m_Layer: 0
+  - component: {fileID: 1343337223}
+  m_Layer: 10
   m_Name: Rock.045
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!23 &1343337220
 MeshRenderer:
@@ -2745,6 +2800,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 90, y: -171.7, z: -3.61}
+--- !u!64 &1343337223
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343337219}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7551333843638968363, guid: 2f11f33173ba2c54f8d9122b8d7d7928, type: 3}
 --- !u!1 &1350330550
 GameObject:
   m_ObjectHideFlags: 0
@@ -3145,7 +3214,7 @@ Transform:
   - {fileID: 677467438}
   - {fileID: 1769442139}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1417469206
 GameObject:
@@ -3691,7 +3760,7 @@ Transform:
   - {fileID: 1133706734}
   - {fileID: 399958162}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1543623182
 GameObject:
@@ -3862,12 +3931,6 @@ MonoBehaviour:
   - 1
   instanceSelf: {fileID: 1634508158}
   timeToAuxRotation: []
---- !u!4 &1720578549 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5170960164380964152, guid: c7028492b0a5e4446857a36cbdf12327,
-    type: 3}
-  m_PrefabInstance: {fileID: 5170960162861778125}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1759736277 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4017799654838210526, guid: b9cd4cb60d91f95409a9932209c4a5a3,
@@ -3943,7 +4006,7 @@ PrefabInstance:
     - target: {fileID: 5988323885097157710, guid: 5f2fe5a29a5bbbf43a311cec74e49454,
         type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 5988323885097157710, guid: 5f2fe5a29a5bbbf43a311cec74e49454,
         type: 3}
@@ -4041,7 +4104,7 @@ PrefabInstance:
         type: 3}
       propertyPath: soundsScene
       value: 
-      objectReference: {fileID: 1720578549}
+      objectReference: {fileID: 0}
     - target: {fileID: 4684415031956091374, guid: c8018c460a0f41a4fb9888c0ab3a3ff7,
         type: 3}
       propertyPath: m_Name
@@ -4116,7 +4179,7 @@ PrefabInstance:
         type: 3}
       propertyPath: soundsScene
       value: 
-      objectReference: {fileID: 1720578549}
+      objectReference: {fileID: 0}
     - target: {fileID: 4684415033300417711, guid: c8018c460a0f41a4fb9888c0ab3a3ff7,
         type: 3}
       propertyPath: typeCharacter
@@ -4232,7 +4295,7 @@ PrefabInstance:
     - target: {fileID: 5988323885097157710, guid: 5f2fe5a29a5bbbf43a311cec74e49454,
         type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 5988323885097157710, guid: 5f2fe5a29a5bbbf43a311cec74e49454,
         type: 3}
@@ -4468,7 +4531,7 @@ PrefabInstance:
         type: 3}
       propertyPath: soundsScene
       value: 
-      objectReference: {fileID: 1720578549}
+      objectReference: {fileID: 0}
     - target: {fileID: 4962103620144139390, guid: 76c0025ecae57a446b2d2ee6645ed06f,
         type: 3}
       propertyPath: m_TargetTexture
@@ -4487,12 +4550,13 @@ GameObject:
   - component: {fileID: 1884097537}
   - component: {fileID: 1884097536}
   - component: {fileID: 1884097535}
-  m_Layer: 0
+  - component: {fileID: 1884097538}
+  m_Layer: 10
   m_Name: Rock.122 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!23 &1884097535
 MeshRenderer:
@@ -4555,6 +4619,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 94.28, y: 169.043, z: 197.345}
+--- !u!64 &1884097538
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884097534}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5826935429309088326, guid: dce9e181433c3d14ab0dc025ee6000b0, type: 3}
 --- !u!1001 &1917023612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4610,7 +4688,7 @@ PrefabInstance:
     - target: {fileID: 5988323885097157710, guid: 5f2fe5a29a5bbbf43a311cec74e49454,
         type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5988323885097157710, guid: 5f2fe5a29a5bbbf43a311cec74e49454,
         type: 3}
@@ -4744,12 +4822,13 @@ GameObject:
   - component: {fileID: 2045801132}
   - component: {fileID: 2045801131}
   - component: {fileID: 2045801130}
-  m_Layer: 0
+  - component: {fileID: 2045801133}
+  m_Layer: 10
   m_Name: Rock.045 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!23 &2045801130
 MeshRenderer:
@@ -4812,6 +4891,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 90, y: -171.7, z: -3.61}
+--- !u!64 &2045801133
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045801129}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7551333843638968363, guid: 2f11f33173ba2c54f8d9122b8d7d7928, type: 3}
 --- !u!1 &2094761935
 GameObject:
   m_ObjectHideFlags: 0
@@ -4931,7 +5024,7 @@ PrefabInstance:
     - target: {fileID: 4334152385297681972, guid: c5a0c84eb4fdf3745922e346452e6984,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4334152385297681972, guid: c5a0c84eb4fdf3745922e346452e6984,
         type: 3}
@@ -5021,7 +5114,7 @@ PrefabInstance:
         type: 3}
       propertyPath: soundsScene
       value: 
-      objectReference: {fileID: 1720578549}
+      objectReference: {fileID: 0}
     - target: {fileID: 380786956802514415, guid: 46eba957efcfdc94db3c89963b312524,
         type: 3}
       propertyPath: m_Name
@@ -5244,7 +5337,7 @@ PrefabInstance:
         type: 3}
       propertyPath: soundsScene
       value: 
-      objectReference: {fileID: 1720578549}
+      objectReference: {fileID: 0}
     - target: {fileID: 4684415031956091369, guid: c8018c460a0f41a4fb9888c0ab3a3ff7,
         type: 3}
       propertyPath: m_AutoRepath
@@ -5303,7 +5396,7 @@ PrefabInstance:
     - target: {fileID: 4684415031956091375, guid: c8018c460a0f41a4fb9888c0ab3a3ff7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4684415031956091375, guid: c8018c460a0f41a4fb9888c0ab3a3ff7,
         type: 3}
@@ -5329,7 +5422,7 @@ PrefabInstance:
         type: 3}
       propertyPath: soundsScene
       value: 
-      objectReference: {fileID: 1720578549}
+      objectReference: {fileID: 0}
     - target: {fileID: 4684415033300417711, guid: c8018c460a0f41a4fb9888c0ab3a3ff7,
         type: 3}
       propertyPath: typeCharacter
@@ -5408,7 +5501,7 @@ PrefabInstance:
         type: 3}
       propertyPath: soundsScene
       value: 
-      objectReference: {fileID: 1720578549}
+      objectReference: {fileID: 0}
     - target: {fileID: 4962103620144139390, guid: 76c0025ecae57a446b2d2ee6645ed06f,
         type: 3}
       propertyPath: m_TargetTexture
@@ -5512,6 +5605,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8592511596256455886, guid: c7028492b0a5e4446857a36cbdf12327,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7028492b0a5e4446857a36cbdf12327, type: 3}
@@ -5634,7 +5732,7 @@ PrefabInstance:
     - target: {fileID: 5329275839397597217, guid: e94e84483f19f72458ff6bf532cf8b71,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5329275839397597217, guid: e94e84483f19f72458ff6bf532cf8b71,
         type: 3}
@@ -6075,7 +6173,7 @@ PrefabInstance:
     - target: {fileID: 7860776457054093023, guid: 9e5ccf7884a745e428a2fc850f3518bb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7860776457054093023, guid: 9e5ccf7884a745e428a2fc850f3518bb,
         type: 3}
@@ -6280,16 +6378,16 @@ PrefabInstance:
         type: 3}
       propertyPath: themesLevel.Array.data[0]
       value: 
-      objectReference: {fileID: 27068903}
+      objectReference: {fileID: 0}
     - target: {fileID: 7758347735300516062, guid: 3aabe748d6b3c0047a51f324d14727db,
         type: 3}
       propertyPath: themesLevel.Array.data[1]
       value: 
-      objectReference: {fileID: 27068903}
+      objectReference: {fileID: 0}
     - target: {fileID: 7758347735300516062, guid: 3aabe748d6b3c0047a51f324d14727db,
         type: 3}
       propertyPath: themesLevel.Array.data[2]
       value: 
-      objectReference: {fileID: 27068903}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aabe748d6b3c0047a51f324d14727db, type: 3}

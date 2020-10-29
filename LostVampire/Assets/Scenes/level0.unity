@@ -4779,6 +4779,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5733225783636570995, guid: c044bd6d670ca734ca191584ca3728b8,
+        type: 3}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6553862485238435701, guid: c044bd6d670ca734ca191584ca3728b8,
         type: 3}
       propertyPath: typeWeapon
