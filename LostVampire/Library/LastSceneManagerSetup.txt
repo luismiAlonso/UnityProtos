@@ -1,5 +1,9 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/level0.unity
+=======
+- path: Assets/Scenes/Terrain.unity
+>>>>>>> a4d7fd671ed47e75f08f94804a9f7abe4738d49b
   isLoaded: 1
   isActive: 1
   isSubScene: 0
