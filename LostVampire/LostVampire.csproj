@@ -749,6 +749,7 @@
     <Compile Include="Assets\MyScripts\ControlInteract.cs" />
     <Compile Include="Assets\MyScripts\ControlSouls.cs" />
     <Compile Include="Assets\MyScripts\DataArmaDistancia.cs" />
+    <Compile Include="Assets\MyScripts\DestructionWall.cs" />
     <Compile Include="Assets\MyScripts\Droid.cs" />
     <Compile Include="Assets\MyScripts\ExitLevel.cs" />
     <Compile Include="Assets\MyScripts\FxControl.cs" />

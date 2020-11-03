@@ -90,8 +90,7 @@ public class CameraControl : MonoBehaviour {
                 Mathf.Clamp(targetPos.x, limitX.x, limitX.y),
                 targetPos.y,
                 Mathf.Clamp(targetPos.z, limitZ.x, limitZ.y));
-            /*
-             * capear zonas
+           /*
             if (target.GetComponent<PlayerControl>().checkers.isGrounded) {
                 Camera.main.transform.localPosition = new Vector3(Camera.main.transform.localPosition.x, target.position.y, Camera.main.transform.localPosition.z);
             }*/

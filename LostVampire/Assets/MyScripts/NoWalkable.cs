@@ -38,7 +38,7 @@ public class NoWalkable : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.tag == "Player"  && other.transform.GetComponent<PlayerControl>() != null)
+        if (other.transform.tag == "Player"  && other.transform.GetComponent<PlayerControl>() != null && !other.transform.GetComponent<PlayerControl>().checkers.isStuned)
         {
             if (typeSurface == TypeSurface.lava)
             {
