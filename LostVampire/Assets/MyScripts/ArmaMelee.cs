@@ -5,7 +5,6 @@ using UnityEngine;
 public class ArmaMelee : MonoBehaviour
 {
     public enum TypeWeaponMelee { hit = 0, combo=1, areaShieldIA = 2,stump=3 };
-    public LayerMask layerInteract;
     public TypeWeaponMelee typeWeapon;
     public float maxRangeAreaAtack;
     public float timeTransitionAreaAtack;
@@ -57,6 +56,15 @@ public class ArmaMelee : MonoBehaviour
 
                 ; break;
             case TypeWeaponMelee.stump:
+
+                if (setEffects.GetFX("fxStump") != null)
+                {
+                    setEffects.PlayFx("fxStump");
+                }
+                if (setEffects.GetSX("sxStump") != null && !active)
+                {
+                    setEffects.GetSX("sxStump").Play();
+                }
                 makeStump();
                 ; break;
         }
@@ -133,41 +141,31 @@ public class ArmaMelee : MonoBehaviour
 
     void makeStump()
     {
+
         StartCoroutine("ImakeStump");
+
     }
 
     IEnumerator ImakeStump()
     {
-
-        if (setEffects.GetFX("fxStump") != null)
-        {
-            setEffects.PlayFx("fxStump");
-        }
-        if (setEffects.GetSX("sxStump") != null && !active)
-        {
-            setEffects.GetSX("sxStump").Play();
-        }
-
-        CameraControl.instance.setState(2);
-        transform.localScale = Vector3.zero;
-
-
-        while (Vector3.Distance(transform.localScale, maxArea) > 0.15f)
+        while (Vector3.Distance(transform.localScale, maxArea) > 0.01f)
         {
             transform.localScale = Vector3.Lerp(transform.localScale, maxArea, Time.deltaTime * timeTransitionAreaAtack);
             active = true;
             yield return null;
         }
 
-        while (Vector3.Distance(transform.localScale, Vector3.zero) > 0.15f)
+        active = false;
+
+        while (Vector3.Distance(transform.localScale, Vector3.zero) > 0.01f)
         {
+            Debug.Log("disminuye");
             transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, Time.deltaTime * timeTransitionAreaAtack);
             yield return null;
         }
-        active = false;
     }
 
-
+    
     IEnumerator ImakeAreaShield()
     {
         while (Vector3.Distance(transform.localScale, maxArea) > 0.01f)
@@ -178,31 +176,16 @@ public class ArmaMelee : MonoBehaviour
         }
     }
 
-    void takeDamageMeleeOnTriggerPlayer(Collider other)
+    void takeDamageMeleeOnTrigger(Collider other)
     {
-        if (other!=null &&  active) {
+        if (other!=null && active) {
 
             if (setEffects.GetSX("sxCupulaRepulsion")!=null)
             {
                 setEffects.GetSX("sxCupulaRepulsion").Play();
             }
+
             other.GetComponent<ControlInteract>().settingLife(CanvasManager.instance.healhtBar.getActualHealth() - Damage);
-            Vector3 dir = transform.position - other.transform.position;
-            dir = -dir.normalized;
-            dir = dir * 5;
-            other.GetComponent<Rigidbody>().MovePosition(transform.position + dir);
-        }
-    }
-
-    void takeDamageMeleeOnTriggerNPC(Collider other)
-    {
-        if (other != null && active)
-        {
-
-            if (setEffects.GetSX("sxCupulaRepulsion") != null)
-            {
-                setEffects.GetSX("sxCupulaRepulsion").Play();
-            }
             Vector3 dir = transform.position - other.transform.position;
             dir = -dir.normalized;
             dir = dir * 5;
@@ -229,7 +212,7 @@ public class ArmaMelee : MonoBehaviour
 
                 if (other.transform.name == "player" && active)
                 {
-                    takeDamageMeleeOnTriggerPlayer(other);
+                    takeDamageMeleeOnTrigger(other);
                 }
 
                 ; break;
@@ -237,34 +220,10 @@ public class ArmaMelee : MonoBehaviour
 
                 if (other.transform.tag == "Player" && active)
                 {
-                    if (other.GetComponent<ControlInteract>() != null) {
-                        takeDamageMeleeOnTriggerPlayer(other);
-                        other.GetComponent<ControlInteract>().stunnedPlayer(1.5f);
-                    }
-                }else if (other.transform.tag == "NPC" && other.gameObject.GetInstanceID()!=transform.parent.gameObject.GetInstanceID() && active)
-                {
-                    if (other.GetComponent<ControlInteract>() != null)
-                    {
-                        takeDamageMeleeOnTriggerNPC(other);
-                        other.GetComponent<ControlInteract>().stunnedNPC(other.GetComponent<SimpleIA>(), 1.5f);
-                    }
+                   // takeDamageMeleeOnTrigger(other);
 
-                }else if (other.gameObject.tag=="wall" && !MyPlayerControl.checkers.isDominated)
+                }else if (other.transform.tag == "NPC" && active)
                 {
-                    if (other.transform.GetComponent<DestructionWall>()!=null)
-                    {
-                        Debug.Log("Tembleque!");
-                        other.transform.GetComponent<DestructionWall>().shakingWall();
-                    }
-                }
-                else if (other.gameObject.tag == "wall" && MyPlayerControl.checkers.isDominated)
-                {
-                    if (other.transform.GetComponent<DestructionWall>() != null)
-                    {
-                        Debug.Log("Tembleque!");
-                        other.transform.GetComponent<DestructionWall>().destroyWall();
-
-                    }
 
                 }
 

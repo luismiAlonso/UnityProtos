@@ -78,7 +78,6 @@ public class BodyChange : MonoBehaviour
             {
                 setEffects.GetSX("sxDamageBlood").Play();
             }
-
             if (myPlayerControl.setthing.life<=0) {
 
                 myPlayerControl.controlInteract.settingLife(0);
@@ -280,17 +279,6 @@ public class BodyChange : MonoBehaviour
             else if (dominate && !isPlayer && InputControl.instance.getButtonsControl("Button3") && simpleIA.typeNPC == SimpleIA.TypeNPC.clero)
             {
                 simpleIA.settinAtack.Arma[simpleIA.settinAtack.indexArma].ShootingRemote();
-
-            }else if (dominate && !isPlayer && InputControl.instance.getButtonsControl("Button3") 
-                && simpleIA.typeNPC == SimpleIA.TypeNPC.tanque && myPlayerControl.checkers.isGrounded)
-            {
-                myPlayerControl.remoteJump();
-            }
-            else if (dominate && !isPlayer && InputControl.instance.getButtonsControl("Button3")
-                && simpleIA.typeNPC == SimpleIA.TypeNPC.tanque && !myPlayerControl.checkers.isGrounded)
-            {
-                simpleIA.settinAtack.ArmaMelee[simpleIA.settinAtack.indexArma].hitMelee();
-                myPlayerControl.StumpNPC();
             }
         }
     }

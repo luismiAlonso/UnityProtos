@@ -128,22 +128,17 @@ namespace LOS
                 LOSHelper.CheckBoundsVisibility(losSource, objMesh.GetComponent<Renderer>().bounds, layerMask))
             {
                 // Debug.Log("veo impostor " + _target.GetComponent<SimpleIA>().typeNPC+ "//"+objMesh.transform.parent.name);
-                if (objMesh.transform.parent.GetComponent<SimpleIA>()!=null && objMesh.transform.parent.GetComponent<SimpleIA>().typeNPC==SimpleIA.TypeNPC.normal) {
-                    _target.GetComponent<SimpleIA>().setTarget(objMesh.transform);
-                    _target.GetComponent<SimpleIA>().setDetectado(true);
-                }
+                _target.GetComponent<SimpleIA>().setTarget(objMesh.transform);
+                _target.GetComponent<SimpleIA>().setDetectado(true);
 
                 return true;
             }
             else if (objMesh.tag == "NPC" && _target.GetComponent<SimpleIA>().typeNPC == SimpleIA.TypeNPC.clero && objMesh.transform.parent.GetComponent<BodyChange>().dominate && !_target.GetComponent<BodyChange>().dominate &&
                 !LOSHelper.CheckBoundsVisibility(losSource, objMesh.GetComponent<Renderer>().bounds, layerMask) && _target.GetComponent<SimpleIA>().getDetectado())
             {
-                // Debug.Log("no veo impostor"+ objMesh.transform.parent.name+" "+ _target.name);
-                if (objMesh.transform.parent.GetComponent<SimpleIA>() != null && objMesh.transform.parent.GetComponent<SimpleIA>().typeNPC == SimpleIA.TypeNPC.normal)
-                {
-                    _target.GetComponent<SimpleIA>().setDetectado(false);
-                    _target.GetComponent<SimpleIA>().setState(2);
-                }
+               // Debug.Log("no veo impostor"+ objMesh.transform.parent.name+" "+ _target.name);
+                _target.GetComponent<SimpleIA>().setDetectado(false);
+                _target.GetComponent<SimpleIA>().setState(2);
                 return true;
             }
            

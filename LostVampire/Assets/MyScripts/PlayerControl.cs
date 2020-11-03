@@ -250,36 +250,6 @@ public class PlayerControl : MonoBehaviour {
         }
     }
 
-    public void remoteJump()
-    {
-        rg.velocity = new Vector3(rg.velocity.x, setthing.forceJump, rg.velocity.z);
-
-        if (setEffects.GetSX("sxJump") != null)
-        {
-            setEffects.GetSX("sxJump").Play();
-        }
-        if (setEffects.GetFX("fxJump") != null)
-        {
-            setEffects.PlayFx("fxJump");
-        }
-       
-    }
-
-    public void StumpNPC()
-    {
-        StartCoroutine("Istump");
-    }
-
-    IEnumerator Istump()
-    {
-        while (!checkers.isGrounded)
-        {
-            rg.velocity += Vector3.up * Physics.gravity.y * 60 * Time.deltaTime;
-            yield return null;
-        }
-
-    }
-
     void dash()
     {
 

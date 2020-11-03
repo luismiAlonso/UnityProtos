@@ -408,7 +408,7 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 
     IEnumerator IdelayJumpAtack()
     {
-        yield return new WaitForSeconds(5.5f);
+        yield return new WaitForSeconds(1.5f);
         agent.enabled = true;
         playerControl.checkers.canAtack = true;
         settinAtack.isPrepareNextAtack = false;

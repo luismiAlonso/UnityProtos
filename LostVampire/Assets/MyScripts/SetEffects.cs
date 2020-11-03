@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SetEffects : MonoBehaviour
 {
-    public enum TypeCharacter { player = 0, cleroE = 1, baseE=2,tanque=3, itemMana=4,wall=5 };
+    public enum TypeCharacter { player = 0, cleroE = 1, baseE=2,tanque=3, itemMana=4 };
     public TypeCharacter typeCharacter;
     public Transform soundsScene;
     private List<Transform> listVFX = new List<Transform>();
@@ -135,35 +135,8 @@ public class SetEffects : MonoBehaviour
                 }
             }
 
+
         }
-        else if (typeCharacter == TypeCharacter.wall)
-        {
-            Transform[] vfx = Resources.LoadAll<Transform>("MyPrefabs/vfxSfx/wall/VFX/");
-
-            foreach (Transform tvfx in vfx)
-            {
-                if (tvfx.GetComponent<FxControl>() != null && tvfx.GetComponent<FxControl>().isLocalObject)
-                {
-
-                    Transform objFx = Instantiate(tvfx, transform.position, Quaternion.identity);
-                    objFx.transform.parent = transform;
-                    objFx.name = tvfx.name;
-                    objFx.gameObject.SetActive(false);
-                    listVFX.Add(objFx);
-
-                }
-                else if (tvfx.GetComponent<FxControl>() != null && !tvfx.GetComponent<FxControl>().isLocalObject)
-                {
-
-                    Transform objFx = Instantiate(tvfx, transform.position, Quaternion.identity);
-                    objFx.name = tvfx.name;
-                    objFx.gameObject.SetActive(false);
-                    listVFX.Add(objFx);
-                }
-            }
-        }
-
-
     }
 
     public ParticleSystem GetFX(string nameFX)

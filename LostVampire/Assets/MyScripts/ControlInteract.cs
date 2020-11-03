@@ -10,13 +10,12 @@ public class ControlInteract : MonoBehaviour
     MeshRenderer meshRenderer;
     [HideInInspector]
     public bool isInShadow;
-    [HideInInspector]
-    public bool stunnedControl;
 
     PlayerControl playerControl;
     private float timeMana;
     private float timeLife;
 
+    private bool stunnedControl;
     SetEffects setEffects;
     Coroutine coStun;
     SimpleIA simpleIA;
@@ -186,49 +185,6 @@ public class ControlInteract : MonoBehaviour
         Manager.instance.Restart();
     }
 
-    public void stunnedPlayer(float timeStunned)
-    {
-        if (!stunnedControl)
-        {
-            if (setEffects.GetFX("fxStun") != null)
-            {
-                setEffects.PlayFx("fxStun");
-            }
-            if (setEffects.GetSX("sxStun") != null)
-            {
-                setEffects.GetSX("sxStun").Play();
-            }
-           
-            coStun = StartCoroutine(IstunnedPlayer(timeStunned));
-        }
-
-       
-    }
-
-    IEnumerator IstunnedPlayer(float t)
-    {
-        while (t > 0 )
-        {
-            transform.Rotate(0, 1000 * Time.deltaTime, 0);
-            t -= Time.deltaTime;
-
-            stunnedControl = true;
-            playerControl.checkers.canMove = false;
-            playerControl.checkers.canJump = false;
-            playerControl.checkers.canDash = true;
-            playerControl.checkers.isStuned = true;
-            yield return null;
-        }
-        //Debug.Log("antes de cancelar");
-        setEffects.noneFx("fxStun");
-        //Debug.Log("despues de cancelar");
-        playerControl.checkers.canMove = true;
-        playerControl.checkers.canJump = true;
-        playerControl.checkers.canDash = false;
-        playerControl.checkers.isStuned = false;    
-        stunnedControl = false;
-    }
-
     #endregion Player Methods
 
 
@@ -253,7 +209,12 @@ public class ControlInteract : MonoBehaviour
             coStun= StartCoroutine(IstunnedNPC(timeStunned,simpleIA));
         }
 
-       
+        if (playerControl.checkers.isDominated)
+        {
+            StopCoroutine(coStun);
+            setEffects.noneFx("fxStun");
+
+        }
     }
 
     IEnumerator IstunnedNPC(float t,SimpleIA sIA)
@@ -268,24 +229,13 @@ public class ControlInteract : MonoBehaviour
             yield return null;
         }
         //Debug.Log("antes de cancelar");
-        if (!playerControl.checkers.isDominated) {
-            setEffects.noneFx("fxStun");
-            playerControl.checkers.isStuned = false;
-            sIA.getNavMeshAgent().enabled = true;
-            sIA.enabled = true;
-            sIA.setVisor(true);
-            stunnedControl = false;
-        }
-        else
-        {
-            setEffects.noneFx("fxStun");
-           // Debug.Log("despues de cancelar");
-            playerControl.checkers.isStuned = false;
-            sIA.getNavMeshAgent().enabled = false;
-            sIA.enabled = false;
-            sIA.setVisor(true);
-            stunnedControl = false;
-        }
+        setEffects.noneFx("fxStun");
+        //Debug.Log("despues de cancelar");
+        playerControl.checkers.isStuned = false;
+        sIA.getNavMeshAgent().enabled = true;
+        sIA.enabled = true;
+        sIA.setVisor(true);
+        stunnedControl = false;
     }
 
  
