@@ -4,45 +4,51 @@ using UnityEngine;
 
 public class BodyChange : MonoBehaviour
 {
-    public bool dominate;
     public bool isPlayer;
+    [HideInInspector]
+    public bool dominate;
+    [HideInInspector]
     public bool expulsion;
+    [HideInInspector]
     public bool activeSouls;
-   
+    [HideInInspector]
+    public bool isThrowing;
 
-    public float timeToFxBodyChange=0.3f;
+    public float heightToExpulsion;
+    public float timeToFxBodyChange = 0.3f;
     public float damageAdsorveLife;
     public float radiusBodyChange;
     public Transform locateCollision;
     public LayerMask layerBodyChange;
 
     PlayerControl myPlayerControl;
+    CharacterController charController;
     PlayerControl dominatorPlayerControl;
     BodyChange bodyChangeControl;
-   // KinemaControl kinemaControl;
+    GrabObject grabObject;
+    // KinemaControl kinemaControl;
     SimpleIA simpleIA;
-    SetEffects setEffects;
     Checkers checkers;
     Vector3 originalScale;
     bool sleep;
+    bool stunHit;
 
     private void Awake()
     {
         myPlayerControl = GetComponent<PlayerControl>();
-        setEffects = GetComponent<SetEffects>();
-       // kinemaControl = GetComponent<KinemaControl>();
+        charController = GetComponent<CharacterController>();
+        grabObject = GetComponent<GrabObject>();
+        // kinemaControl = GetComponent<KinemaControl>();
         checkers = myPlayerControl.checkers;
         if (!isPlayer)
         {
-            myPlayerControl.enabled = false;
             simpleIA = GetComponent<SimpleIA>();
-            simpleIA.enabled = true;
         }
     }
 
     // Start is called before the first frame update
     void Start()
-    {      
+    {
         originalScale = transform.localScale;
     }
 
@@ -59,7 +65,7 @@ public class BodyChange : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+
         bodyChageBecomeOriginal();
         bodyChageBecomeNPC();
 
@@ -69,16 +75,19 @@ public class BodyChange : MonoBehaviour
     {
         if (dominate && !isPlayer && !checkers.isDead && !sleep && InputControl.instance.getButtonsControl("Button0"))
         {
-            myPlayerControl.controlInteract.settingLife (myPlayerControl.setthing.life - damageAdsorveLife);
+            myPlayerControl.controlInteract.settingLife(myPlayerControl.setthing.life - damageAdsorveLife);
 
-            if (setEffects.GetFX("fxDamageBlood")!=null) {
-                setEffects.PlayFx("fxDamageBlood");
-            }
-            if (setEffects.GetSX("sxDamageBlood") != null)
+            if (myPlayerControl.setEffects.GetFX("fxDamageBlood") != null)
             {
-                setEffects.GetSX("sxDamageBlood").Play();
+                myPlayerControl.setEffects.PlayFx("fxDamageBlood");
             }
-            if (myPlayerControl.setthing.life<=0) {
+            if (myPlayerControl.setEffects.GetSX("sxDamageBlood") != null)
+            {
+                myPlayerControl.setEffects.GetSX("sxDamageBlood").Play();
+            }
+
+            if (myPlayerControl.setthing.life <= 0)
+            {
 
                 myPlayerControl.controlInteract.settingLife(0);
                 prepareToExpulsion();
@@ -116,26 +125,26 @@ public class BodyChange : MonoBehaviour
         {
             dominatorPlayerControl.controlInteract.settingDamageManaGlobal();
 
-            if (dominatorPlayerControl.setthing.mana<=0)
+            if (dominatorPlayerControl.setthing.mana <= 0)
             {
                 prepareToExpulsion();
             }
             myPlayerControl.enabled = true;
-           // Debug.Log("Si estoy dominado");
+            // Debug.Log("Si estoy dominado");
 
         }
-        else if(!dominate && !isPlayer)
+        else if (!dominate && !isPlayer)
         {
             // 
             myPlayerControl.enabled = false;
-           // Debug.Log("no estoy dominado");
+            // Debug.Log("no estoy dominado");
         }
     }
 
     void checkBodyChange()
     {
 
-        if (!checkers.isGroundCheck() && isPlayer && !checkers.isDead && myPlayerControl.setthing.mana  > 0)
+        if (!charController.isGrounded && isPlayer && !checkers.isDead && myPlayerControl.setthing.mana > 0)
         {
 
             Collider[] hitColliders = Physics.OverlapSphere(locateCollision.position, radiusBodyChange, layerBodyChange);
@@ -143,49 +152,14 @@ public class BodyChange : MonoBehaviour
             foreach (var hitCollider in hitColliders)
             {
 
-                if (!myPlayerControl.checkers.isCaptured && !expulsion) {
+                if (!myPlayerControl.checkers.isCaptured && !dominate)
+                {
 
-                    if (hitCollider.GetComponent<SimpleIA>()!=null &&  
-                        !hitCollider.GetComponent<SimpleIA>().getDetectado() && 
-                        !hitCollider.GetComponent<BodyChange>().sleep &&
-                        hitCollider.GetComponent<SimpleIA>().typeNPC==SimpleIA.TypeNPC.normal) {
-
-                        myPlayerControl.checkers.isCaptured = true;
-                        dominatorPlayerControl = hitCollider.transform.gameObject.GetComponent<PlayerControl>();
-
-                        if (!hitCollider.GetComponent<BodyChange>().activeSouls)
-                        {
-                            hitCollider.GetComponent<BodyChange>().activeSouls = true;
-                            ControlSouls.instance.activeImgSouls();
-                        }
-
-                        if (hitCollider.GetComponent<SetEffects>().GetFX("fxCaptureNPC")!=null) {
-                            hitCollider.GetComponent<SetEffects>().PlayFx("fxCaptureNPC");
-                        }
-                        if (hitCollider.GetComponent<SetEffects>().GetSX("sxCaptureNPC") != null)
-                        {
-                            hitCollider.GetComponent<SetEffects>().GetSX("sxCaptureNPC").Play();
-                        }
-                        if (GetComponent<SetEffects>().GetFX("fxJump"))
-                        {
-                            GetComponent<SetEffects>().noneFx("fxJump");
-                        }
-
-                        hitCollider.GetComponent<BodyChange>().simpleIA.getNavMeshAgent().enabled = false;
-                        hitCollider.GetComponent<BodyChange>().simpleIA.enabled = false;
-                        hitCollider.GetComponent<BodyChange>().dominate = true;
-                        hitCollider.transform.gameObject.GetComponent<PlayerControl>().checkers.isDominated = true;
-                        hitCollider.GetComponent<BodyChange>().setbodyChangeControl(this);
-                        hitCollider.GetComponent<BodyChange>().setPlayerControlDominator(myPlayerControl);
-                        hitCollider.transform.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-                        hitCollider.GetComponent<BodyChange>().delayToControl(hitCollider.transform.gameObject.GetComponent<PlayerControl>());
-                        CameraControl.instance.setTarget(hitCollider.transform);
-
-                    }else if (hitCollider.GetComponent<SimpleIA>()!=null && 
+                    if (hitCollider.GetComponent<SimpleIA>() != null &&
                         !hitCollider.GetComponent<SimpleIA>().getDetectado() &&
-                        (hitCollider.GetComponent<SimpleIA>().typeNPC == SimpleIA.TypeNPC.clero 
-                        || hitCollider.GetComponent<SimpleIA>().typeNPC == SimpleIA.TypeNPC.tanque) &&
-                        hitCollider.transform.gameObject.GetComponent<PlayerControl>().checkers.isStuned)
+                        !hitCollider.GetComponent<BodyChange>().sleep &&
+                        !hitCollider.GetComponent<BodyChange>().isThrowing  &&
+                        hitCollider.GetComponent<SimpleIA>().typeNPC == SimpleIA.TypeNPC.normal)
                     {
 
                         myPlayerControl.checkers.isCaptured = true;
@@ -205,18 +179,57 @@ public class BodyChange : MonoBehaviour
                         {
                             hitCollider.GetComponent<SetEffects>().GetSX("sxCaptureNPC").Play();
                         }
-                        if (GetComponent<SetEffects>().GetFX("fxJump"))
-                        {
-                            GetComponent<SetEffects>().noneFx("fxJump");
-                        }
-
+                        hitCollider.GetComponent<JumpControl>().enabled = true;
                         hitCollider.GetComponent<BodyChange>().simpleIA.getNavMeshAgent().enabled = false;
+                        //hitCollider.GetComponent<Rigidbody>().isKinematic = true;
                         hitCollider.GetComponent<BodyChange>().simpleIA.enabled = false;
                         hitCollider.GetComponent<BodyChange>().dominate = true;
                         hitCollider.transform.gameObject.GetComponent<PlayerControl>().checkers.isDominated = true;
+                        hitCollider.transform.gameObject.GetComponent<PlayerControl>().checkers.remoteControl = true;
                         hitCollider.GetComponent<BodyChange>().setbodyChangeControl(this);
                         hitCollider.GetComponent<BodyChange>().setPlayerControlDominator(myPlayerControl);
-                        hitCollider.transform.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                        hitCollider.GetComponent<BodyChange>().delayToControl(hitCollider.transform.gameObject.GetComponent<PlayerControl>());
+                        CameraControl.instance.setTarget(hitCollider.transform);
+
+                    }
+                    else if (hitCollider.GetComponent<SimpleIA>() != null &&
+                       !hitCollider.GetComponent<SimpleIA>().getDetectado() &&
+                       (hitCollider.GetComponent<SimpleIA>().typeNPC == SimpleIA.TypeNPC.clero
+                       || hitCollider.GetComponent<SimpleIA>().typeNPC == SimpleIA.TypeNPC.tanque) &&
+                       hitCollider.transform.gameObject.GetComponent<PlayerControl>().checkers.isStuned)
+                    {
+
+                        myPlayerControl.checkers.isCaptured = true;
+                        dominatorPlayerControl = hitCollider.transform.gameObject.GetComponent<PlayerControl>();
+
+                        if (!hitCollider.GetComponent<BodyChange>().activeSouls)
+                        {
+                            hitCollider.GetComponent<BodyChange>().activeSouls = true;
+                            ControlSouls.instance.activeImgSouls();
+                        }
+
+                        if (hitCollider.GetComponent<SetEffects>().GetFX("fxCaptureNPC") != null)
+                        {
+                            hitCollider.GetComponent<SetEffects>().PlayFx("fxCaptureNPC");
+                        }
+                        if (hitCollider.GetComponent<SetEffects>().GetSX("sxCaptureNPC") != null)
+                        {
+                            hitCollider.GetComponent<SetEffects>().GetSX("sxCaptureNPC").Play();
+                        }
+
+                        /*if (GetComponent<SetEffects>().GetFX("fxJump"))
+                        {
+                            GetComponent<SetEffects>().noneFx("fxJump");
+                        }*/
+                        hitCollider.GetComponent<JumpControl>().enabled = true;
+                        hitCollider.GetComponent<BodyChange>().simpleIA.getNavMeshAgent().enabled = false;
+                        hitCollider.GetComponent<BodyChange>().simpleIA.enabled = false;
+                       // hitCollider.GetComponent<Rigidbody>().isKinematic = true;
+                        hitCollider.GetComponent<BodyChange>().dominate = true;
+                        hitCollider.transform.gameObject.GetComponent<PlayerControl>().checkers.isDominated = true;
+                        hitCollider.transform.gameObject.GetComponent<PlayerControl>().checkers.remoteControl = true;
+                        hitCollider.GetComponent<BodyChange>().setbodyChangeControl(this);
+                        hitCollider.GetComponent<BodyChange>().setPlayerControlDominator(myPlayerControl);
                         hitCollider.GetComponent<BodyChange>().delayToControl(hitCollider.transform.gameObject.GetComponent<PlayerControl>());
                         CameraControl.instance.setTarget(hitCollider.transform);
                     }
@@ -254,17 +267,21 @@ public class BodyChange : MonoBehaviour
             if (dominate && !isPlayer && InputControl.instance.getButtonsControl("Button1"))
             {
                 prepareToExpulsion();
-                if (setEffects.GetFX("fxCaptureNPC") != null)
+               // transform.GetComponent<Rigidbody>().isKinematic = false;
+                transform.GetComponent<JumpControl>().enabled = false;
+
+                if (myPlayerControl.setEffects.GetFX("fxCaptureNPC") != null)
                 {
-                    setEffects.PlayFx("fxCaptureNPC");
+                    myPlayerControl.setEffects.PlayFx("fxCaptureNPC");
                 }
             }
         }
+      
 
-        if (expulsion)
+       /* if (expulsion)
         {
             fxBecomeOriginalPlayer();
-        }
+        }*/
     }
 
     void usingAtackDominate()
@@ -279,159 +296,114 @@ public class BodyChange : MonoBehaviour
             else if (dominate && !isPlayer && InputControl.instance.getButtonsControl("Button3") && simpleIA.typeNPC == SimpleIA.TypeNPC.clero)
             {
                 simpleIA.settinAtack.Arma[simpleIA.settinAtack.indexArma].ShootingRemote();
+
+            }
+            else if (dominate && !isPlayer && InputControl.instance.getButtonsControl("Button3")
+               && simpleIA.typeNPC == SimpleIA.TypeNPC.tanque && myPlayerControl.characterController.isGrounded && !grabObject.getGrabObject())
+            {
+                  myPlayerControl.jumpControl.StartStump();
+
+            }
+            else if (dominate && !isPlayer && InputControl.instance.getButtonsControl("Button3")
+                && simpleIA.typeNPC == SimpleIA.TypeNPC.tanque && !myPlayerControl.characterController.isGrounded)
+            {
+                myPlayerControl.jumpControl.stumpNPC();
+
+            }
+            else if (dominate && !isPlayer && InputControl.instance.getButtonsControlOnPress("Button3")
+               && simpleIA.typeNPC == SimpleIA.TypeNPC.tanque && myPlayerControl.characterController.isGrounded && grabObject.getGrabObject()!=null)
+            {
+                grabObject.grabObject();
+                //grab
+            }
+            else if (dominate && !isPlayer && InputControl.instance.getButtonsControlOnRelease("Button3")
+               && simpleIA.typeNPC == SimpleIA.TypeNPC.tanque && myPlayerControl.characterController.isGrounded && grabObject.getGrabObject()!=null)
+            {
+                //throw         
+                grabObject.getGrabObject().GetComponent<JumpControl>().throwUP();
+                grabObject.throwObject();
             }
         }
     }
 
     void prepareToThrowNPC()
     {
-        //myPlayerControl.enabled = false;
-        //simpleIA.getNavMeshAgent().enabled = true;
-        //simpleIA.enabled = true;
-        myPlayerControl.checkers.remoteControl = true;
+        isThrowing = true;
         dominatorPlayerControl.transform.gameObject.SetActive(true);
         dominatorPlayerControl.enabled = true;
         dominatorPlayerControl.checkers.isCaptured = false;
-        bodyChangeControl.expulsion = true;
-        dominatorPlayerControl.transform.position = transform.position; // new Vector3(transform.position.x, 2.5f, transform.position.z);
-        if (setEffects.GetFX("fxDash") != null)
-        {
-            setEffects.PlayFx("fxDash");
-        }
-        ThrowNPC();
-        checkers.canJump = true;
+        dominatorPlayerControl.transform.position = new Vector3(transform.position.x, heightToExpulsion, transform.position.z);
+        dominatorPlayerControl.jumpControl.remoteJump();
         dominate = false;
         myPlayerControl.checkers.isDominated = false;
+        throwNpc();
         CameraControl.instance.setTarget(dominatorPlayerControl.transform);
     }
 
-    void ThrowNPC()
+    void throwNpc()
     {
-        Vector3 normaLizeDir = Vector3.zero;
-        Vector3 dir = Vector3.zero;
-        normaLizeDir = transform.forward * myPlayerControl.setthing.distanceDash;
-        normaLizeDir.y = 0.0f;
-        checkers.canDash = true;
-        StartCoroutine("ThrowIE", normaLizeDir);
+        StartCoroutine("ThrowIE");
     }
 
-    IEnumerator ThrowIE(Vector3 dir)
+
+    IEnumerator ThrowIE()
     {
-        /*myPlayerControl.setthing.distanceToBlockingDash = Vector3.Distance(transform.position, dir);
+        float time = 0;
 
-        while (myPlayerControl.setthing.distanceToBlockingDash >= 0.5f)
+        while (time < myPlayerControl.dashControl.timeDash)
         {
-            myPlayerControl.setthing.distanceToBlockingDash = Vector3.Distance(transform.position, dir);
-            float step = myPlayerControl.setthing.forceDash * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, dir, step);
-            yield return null;
-        }*/
-
-        float time = myPlayerControl.setthing.TimeDurationDash;
-
-        while (time > 0)
-        {
-            if (!myPlayerControl.checkers.checkCollisionONthrow().checkCollThrow)
+            if (!myPlayerControl.checkers.checkCollisionONthrow().checkCollThrow && !stunHit)
             {
-                myPlayerControl.GetRigidbody().MovePosition(transform.position + dir * Time.deltaTime * myPlayerControl.setthing.forceDash);
-                time -= Time.deltaTime;
-
+                charController.Move(transform.forward * myPlayerControl.dashControl.forceDash * Time.deltaTime);
+                time += Time.deltaTime;
             }
-            else
+            else if(myPlayerControl.checkers.checkCollisionONthrow().checkCollThrow && !stunHit)
             {
-
+                stunHit = true;
+                isThrowing = false;
+                transform.GetComponent<Rigidbody>().isKinematic = true;
                 myPlayerControl.checkers.checkCollisionONthrow().objColl.GetComponent<ControlInteract>().stunnedNPC(myPlayerControl.checkers.checkCollisionONthrow().objColl.GetComponent<SimpleIA>(), 6);
                 //stune self
                 time = 0;
                 myPlayerControl.checkers.remoteControl = false;
-                myPlayerControl.GetRigidbody().isKinematic = true;
                 transform.GetComponent<ControlInteract>().stunnedNPC(simpleIA, 6);
-
                 // StartCoroutine("IEreboteDash", dir);
 
-                /* if (setEffects.GetFX("fxDash") != null)
-                 {
-                     setEffects.noneFx("fxDash");
-                 }*/
             }
+
             yield return null;
         }
 
         if (!myPlayerControl.checkers.checkCollisionONthrow().checkCollThrow)
         {
-            myPlayerControl.GetRigidbody().velocity = Vector3.zero;
-            myPlayerControl.GetRigidbody().isKinematic = true;
+            transform.GetComponent<Rigidbody>().isKinematic = true;
             myPlayerControl.checkers.remoteControl = false;
             myPlayerControl.enabled = false;
             simpleIA.getNavMeshAgent().enabled = true;
-            simpleIA.enabled = true;
-            checkers.canDash = true;
+            stunHit = false;
+            isThrowing = false;
+
         }
 
     }
-
-    IEnumerator IEreboteDash(Vector3 direction)
-    {
-        float time = myPlayerControl.setthing.TimeDurationPropulsion;
-
-        while (time > 0)
-        {
-            Debug.Log("entro");
-            Vector3 dir = direction - transform.position;
-            // We then get the opposite (-Vector3) and normalize it
-            dir = -dir.normalized;
-            // And finally we add force in the direction of dir and multiply it by force. 
-            // This will push back the player
-            GetComponent<Rigidbody>().AddForce(dir * 135);
-            time -= Time.deltaTime;
-
-            yield return null;
-        }
-
-        myPlayerControl.GetRigidbody().velocity = Vector3.zero;
-        myPlayerControl.GetRigidbody().isKinematic = true;
-        myPlayerControl.checkers.remoteControl = false;
-        myPlayerControl.GetRigidbody().velocity = Vector3.zero;
-        myPlayerControl.enabled = false;
-        simpleIA.getNavMeshAgent().enabled = true;
-        simpleIA.enabled = true;
-        checkers.canDash = true;
-
-    }
-
-    void reboteDash(Vector3 direction)
-    {
-        Debug.Log("hola");
-        Vector3 dir = direction - transform.position;
-        // We then get the opposite (-Vector3) and normalize it
-        dir = -dir.normalized;
-        // And finally we add force in the direction of dir and multiply it by force. 
-        // This will push back the player
-        GetComponent<Rigidbody>().AddForce(dir * 35);
-    }
+    
 
     public void prepareToExpulsion()
     {
-
-        myPlayerControl.GetRigidbody().isKinematic = true;
+        isThrowing = true;
         simpleIA.getNavMeshAgent().enabled = true;
         simpleIA.enabled = true;
         dominatorPlayerControl.transform.gameObject.SetActive(true);
         dominatorPlayerControl.enabled = true;
         dominatorPlayerControl.checkers.isCaptured = false;
-        bodyChangeControl.expulsion = true;
+        dominatorPlayerControl.checkers.remoteControl = true;
         //calcular la altura 
-        dominatorPlayerControl.transform.position = new Vector3(transform.position.x, 2.5f, transform.position.z);
-        checkers.canJump = false; 
-        dominatorPlayerControl.remoteFasterJump();
+        dominatorPlayerControl.transform.position = new Vector3(transform.position.x, heightToExpulsion, transform.position.z);
+        dominatorPlayerControl.jumpControl.remoteJump();
+        dominatorPlayerControl.checkers.remoteControl = false;
         dominate = false;
         myPlayerControl.checkers.isDominated = false;
-        checkers.canJump = true;
-
-        if (setEffects.GetFX("fxDash") != null)
-        {
-            setEffects.noneFx("fxDash");
-        }
+        delayToCapture();
         CameraControl.instance.setTarget(dominatorPlayerControl.transform);
     }
 
@@ -443,15 +415,16 @@ public class BodyChange : MonoBehaviour
 
     void fxBecomeOriginalPlayer()
     {
+        //Debug.Log(Vector3.Distance(transform.localScale, originalScale));
         if (Vector3.Distance(transform.localScale, originalScale) > 0.1f)
         {
-             transform.localScale = Vector3.Lerp(transform.localScale, originalScale, Time.deltaTime * timeToFxBodyChange);
+            transform.localScale = Vector3.Lerp(transform.localScale, originalScale, Time.deltaTime * timeToFxBodyChange);
         }
         else
         {
             expulsion = false;
         }
-        
+
     }
 
     void delayToControl(PlayerControl pc)
@@ -469,14 +442,28 @@ public class BodyChange : MonoBehaviour
 
     }
 
+    void delayToCapture()
+    {
+        StartCoroutine("IdelayToCapture");
+    }
+
+    IEnumerator IdelayToCapture()
+    {
+        yield return new WaitForSeconds(0.1f);
+        isThrowing = false;
+    }
+
     private void OnDrawGizmos()
     {
-        if (locateCollision!=null) {
+        if (locateCollision != null)
+        {
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(locateCollision.position, radiusBodyChange);
-           
+
         }
     }
+
+
 
 
 }

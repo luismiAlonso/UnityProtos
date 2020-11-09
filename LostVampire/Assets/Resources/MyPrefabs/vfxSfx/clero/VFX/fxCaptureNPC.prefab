@@ -14413,6 +14413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLocalObject: 1
+  useInLoop: 0
 --- !u!199 &1133171931027145720
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -19239,6 +19240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLocalObject: 1
+  useInLoop: 0
 --- !u!199 &1977951040356297159
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -24008,7 +24010,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33ac159cc3c56ac4cb7c9f7b6ea61a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLocalObject: 0
+  isLocalObject: 1
+  useInLoop: 0
 --- !u!199 &3752485171474493268
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -33652,6 +33655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLocalObject: 1
+  useInLoop: 0
 --- !u!199 &530255261182978430
 ParticleSystemRenderer:
   serializedVersion: 6

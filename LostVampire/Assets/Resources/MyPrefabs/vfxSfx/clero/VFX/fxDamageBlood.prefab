@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -4064359354709008445}
   - component: {fileID: 5798472695224366727}
   - component: {fileID: 4234479523270008731}
+  - component: {fileID: -1929852029394018881}
   m_Layer: 11
   m_Name: fxDamageBlood
   m_TagString: fx
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLocalObject: 1
+  useInLoop: 0
 --- !u!198 &5798472695224366727
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4769,6 +4771,20 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-1929852029394018881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6692068716967939539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ac159cc3c56ac4cb7c9f7b6ea61a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLocalObject: 1
+  useInLoop: 0
 --- !u!1001 &4002922144737618549
 PrefabInstance:
   m_ObjectHideFlags: 0

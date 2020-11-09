@@ -188,6 +188,160 @@ public class InputControl : MonoBehaviour
         return input;
     }
 
+    public bool getButtonsControlOnRelease(string name)
+    {
+        bool input = false;
+
+        if (Manager.instance.GlobalUsePad)
+        {
+
+            if (!forceChangeControllerInput)
+            {
+
+                if (name == "Button0")
+                {
+
+                    input = Input.GetButtonUp("buttonY");
+
+                }
+                else if (name == "Button1")
+                {
+                    input = Input.GetButtonUp("buttonB");
+
+                }
+                else if (name == "Button2")
+                {
+                    input = Input.GetButtonUp("buttonX");
+
+                }
+                else if (name == "Button3")
+                {
+                    input = Input.GetButtonUp("buttonA");
+                }
+
+            }
+            else
+            {
+                if (name == "Button0")
+                {
+                    input = Input.GetButtonUp("buttonA");
+                }
+                else if (name == "Button1")
+                {
+                    input = Input.GetButtonUp("buttonX");
+
+                }
+                else if (name == "Button2")
+                {
+                    input = Input.GetButtonUp("buttonY");
+
+                }
+                else if (name == "Button3")
+                {
+                    input = Input.GetButtonUp("buttonB");
+                }
+            }
+        }
+        else
+        {
+            if (name == "Button0")
+            {
+                input = Input.GetKeyUp(KeyCode.Space);
+            }
+            else if (name == "Button1")
+            {
+                input = Input.GetButtonUp("Fire2");
+            }
+            else if (name == "Button2")
+            {
+                input = Input.GetKeyUp(KeyCode.Q);
+            }
+            else if (name == "Button3")
+            {
+                input = Input.GetButtonUp("Fire1");
+            }
+        }
+
+        return input;
+    }
+
+    public bool getButtonsControlOnPress(string name)
+    {
+        bool input = false;
+
+        if (Manager.instance.GlobalUsePad)
+        {
+
+            if (!forceChangeControllerInput)
+            {
+
+                if (name == "Button0")
+                {
+
+                    input = Input.GetButton("buttonY");
+
+                }
+                else if (name == "Button1")
+                {
+                    input = Input.GetButton("buttonB");
+
+                }
+                else if (name == "Button2")
+                {
+                    input = Input.GetButton("buttonX");
+
+                }
+                else if (name == "Button3")
+                {
+                    input = Input.GetButton("buttonA");
+                }
+
+            }
+            else
+            {
+                if (name == "Button0")
+                {
+                    input = Input.GetButton("buttonA");
+                }
+                else if (name == "Button1")
+                {
+                    input = Input.GetButton("buttonX");
+
+                }
+                else if (name == "Button2")
+                {
+                    input = Input.GetButton("buttonY");
+
+                }
+                else if (name == "Button3")
+                {
+                    input = Input.GetButton("buttonB");
+                }
+            }
+        }
+        else
+        {
+            if (name == "Button0")
+            {
+                input = Input.GetKey(KeyCode.Space);
+            }
+            else if (name == "Button1")
+            {
+                input = Input.GetButton("Fire2");
+            }
+            else if (name == "Button2")
+            {
+                input = Input.GetKey(KeyCode.Q);
+            }
+            else if (name == "Button3")
+            {
+                input = Input.GetButton("Fire1");
+            }
+        }
+
+        return input;
+    }
+
     public Vector3 getAxisFree()
     {
         Vector3 freePos = Vector3.zero;

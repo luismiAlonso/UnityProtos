@@ -62,8 +62,8 @@ internal class Terrain2Obj : EditorWindow
    private void Export()
    {
       var fileName = EditorUtility.SaveFilePanel("Export .obj file", "", "Terrain", "obj");
-      var w = _terrain.heightmapWidth;
-      var h = _terrain.heightmapHeight;
+      var w = _terrain.heightmapResolution;
+      var h = _terrain.heightmapResolution;
       var meshScale = _terrain.size;
       var tRes = (int)Mathf.Pow(2, (int)_saveResolution );
       meshScale = new Vector3(meshScale.x / (w - 1) * tRes, meshScale.y, meshScale.z / (h - 1) * tRes);

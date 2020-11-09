@@ -17,56 +17,61 @@ public class CameraControl : MonoBehaviour {
     }
 
 
-     
+
     public Vector3 offset;
     public Vector2 limitX;
     public Vector2 limitZ;
     public Vector3[] shakePoints;
     public float margenDrag;
-	public Vector3 m_Velocity;
+    public Vector3 m_Velocity;
+    public float[] floors;
     public float speed;
     public float m_SmoothTime;
     public int state = 1;
 
     private Rect screenRect;
     private int screenBoundsWidth;
-	private int screenBoundsHeight;
+    private int screenBoundsHeight;
     private int indexPoints = 0;
+    private int indexFloor = 0;
     private Transform target;
 
-    void Start () {
+    void Start()
+    {
 
         //dimensiones de pantalla
         screenBoundsWidth = Screen.width;
-		screenBoundsHeight = Screen.height;
-		screenRect = new Rect (0, 0, screenBoundsWidth, screenBoundsHeight);//marco limitador de pantalla
+        screenBoundsHeight = Screen.height;
+        screenRect = new Rect(0, 0, screenBoundsWidth, screenBoundsHeight);//marco limitador de pantalla
         findTargetPlayer();
     }
 
     private void Update()
     {
-        
-        if (state==0)
+
+        if (state == 0)
         {
             StartFollowPlayer();
 
-        }else if (state==1)
+        }
+        else if (state == 1)
         {
             moveLookCam();
         }
-        else if(state==2)
+        else if (state == 2)
         {
             StartFollowPlayer();
             shaking();
 
-        }else if (state==3)
+        }
+        else if (state == 3)
         {
             deadCam();
         }
 
     }
 
-   
+
     void findTargetPlayer()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -81,8 +86,9 @@ public class CameraControl : MonoBehaviour {
     {
         //transform.position = new Vector3(player.transform.position.x + position.x, transform.position.y, player.transform.position.z + position.z);
         //transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.position.x + offset.x, transform.position.y, target.position.z + offset.z), Time.deltaTime * speed);
-        if (target!=null) {
-            Vector3 targetPos = target.position;
+        if (target != null)
+        {
+            Vector3 targetPos = target.position + offset;
             //Keep camera height the same
             targetPos.y = transform.position.y;
             targetPos = Vector3.SmoothDamp(transform.position, targetPos, ref m_Velocity, m_SmoothTime);
@@ -90,12 +96,11 @@ public class CameraControl : MonoBehaviour {
                 Mathf.Clamp(targetPos.x, limitX.x, limitX.y),
                 targetPos.y,
                 Mathf.Clamp(targetPos.z, limitZ.x, limitZ.y));
-            /*
-             * capear zonas
-            if (target.GetComponent<PlayerControl>().checkers.isGrounded) {
-                Camera.main.transform.localPosition = new Vector3(Camera.main.transform.localPosition.x, target.position.y, Camera.main.transform.localPosition.z);
-            }*/
 
+                Camera.main.transform.localPosition = new Vector3(Camera.main.transform.localPosition.x, target.position.y, Camera.main.transform.localPosition.z);
+             
+
+            //goToNextFloor();
         }
 
 
@@ -108,24 +113,57 @@ public class CameraControl : MonoBehaviour {
 
     public void shaking()
     {
-        if (indexPoints==shakePoints.Length-1) {
+        if (indexPoints == shakePoints.Length - 1)
+        {
             state = 0;
             indexPoints = 0;
-          //  Debug.Log(state);
+            //  Debug.Log(state);
         }
         else
         {
-            Vector3 nextDir = new Vector3(shakePoints[indexPoints].x + transform.position.x, transform.position.y,shakePoints[indexPoints].z+transform.position.z);
-            transform.position = Vector3.MoveTowards(transform.position,nextDir,Time.deltaTime*200);
-            if (Vector3.Distance(transform.position,nextDir)<=0)
+            Vector3 nextDir = new Vector3(shakePoints[indexPoints].x + transform.position.x, transform.position.y, shakePoints[indexPoints].z + transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, nextDir, Time.deltaTime * 200);
+            if (Vector3.Distance(transform.position, nextDir) <= 0)
             {
                 indexPoints++;
             }
-          //  Debug.Log(indexPoints+"state "+state);
+            //  Debug.Log(indexPoints+"state "+state);
         }
     }
 
-    
+    void goToNextFloor()
+    {
+        
+        if (floors.Length > 0)
+        {
+            if (target.transform.position.y > floors[indexFloor])
+            {
+                Vector3 newFloor = new Vector3(Camera.main.transform.localPosition.x, floors[indexFloor], Camera.main.transform.localPosition.z);
+                if (Vector3.Distance(target.transform.position, newFloor) > 0.1f) {
+                    Camera.main.transform.localPosition = Vector3.Lerp(target.transform.position, newFloor,Time.deltaTime*2.5f);
+                }
+                else
+                {
+                    indexFloor += 1;
+                }
+
+            }else if (indexFloor > 0 && target.transform.position.y < floors[indexFloor])
+            {
+                Vector3 newFloor = new Vector3(Camera.main.transform.localPosition.x, floors[indexFloor], Camera.main.transform.localPosition.z);
+                if (Vector3.Distance(target.transform.position, newFloor) > 0.1f)
+                {
+                    Camera.main.transform.localPosition = Vector3.Lerp(target.transform.position, newFloor, Time.deltaTime * 2.5f);
+                   
+                }
+                else
+                {
+                    indexFloor-=1;
+                }
+                Debug.Log("Descendemos");
+            }
+        }
+    }
+
     public void moveLookCam()
     {
         /*Vector3 posCursor = Util.getMousePointWorld(true);
@@ -143,34 +181,42 @@ public class CameraControl : MonoBehaviour {
 
     void deadCam()
     {
-        transform.Rotate(0,0,1.0f * Time.deltaTime);
+        transform.Rotate(0, 0, 1.0f * Time.deltaTime);
 
     }
 
-    void pameandoNoClick(){
-		
-		if (screenRect.Contains (Input.mousePosition)) {
-			
-			if (Input.mousePosition.x > screenBoundsWidth - margenDrag) {
-                offset.x += speed * Time.deltaTime;
-			}
-			
-			if (Input.mousePosition.x < 0 + margenDrag) {
-                offset.x -= speed * Time.deltaTime;
-			}
-			
-			if (Input.mousePosition.y > screenBoundsHeight - margenDrag) {
-                offset.z += speed * Time.deltaTime;
-			}
-			
-			if (Input.mousePosition.y < 0 + margenDrag) {
-                offset.z -= speed * Time.deltaTime;
-			}   
-			
-		
-			transform.position = new Vector3 (Mathf.Clamp (offset.x, -30, 30),20,Mathf.Clamp (offset.z, -30, 30));  
-		}
-	}
+    void pameandoNoClick()
+    {
 
-   
+        if (screenRect.Contains(Input.mousePosition))
+        {
+
+            if (Input.mousePosition.x > screenBoundsWidth - margenDrag)
+            {
+                offset.x += speed * Time.deltaTime;
+            }
+
+            if (Input.mousePosition.x < 0 + margenDrag)
+            {
+                offset.x -= speed * Time.deltaTime;
+            }
+
+            if (Input.mousePosition.y > screenBoundsHeight - margenDrag)
+            {
+                offset.z += speed * Time.deltaTime;
+            }
+
+            if (Input.mousePosition.y < 0 + margenDrag)
+            {
+                offset.z -= speed * Time.deltaTime;
+            }
+
+
+            transform.position = new Vector3(Mathf.Clamp(offset.x, -30, 30), 20, Mathf.Clamp(offset.z, -30, 30));
+        }
+    }
+
+
+
+
 }

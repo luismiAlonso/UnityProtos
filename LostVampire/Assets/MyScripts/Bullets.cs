@@ -69,7 +69,7 @@ public class Bullets : MonoBehaviour {
         }else if (collision.transform.tag == "NPC" && collision.GetComponent<BodyChange>()!=null && collision.GetComponent<BodyChange>().dominate && IdInstanceParent!= collision.gameObject.GetInstanceID())
         {
             Manager.instance.playerControl.transform.GetComponent<ControlInteract>().settingMana(0);
-            collision.transform.GetComponent<BodyChange>().prepareToExpulsion();
+            //collision.transform.GetComponent<BodyChange>().prepareToExpulsion();
 
         }else if (collision.transform.tag == "NPC" && enemyDominated && IdInstanceParent != collision.gameObject.GetInstanceID())
         {

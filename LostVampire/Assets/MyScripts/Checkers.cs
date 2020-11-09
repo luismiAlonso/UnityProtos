@@ -33,14 +33,13 @@ public class Checkers
     public bool canAtack = true;
     [HideInInspector]
     public bool remoteControl = false;
-    [HideInInspector]
     public bool isStuned = false;
     [HideInInspector]
     public bool isDominated = false;
     [HideInInspector]
     public bool isCaptured = false;
-    [HideInInspector]
-    public bool canDash = false;
+    public bool canRotate = true;
+    public bool canDash = true;
 
     RaycastHit hit;
     Vector3 pointBlocking;
@@ -52,12 +51,11 @@ public class Checkers
         public Transform objColl;
     }
 
-    public bool isGroundCheck()
+   /* public bool isGroundCheck()
     {
-
         isGrounded = Physics.Raycast(parentObj.position, Vector3.down, out hit, maxDistanceGrounded, layerMaskGround,QueryTriggerInteraction.UseGlobal);
         return isGrounded;
-    }
+    }*/
 
     public bool isTraspasable()
     {
@@ -81,9 +79,11 @@ public class Checkers
         objDataColl objColl = new objDataColl();
         objColl.checkCollThrow = false;
         Collider[] hitColliders = Physics.OverlapSphere(parentObj.position, radiusCollisionThrow, layerThrow);
-        
+
         foreach (var hitCollider in hitColliders)
         {
+           // Debug.Log(hitCollider.transform.name+" - "+ parentObj.name +" - "+hitCollider.transform.GetComponent<SimpleIA>());
+
             if (hitCollider.transform.name!=parentObj.name && hitCollider.transform.GetComponent<SimpleIA>()!=null && 
                 hitCollider.transform.GetComponent<SimpleIA>().typeNPC!=SimpleIA.TypeNPC.tanque)
             {

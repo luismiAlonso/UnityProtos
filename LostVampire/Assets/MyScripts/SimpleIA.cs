@@ -8,12 +8,12 @@ using UnityEngine.AI;
 public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 {
     public WayPoints[] wayPoits;
-    public enum TypeNPC { normal=0,clero=1,tanque=2 };
+    public enum TypeNPC { normal = 0, clero = 1, tanque = 2 };
     public TypeNPC typeNPC;
     public SettingAtacksIA settinAtack;
     public SettingBehaviourIA settinBehaviour;
     public GameObject source;
-    public bool activeGizmos=true;
+    public bool activeGizmos = true;
 
     private NavMeshAgent agent;
     private int targetPoint;
@@ -44,9 +44,11 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
     // Update is called once per frame
     void Update()
     {
-        if (!Manager.instance.fullStop) {
+        if (!Manager.instance.fullStop)
+        {
 
-            if (!playerControl.checkers.isDead) {
+            if (!playerControl.checkers.isDead)
+            {
 
                 stateMachine();
                 stopped();
@@ -59,7 +61,7 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 
             }
         }
-      //  Debug.Log(detectado+"//"+transform.name);
+        //  Debug.Log(detectado+"//"+transform.name);
     }
 
     public NavMeshAgent getNavMeshAgent()
@@ -89,11 +91,12 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
                 if (typeNPC == TypeNPC.clero)
                 {
 
-                    if (Vector3.Distance(transform.position, target.position) <= settinAtack.distanceAtack && !Manager.instance.playerControl.checkers.isDead)
+                    if (Vector3.Distance(transform.position, target.position) <= settinAtack.distanceAtack && !Manager.instance.playerControl.checkers.isDead
+                        && playerControl.checkers.canAtack)
                     {
                         stop = true;
-                        transform.LookAt(target);
-                        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
+                        //transform.LookAt(target);
+                       // transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
                         actackDistance();
                     }
                     else
@@ -102,13 +105,14 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
                         moveto(target);
                     }
 
-                }else if (typeNPC == TypeNPC.normal )
+                }
+                else if (typeNPC == TypeNPC.normal)
                 {
                     if ((Vector3.Distance(transform.position, target.position) <= settinAtack.distanceAtackMelee) && playerControl.checkers.canAtack)
                     {
                         stop = true;
                         actackMelee();
-                        
+
                     }
                     /*else if ((Vector3.Distance(transform.position, target.position) <= settinAtack.distanceAtackMelee) && !playerControl.checkers.canAtack)
                     {
@@ -123,21 +127,22 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
                         moveto(target);
                     }
 
-                }else if (typeNPC == TypeNPC.tanque)
+                }
+                else if (typeNPC == TypeNPC.tanque)
                 {
                     if ((Vector3.Distance(transform.position, target.position) <= settinAtack.distanceAtackMelee) && playerControl.checkers.canAtack)
                     {
-                       
+
                         StartCoroutine("doJumpBomb");
 
                     }
-                    else if((Vector3.Distance(transform.position, target.position) > settinAtack.distanceAtackMelee) && playerControl.checkers.canAtack)
+                    else if ((Vector3.Distance(transform.position, target.position) > settinAtack.distanceAtackMelee) && playerControl.checkers.canAtack)
                     {
                         stop = false;
                         moveto(target);
                     }
 
-                   
+
                 }
 
             }
@@ -155,14 +160,13 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, settinBehaviour.rangeAlerta, settinBehaviour.layerRangeALerta);
         bool check = false;
 
-        for (int i=0;i < hitColliders.Length;i++)
+        for (int i = 0; i < hitColliders.Length; i++)
         {
 
             if (hitColliders[i].transform.tag == "Player")
             {
-                check = true;
-                return check;
-                
+                //Debug.Log("veo pLayer");      
+                return true;
             }
 
             /* else if (hitCollider.tag == "NPC" && hitCollider.transform.GetComponent<BodyChange>().dominate)
@@ -175,7 +179,7 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 
     void PatrullaWayPointsAndStop()
     {
-        
+
         if (!detectado)
         {
             if (wayPoits != null && wayPoits.Length > 0 && wayPoits[targetPoint] != null)
@@ -291,12 +295,14 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 
     private bool canRotate()
     {
-        if (!detectado) {
+        if (!detectado)
+        {
 
             if (indexTimeRotate <= wayPoits[targetPoint].timeToRotation.Length - 1)
             {
 
-                if (wayPoits[targetPoint].timeToAuxRotation.Length > 0) {
+                if (wayPoits[targetPoint].timeToAuxRotation.Length > 0)
+                {
 
                     if (wayPoits[targetPoint].timeToAuxRotation[indexTimeRotate] <= 0)
                     {
@@ -327,7 +333,8 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 
     public void stopped()
     {
-        if (agent.isActiveAndEnabled) {
+        if (agent.isActiveAndEnabled)
+        {
 
             if (!stop)
             {
@@ -366,8 +373,9 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 
     public void setDetectado(bool _detectado)
     {
-        if (!playerControl.checkers.isStuned) {
-            Manager.instance.playerControl.checkers.isDetectado = _detectado;
+        if (!playerControl.checkers.isStuned)
+        {
+           // Manager.instance.playerControl.checkers.isDetectado = _detectado;
             detectado = _detectado;
         }
         else
@@ -388,11 +396,12 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 
     public void actackDistance()
     {
-        if (typeNPC==TypeNPC.clero && playerControl.checkers.canAtack && !playerControl.checkers.isDominated)
+        if (typeNPC == TypeNPC.clero && playerControl.checkers.canAtack && !playerControl.checkers.isDominated)
         {
             StartCoroutine("IatackDistance");
 
-        }else if (typeNPC == TypeNPC.normal && playerControl.checkers.canAtack)
+        }
+        else if (typeNPC == TypeNPC.normal && playerControl.checkers.canAtack)
         {
 
         }
@@ -408,7 +417,7 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 
     IEnumerator IdelayJumpAtack()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(5.5f);
         agent.enabled = true;
         playerControl.checkers.canAtack = true;
         settinAtack.isPrepareNextAtack = false;
@@ -426,7 +435,8 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 
         while (!settinAtack.isPrepareNextAtack)
         {
-            if (!finished) {
+            if (!finished)
+            {
 
                 transform.position = Vector3.Lerp(transform.position, jumpPoint, Time.deltaTime * 20);
 
@@ -437,7 +447,7 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
             }
             else if (finished)
             {
-                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x,beforeJump,transform.position.z), Time.deltaTime * 30);
+                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, beforeJump, transform.position.z), Time.deltaTime * 30);
 
                 if (Vector3.Distance(transform.position, new Vector3(transform.position.x, beforeJump, transform.position.z)) < 0.1f)
                 {
@@ -445,12 +455,12 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
                     settinAtack.ArmaMelee[settinAtack.indexArma].hitMelee();
                 }
             }
-            
+
             yield return null;
         }
 
         StartCoroutine("IdelayJumpAtack");
-       
+
     }
 
     public void actackMelee()
@@ -465,13 +475,15 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
         {
             settinAtack.ArmaMelee[settinAtack.indexArma].hitMelee();
 
-            if (setEffects.GetFX("fxCupule") !=null) {
+            if (setEffects.GetFX("fxCupule") != null)
+            {
                 setEffects.GetFX("fxCupule").Play();
             }
 
             playerControl.checkers.canAtack = false;
 
-        }else if (typeNPC == TypeNPC.tanque && playerControl.checkers.canAtack)
+        }
+        else if (typeNPC == TypeNPC.tanque && playerControl.checkers.canAtack)
         {
             //rb.isKinematic = false;
             agent.enabled = false;
@@ -489,7 +501,7 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
     public void setVisor(bool active)
     {
         source.SetActive(active);
-        
+
     }
 
     public void runAway()
@@ -504,7 +516,8 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
         {
             StartCoroutine("IwaitAndGo");
 
-        }else if (typeNPC == TypeNPC.clero)
+        }
+        else if (typeNPC == TypeNPC.clero)
         {
             StartCoroutine("IwaitAndGo");
         }
@@ -526,10 +539,11 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
 
     private void OnDrawGizmos()
     {
-        if (activeGizmos) {
+        if (activeGizmos)
+        {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, settinBehaviour.rangeAlerta);
-            
+
         }
     }
 
@@ -537,7 +551,7 @@ public class SimpleIA : MonoBehaviour , IatackNPC, Ibehaviuour
     private void OnCollisionEnter(Collision collision)
     {
 
-        if (collision.transform.tag=="Player" )
+        if (collision.transform.tag == "Player")
         {
 
             /*setDetectado(true);

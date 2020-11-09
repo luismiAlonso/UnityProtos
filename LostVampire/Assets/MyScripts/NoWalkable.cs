@@ -15,7 +15,7 @@ public class NoWalkable : MonoBehaviour
         {
             if (typeSurface== TypeSurface.lava )
             {
-                other.transform.GetComponent<PlayerControl>().setSpeedMove(speedSlow);
+                other.transform.GetComponent<PlayerMove>().setSpeedMove(speedSlow);
                 other.transform.GetComponent<PlayerControl>().checkers.canDash = true;
                 other.transform.GetComponent<PlayerControl>().checkers.canJump = false;
 
@@ -28,7 +28,7 @@ public class NoWalkable : MonoBehaviour
         {
             if (typeSurface == TypeSurface.lava)
             {
-                other.transform.GetComponent<PlayerControl>().setSpeedMove(speedSlow);
+                other.transform.GetComponent<PlayerMove>().setSpeedMove(speedSlow);
                 other.transform.GetComponent<PlayerControl>().checkers.canDash = true;
                 other.transform.GetComponent<PlayerControl>().checkers.canJump = false;
 
@@ -42,8 +42,8 @@ public class NoWalkable : MonoBehaviour
         {
             if (typeSurface == TypeSurface.lava)
             {
-                other.transform.GetComponent<PlayerControl>().setSpeedMove(other.transform.GetComponent<PlayerControl>().setthing.speedMove);
-                other.transform.GetComponent<PlayerControl>().checkers.canDash = false;
+                other.transform.GetComponent<PlayerMove>().setSpeedMove(other.transform.GetComponent<PlayerMove>().speedMove);
+                other.transform.GetComponent<PlayerControl>().checkers.canDash = true;
                 other.transform.GetComponent<PlayerControl>().checkers.canJump = true;
 
             }else if (typeSurface == TypeSurface.sagrado)
@@ -53,8 +53,8 @@ public class NoWalkable : MonoBehaviour
         }
         else if (other.transform.tag == "NPC" && other.GetComponent<SimpleIA>() != null && other.GetComponent<SimpleIA>().typeNPC == SimpleIA.TypeNPC.normal)
         {
-            other.transform.GetComponent<PlayerControl>().setSpeedMove(other.transform.GetComponent<PlayerControl>().setthing.speedMove);
-            other.transform.GetComponent<PlayerControl>().checkers.canDash = false;
+            other.transform.GetComponent<PlayerMove>().setSpeedMove(other.transform.GetComponent<PlayerMove>().speedMove);
+            other.transform.GetComponent<PlayerControl>().checkers.canDash = true;
             other.transform.GetComponent<PlayerControl>().checkers.canJump = true;
         }
     }
