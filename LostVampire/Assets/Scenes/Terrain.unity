@@ -858,22 +858,22 @@ PrefabInstance:
     - target: {fileID: 7860776457054093023, guid: 9e5ccf7884a745e428a2fc850f3518bb,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7860776457054093023, guid: 9e5ccf7884a745e428a2fc850f3518bb,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.9970808
       objectReference: {fileID: 0}
     - target: {fileID: 7860776457054093023, guid: 9e5ccf7884a745e428a2fc850f3518bb,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7860776457054093023, guid: 9e5ccf7884a745e428a2fc850f3518bb,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.07635354
       objectReference: {fileID: 0}
     - target: {fileID: 7860776457054093023, guid: 9e5ccf7884a745e428a2fc850f3518bb,
         type: 3}
@@ -888,13 +888,14 @@ PrefabInstance:
     - target: {fileID: 7860776457054093023, guid: 9e5ccf7884a745e428a2fc850f3518bb,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -171.242
       objectReference: {fileID: 0}
     - target: {fileID: 7860776457054093023, guid: 9e5ccf7884a745e428a2fc850f3518bb,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 8111411340826929011, guid: 9e5ccf7884a745e428a2fc850f3518bb,
         type: 3}
       propertyPath: m_TargetTexture
@@ -904,6 +905,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetTexture
       value: 
+=======
+    - target: {fileID: 8866272335527685438, guid: 46eba957efcfdc94db3c89963b312524,
+        type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: 0.7036656
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866272335527685438, guid: 46eba957efcfdc94db3c89963b312524,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.7536658
+>>>>>>> 2ae857843fb1fa9f35b470f0aa74a9a38bfc64e1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e5ccf7884a745e428a2fc850f3518bb, type: 3}
