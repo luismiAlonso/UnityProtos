@@ -284,7 +284,7 @@ namespace LOS
             {
                 finalSize *= 2;
 
-                Debug.Assert(finalSize <= maxTextureSize, "Render texture size to big, can't be larger than " + maxTextureSize);
+               // Debug.Assert(finalSize <= maxTextureSize, "Render texture size to big, can't be larger than " + maxTextureSize);
                 //Make sure size is not bigger than max texture size
                 Math.Min(finalSize, maxTextureSize);
             }

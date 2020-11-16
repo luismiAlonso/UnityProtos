@@ -49,8 +49,9 @@ public class ControlSouls : MonoBehaviour
         for (int i=0; i<ManagerRenderCuller.instance.listRendersCullers.Count;i++)
         {
             if (ManagerRenderCuller.instance.listRendersCullers[i].tag!="Player") {
-                soulsImg imgSouls = Instantiate(Resources.Load<soulsImg>("MyPrefabs/components/soulsImage")) as soulsImg;
+                soulsImg imgSouls = Instantiate(Resources.Load<soulsImg>("MyPrefabs/components/ImageSouls")) as soulsImg;
                 imgSouls.transform.parent = transform;
+                imgSouls.transform.localScale = Vector3.one;
                 imgSoulsList.Add(imgSouls);
             }
         }

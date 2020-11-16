@@ -191,8 +191,8 @@ public class ArmaMelee : MonoBehaviour
             other.GetComponent<ControlInteract>().settingLife(CanvasManager.instance.healhtBar.getActualHealth() - Damage);
             Vector3 dir = transform.position - other.transform.position;
             dir = -dir.normalized;
-            dir = dir * 5;
-            other.GetComponent<Rigidbody>().MovePosition(transform.position + dir);
+            dir = dir * 1.5f;
+            other.GetComponent<PlayerControl>().characterController.Move( dir);
         }
     }
 
@@ -207,8 +207,8 @@ public class ArmaMelee : MonoBehaviour
             }
             Vector3 dir = transform.position - other.transform.position;
             dir = -dir.normalized;
-            dir = dir * 5;
-            other.GetComponent<Rigidbody>().MovePosition(transform.position + dir);
+            dir = dir * 1.5f;
+            other.GetComponent<PlayerControl>().characterController.Move(dir);
         }
     }
 
