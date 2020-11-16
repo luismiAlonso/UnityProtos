@@ -18,7 +18,7 @@ public class InstanceWall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Mathf.Round(transform.eulerAngles.y));
+
         if (InputControl.instance.getButtonsControl("Button2"))
         {
             if (Mathf.Round(transform.eulerAngles.y) == 90) {

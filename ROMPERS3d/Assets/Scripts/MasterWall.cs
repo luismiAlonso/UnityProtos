@@ -97,9 +97,9 @@ public class MasterWall : MonoBehaviour
             else if (mw.name == "leftWall" && dirwall == DirWall.left)
             {
                 mw.gameObject.SetActive(true);
-                mw.GetComponent<CheckWall>().wallNode.setIdCode(idCode);
+               /* mw.GetComponent<CheckWall>().wallNode.setIdCode(idCode);
                 mw.GetComponent<CheckWall>().wallNode.masterWall = this;
-                mw.GetComponent<CheckWall>().wallNode.setTimeToResetRomper(TimeResetRomper);
+                mw.GetComponent<CheckWall>().wallNode.setTimeToResetRomper(TimeResetRomper);*/
                 listCheckWall.Add(mw.GetComponent<CheckWall>());
             }
 
@@ -110,9 +110,9 @@ public class MasterWall : MonoBehaviour
             else if (mw.name == "rightWall" && dirwall == DirWall.right)
             {
                 mw.gameObject.SetActive(true);
-                mw.GetComponent<CheckWall>().wallNode.setIdCode(idCode);
+               /* mw.GetComponent<CheckWall>().wallNode.setIdCode(idCode);
                 mw.GetComponent<CheckWall>().wallNode.masterWall = this;
-                mw.GetComponent<CheckWall>().wallNode.setTimeToResetRomper(TimeResetRomper);
+                mw.GetComponent<CheckWall>().wallNode.setTimeToResetRomper(TimeResetRomper);*/
 
                 listCheckWall.Add(mw.GetComponent<CheckWall>());
 
@@ -125,9 +125,9 @@ public class MasterWall : MonoBehaviour
             else if (mw.name == "topWall" && dirwall == DirWall.top)
             {
                 mw.gameObject.SetActive(true);
-                mw.GetComponent<CheckWall>().wallNode.setIdCode(idCode);
+               /* mw.GetComponent<CheckWall>().wallNode.setIdCode(idCode);
                 mw.GetComponent<CheckWall>().wallNode.masterWall = this;
-                mw.GetComponent<CheckWall>().wallNode.setTimeToResetRomper(TimeResetRomper);
+                mw.GetComponent<CheckWall>().wallNode.setTimeToResetRomper(TimeResetRomper);*/
 
                 listCheckWall.Add(mw.GetComponent<CheckWall>());
 
@@ -140,9 +140,9 @@ public class MasterWall : MonoBehaviour
             else if (mw.name == "downWall" && dirwall == DirWall.down)
             {
                 mw.gameObject.SetActive(true);
-                mw.GetComponent<CheckWall>().wallNode.setIdCode(idCode);
+                /*mw.GetComponent<CheckWall>().wallNode.setIdCode(idCode);
                 mw.GetComponent<CheckWall>().wallNode.masterWall = this;
-                mw.GetComponent<CheckWall>().wallNode.setTimeToResetRomper(TimeResetRomper);
+                mw.GetComponent<CheckWall>().wallNode.setTimeToResetRomper(TimeResetRomper);*/
 
                 listCheckWall.Add(mw.GetComponent<CheckWall>());
 
@@ -160,7 +160,7 @@ public class MasterWall : MonoBehaviour
 
         for (int i=0;i< listCheckWall.Count;i++) {
 
-            if (pointContact.x!=0 && pointContact.x > 0 && !listCheckWall[i].getCollisionCheckWall("front"))
+           /* if (pointContact.x!=0 && pointContact.x > 0 && !listCheckWall[i].getCollisionCheckWall("front"))
             {
                 posibleWallFall.Add(listCheckWall[i]);
                 dirFall = "front";
@@ -186,15 +186,15 @@ public class MasterWall : MonoBehaviour
                 dirFall = "back";
                 Debug.Log("backz");
 
-            }
+            }*/
         }
 
         if (posibleWallFall.Count == listCheckWall.Count) {
 
-            foreach (CheckWall wn in posibleWallFall)
+          /*  foreach (CheckWall wn in posibleWallFall)
             {
                 wn.wallNode.fallWall(dirFall);
-            }
+            }*/
         }
     }
 

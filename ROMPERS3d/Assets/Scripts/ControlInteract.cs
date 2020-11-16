@@ -8,9 +8,13 @@ public class ControlInteract : MonoBehaviour
     RaycastHit hit;
     Rigidbody rb;
 
+    bool checkFront;
+    bool checkDown;
+    bool checkTop;
+
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+
     }
     // Start is called before the first frame update
     void Start()
@@ -21,20 +25,62 @@ public class ControlInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckFront();
+        CheckInput();
     }
 
 
-    void CheckFront()
+    void CheckInput()
     {
-        if (InputControl.instance.getButtonsControl("Button1")) {
+        if (InputControl.instance.getButtonsControl("Button1") && !CheckTop() && CheckFront()) {
 
-            bool checkFront = Physics.Raycast(transform.position, transform.forward, out hit, 1.0f, layerMaskFront, QueryTriggerInteraction.UseGlobal);
-            if (hit.transform != null && hit.transform.GetComponent<wallNode>() != null)
+
+            if (hit.transform != null && hit.transform.GetComponent<FallWallPhysics>() != null)
             {
-                hit.transform.GetComponent<wallNode>().prepareFallWall(hit.normal);
-
+                //hit.transform.GetComponent<FallWallPhysics>().unableCheckWalls();
+                hit.transform.GetComponent<FallWallPhysics>().fallWall(transform.forward);
             }
+
+           /* if (hit.transform != null && hit.transform.GetComponent<CheckWall>() != null) {
+                Vector3 dirPoint =  hit.point - transform.position ;
+                hit.transform.GetComponent<CheckWall>().wallNode.unableCheckWalls();
+                hit.transform.GetComponent<CheckWall>().wallNode.fallWall(dirPoint);
+            }*/ 
+
+        }else if (InputControl.instance.getButtonsControl("Button1") && CheckTop())
+        {
+            if (hit.transform != null && hit.transform.GetComponent<TopWall>() != null)
+            {
+                //hit.transform.GetComponent<FallWallPhysics>().unableCheckWalls();
+                hit.transform.GetComponent<TopWall>().ThrowWallTop();
+            }
+        }
+    }
+
+
+    public bool CheckFront()
+    {
+        checkFront = Physics.Raycast(transform.position, transform.forward, out hit, 1.0f, layerMaskFront, QueryTriggerInteraction.UseGlobal);
+        return checkFront;
+    }
+
+    public bool CheckTop()
+    {
+        checkTop = Physics.Raycast(transform.position, transform.up, out hit, 1.0f, layerMaskFront, QueryTriggerInteraction.UseGlobal);
+        return checkTop;
+    }
+
+    public bool CheckDown()
+    {
+        checkDown = Physics.Raycast(transform.position, -transform.up, out hit, 1.0f, layerMaskFront, QueryTriggerInteraction.UseGlobal);
+        return checkDown;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Enemy")
+        {
+            // rb.constraints = RigidbodyConstraints.FreezeAll;
+
         }
     }
 
@@ -47,14 +93,6 @@ public class ControlInteract : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.tag=="Enemy")
-        {
-           // rb.constraints = RigidbodyConstraints.FreezeAll;
-
-        }
-    }
-
+   
 
 }

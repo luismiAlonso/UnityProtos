@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using System;
 
 public class InputControl : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class InputControl : MonoBehaviour
     public enum ControllerTypeConnected { Xbox, Playstation,KeyBoard, Other }
     [HideInInspector]
     public ControllerTypeConnected controllerTypeConnected;
-
+    public bool forceChangeControllerInput;
     string diviceName;
 
     private void Start()
@@ -64,10 +65,13 @@ public class InputControl : MonoBehaviour
 
     private string getControllerType()
     {
+
+
         string[] joystickNames = Input.GetJoystickNames();
 
         foreach (string joystickName in joystickNames)
         {
+
             if (joystickName.ToLower().Contains("xbox"))
             {
                 return "XBOX";
@@ -85,7 +89,7 @@ public class InputControl : MonoBehaviour
                 return "OTHER";
             }
         }
-        return "OTHER";
+        return "UNKNOWN";
     }
 
     public Vector2 getAxisControl()
@@ -94,7 +98,16 @@ public class InputControl : MonoBehaviour
 
         if (Manager.instance.GlobalUsePad)
         {
-            axis = new Vector2(Input.GetAxisRaw("PadAxisH"), Input.GetAxisRaw("PadAxisV"));
+            if (!forceChangeControllerInput && (diviceName== "XBOX" || diviceName== "OTHER")) {
+
+                axis = new Vector2(Input.GetAxisRaw("PadAxisH"), Input.GetAxisRaw("PadAxisV"));
+
+            }
+            else if(forceChangeControllerInput)
+            {
+                axis = new Vector2(Input.GetAxisRaw("PadAxisH_play"), Input.GetAxisRaw("PadAxisV_play"));
+
+            }
         }
         else
         {
@@ -110,41 +123,260 @@ public class InputControl : MonoBehaviour
 
         if (Manager.instance.GlobalUsePad)
         {
-            if (name=="Button0") {
 
-                input = Input.GetButtonDown("buttonY");
+            if (!forceChangeControllerInput) {
 
-            }else if (name=="Button1")
+                if (name == "Button0") {
+
+                    input = Input.GetButtonDown("buttonY");
+
+                } else if (name == "Button1")
+                {
+                    input = Input.GetButtonDown("buttonB");
+
+                } else if (name == "Button2")
+                {
+                    input = Input.GetButtonDown("buttonX");
+
+                } else if (name == "Button3")
+                {
+                    input = Input.GetButtonDown("buttonA");
+
+                }else if (name == "Button4")
+                {
+                    input = Input.GetButtonDown("buttonRB");
+                }
+                else if (name == "Button5")
+                {
+                    input = Input.GetButtonDown("buttonLB");
+                }
+
+            }
+            else
             {
-                input = Input.GetButtonDown("buttonB");
+                if (name == "Button0")
+                {
+                    input = Input.GetButtonDown("buttonA");
+                }
+                else if (name == "Button1")
+                {
+                    input = Input.GetButtonDown("buttonX");
 
-            }else if (name == "Button2")
-            {
-                input = Input.GetButtonDown("buttonX");
+                }
+                else if (name == "Button2")
+                {
+                    input = Input.GetButtonDown("buttonY");
 
-            }else if (name == "Button3")
+                }
+                else if (name == "Button3")
+                {
+                    input = Input.GetButtonDown("buttonB");
+                }
+                else if (name == "Button4")
+                {
+                    input = Input.GetButtonDown("buttonRB");
+                }
+                else if (name == "Button5")
+                {
+                    input = Input.GetButtonDown("buttonLB");
+                }
+            }
+        }
+        else
+        {
+            if (name == "Button0") 
             {
-                input = Input.GetButtonDown("buttonA");
+                input = Input.GetKeyDown(KeyCode.Space);
+            }
+            else if (name == "Button1")
+            {
+                input = Input.GetButtonDown("Fire2");
+            }
+            else if (name == "Button2")
+            {
+                input = Input.GetKeyDown(KeyCode.Q);
+            }
+            else if (name == "Button3")
+            {
+                input = Input.GetButtonDown("Fire1");
+            }
+            else if (name == "Button4")
+            {
+                input = Input.GetKeyDown(KeyCode.Alpha1);
+
+                if (!input)
+                {
+                    if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+                    {
+                        input = true;
+                    }
+                }
+            }
+            else if (name == "Button5")
+            {
+                input = Input.GetKeyDown(KeyCode.Alpha2);
+
+                if (!input)
+                {
+                    if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+                    {
+                        input = true;
+                    }
+                }
+            }
+        }
+
+        return input;
+    }
+
+    public bool getButtonsControlOnRelease(string name)
+    {
+        bool input = false;
+
+        if (Manager.instance.GlobalUsePad)
+        {
+
+            if (!forceChangeControllerInput)
+            {
+
+                if (name == "Button0")
+                {
+
+                    input = Input.GetButtonUp("buttonY");
+
+                }
+                else if (name == "Button1")
+                {
+                    input = Input.GetButtonUp("buttonB");
+
+                }
+                else if (name == "Button2")
+                {
+                    input = Input.GetButtonUp("buttonX");
+
+                }
+                else if (name == "Button3")
+                {
+                    input = Input.GetButtonUp("buttonA");
+                }
+
+            }
+            else
+            {
+                if (name == "Button0")
+                {
+                    input = Input.GetButtonUp("buttonA");
+                }
+                else if (name == "Button1")
+                {
+                    input = Input.GetButtonUp("buttonX");
+
+                }
+                else if (name == "Button2")
+                {
+                    input = Input.GetButtonUp("buttonY");
+
+                }
+                else if (name == "Button3")
+                {
+                    input = Input.GetButtonUp("buttonB");
+                }
             }
         }
         else
         {
             if (name == "Button0")
             {
-                input = Input.GetKeyDown(KeyCode.Q);
+                input = Input.GetKeyUp(KeyCode.Space);
             }
             else if (name == "Button1")
             {
-                input = Input.GetKeyDown(KeyCode.LeftShift);
-
+                input = Input.GetButtonUp("Fire2");
             }
             else if (name == "Button2")
             {
-                input = Input.GetKeyDown(KeyCode.Space);
+                input = Input.GetKeyUp(KeyCode.Q);
             }
             else if (name == "Button3")
             {
-                input = Input.GetKeyDown(KeyCode.E);
+                input = Input.GetButtonUp("Fire1");
+            }
+        }
+
+        return input;
+    }
+
+    public bool getButtonsControlOnPress(string name)
+    {
+        bool input = false;
+
+        if (Manager.instance.GlobalUsePad)
+        {
+
+            if (!forceChangeControllerInput)
+            {
+
+                if (name == "Button0")
+                {
+
+                    input = Input.GetButton("buttonY");
+
+                }
+                else if (name == "Button1")
+                {
+                    input = Input.GetButton("buttonB");
+
+                }
+                else if (name == "Button2")
+                {
+                    input = Input.GetButton("buttonX");
+
+                }
+                else if (name == "Button3")
+                {
+                    input = Input.GetButton("buttonA");
+                }
+
+            }
+            else
+            {
+                if (name == "Button0")
+                {
+                    input = Input.GetButton("buttonA");
+                }
+                else if (name == "Button1")
+                {
+                    input = Input.GetButton("buttonX");
+
+                }
+                else if (name == "Button2")
+                {
+                    input = Input.GetButton("buttonY");
+
+                }
+                else if (name == "Button3")
+                {
+                    input = Input.GetButton("buttonB");
+                }
+            }
+        }
+        else
+        {
+            if (name == "Button0")
+            {
+                input = Input.GetKey(KeyCode.Space);
+            }
+            else if (name == "Button1")
+            {
+                input = Input.GetButton("Fire2");
+            }
+            else if (name == "Button2")
+            {
+                input = Input.GetKey(KeyCode.Q);
+            }
+            else if (name == "Button3")
+            {
+                input = Input.GetButton("Fire1");
             }
         }
 
@@ -167,4 +399,26 @@ public class InputControl : MonoBehaviour
 
         return freePos;
     }
+
+    /*List<USBDeviceInfo> GetUSBDevices()
+    {
+        List<USBDeviceInfo> devices = new List<USBDeviceInfo>();
+
+        System.Management.ManagementObjectCollection  collection;
+        using (var searcher = new System.Management.ManagementObjectSearcher(@"Select * From Win32_USBHub"))
+            collection = searcher.Get();
+
+        foreach (var device in collection)
+        {
+            devices.Add(new USBDeviceInfo(
+            (string)device.GetPropertyValue("DeviceID"),
+            (string)device.GetPropertyValue("PNPDeviceID"),
+            (string)device.GetPropertyValue("Description")
+            ));
+        }
+
+        collection.Dispose();
+        return devices;
+    }*/
+
 }

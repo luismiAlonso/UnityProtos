@@ -40,7 +40,7 @@ public class Checkers
     public bool isCaptured = false;
     public bool canRotate = true;
     public bool canDash = true;
-
+   
     RaycastHit hit;
     Vector3 pointBlocking;
     Vector3 pointMouse;

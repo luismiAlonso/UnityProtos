@@ -17,10 +17,10 @@ TagManager:
   - 
   - wall
   - Enemy
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - DefKitColliders
+  - DefkitNodes
+  - Player
   - 
   - 
   - 

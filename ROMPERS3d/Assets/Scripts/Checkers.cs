@@ -7,5 +7,6 @@ using System;
 public class Checkers {
 
     public bool canMove;
-    
+    public bool canJump;
+    public bool canRotate;
 }

@@ -41,13 +41,13 @@ public class DataLevel: MonoBehaviour
 
     }
 
-    public Transform getRandomWall()
+   /* public Transform getRandomWall()
     {
         int randIndex = Random.Range(0, allCheckWalls.Count);
         int randDirWall = Random.Range(0, allCheckWalls[randIndex].checkersWall.Length);
         Debug.Log(allCheckWalls[randIndex].checkersWall.Length);
         return allCheckWalls[randIndex].checkersWall[randDirWall].transform;
-    }
+    }*/
 
 
     public void setEnemies()
