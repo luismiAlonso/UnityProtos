@@ -1230,7 +1230,7 @@ PrefabInstance:
     - target: {fileID: 8357132712583543531, guid: 3d0dae4eb3f5e7e488d061535c386ef9,
         type: 3}
       propertyPath: GlobalUsePad
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8357132712583543531, guid: 3d0dae4eb3f5e7e488d061535c386ef9,
         type: 3}
