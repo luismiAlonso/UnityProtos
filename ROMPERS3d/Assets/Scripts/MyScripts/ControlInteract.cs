@@ -80,7 +80,13 @@ public class ControlInteract : MonoBehaviour
 
     public bool CheckDown()
     {
-        checkDown = Physics.Raycast(transform.position, -transform.up, out hit, 3.0f, layerMaskFront, QueryTriggerInteraction.UseGlobal);
+        checkDown = Physics.Raycast(transform.position, -transform.up, out hit, 1.0f, layerMaskFront, QueryTriggerInteraction.UseGlobal);
+
+        if (hit.transform.tag=="movilWall")
+        {
+            checkDown = false;
+        }
+
         return checkDown;
     }
 
