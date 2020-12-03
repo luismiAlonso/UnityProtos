@@ -62,47 +62,100 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Atack.cs" />
-    <Compile Include="Assets\Scripts\Bomb.cs" />
-    <Compile Include="Assets\Scripts\BombingNPC.cs" />
-    <Compile Include="Assets\Scripts\Bullet.cs" />
-    <Compile Include="Assets\Scripts\CameraControl.cs" />
-    <Compile Include="Assets\Scripts\CanvasControlParent.cs" />
-    <Compile Include="Assets\Scripts\CheckFallWall.cs" />
-    <Compile Include="Assets\Scripts\CheckWall.cs" />
-    <Compile Include="Assets\Scripts\Checkers.cs" />
-    <Compile Include="Assets\Scripts\ColorToPrefab.cs" />
-    <Compile Include="Assets\Scripts\ControlInteract.cs" />
-    <Compile Include="Assets\Scripts\CreateWallPlayer.cs" />
-    <Compile Include="Assets\Scripts\DataLevel.cs" />
-    <Compile Include="Assets\Scripts\DownWall.cs" />
-    <Compile Include="Assets\Scripts\FallWall.cs" />
-    <Compile Include="Assets\Scripts\FallWallPhysics.cs" />
-    <Compile Include="Assets\Scripts\FrontWall.cs" />
-    <Compile Include="Assets\Scripts\GeneratorLevel.cs" />
-    <Compile Include="Assets\Scripts\IAcontrol.cs" />
-    <Compile Include="Assets\Scripts\IWall.cs" />
-    <Compile Include="Assets\Scripts\InputControl.cs" />
-    <Compile Include="Assets\Scripts\InstanceWall.cs" />
-    <Compile Include="Assets\Scripts\JumpControl.cs" />
-    <Compile Include="Assets\Scripts\MakeJiggly.cs" />
-    <Compile Include="Assets\Scripts\Manager.cs" />
-    <Compile Include="Assets\Scripts\MapNode.cs" />
-    <Compile Include="Assets\Scripts\MasterWall.cs" />
-    <Compile Include="Assets\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\PlayerMove.cs" />
-    <Compile Include="Assets\Scripts\PlayerPhysicControl.cs" />
-    <Compile Include="Assets\Scripts\PlayerSettings.cs" />
-    <Compile Include="Assets\Scripts\RodeNPC.cs" />
-    <Compile Include="Assets\Scripts\ShootNPC.cs" />
-    <Compile Include="Assets\Scripts\SuperMaterial.cs" />
-    <Compile Include="Assets\Scripts\TopWall.cs" />
-    <Compile Include="Assets\Scripts\Util.cs" />
-    <Compile Include="Assets\Scripts\WayPoints.cs" />
-    <Compile Include="Assets\Scripts\menuCurrentSkill.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Animation &amp; Audio\AnimationControl.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Animation &amp; Audio\AudioControl.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Animation &amp; Audio\TurnTowardCameraDirection.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Animation &amp; Audio\TurnTowardControllerVelocity.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Animation &amp; Audio\TurnTowardTransformDirection.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Camera\CameraController.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Camera\CameraDistanceRaycaster.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Camera\ThirdPersonCameraController.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Controllers\AdvancedWalkerController.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Controllers\ClickToMoveController.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Controllers\Controller.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Controllers\SidescrollerController.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Controllers\SimpleWalkerController.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Core scripts\CeilingDetector.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Core scripts\Mover.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Core scripts\Sensor.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Environment\FlipAtRightAngle.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Environment\GravityTunnel.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Environment\MovingPlatform.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Environment\TriggerArea.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Helper\VectorMath.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Input\Camera\CameraInput.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Input\Camera\CameraJoystickInput.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Input\Camera\CameraMouseInput.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Input\Character\CharacterInput.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Input\Character\CharacterJoystickInput.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Input\Character\CharacterKeyboardInput.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Input\Character\CharacterPadInput.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Showcase\AlignRigidbodyToTarget.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Showcase\DemoMenu.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Showcase\DisableShadows.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Showcase\FPSCounter.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Showcase\MouseCursorLock.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Showcase\PlayerData.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Showcase\RotateObject.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Smoothing\SmoothPosition.cs" />
+    <Compile Include="Assets\Scripts\ControllerPlayer\Scripts\Smoothing\SmoothRotation.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\Atack.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\Bomb.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\BombingNPC.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\Bullet.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\CameraControl.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\CanvasControlParent.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\CheckFallWall.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\CheckWall.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\Checkers.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\ColorToPrefab.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\ControlInteract.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\ControlSkillGlobalMenu.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\CreateWallPlayer.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\DataLevel.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\Disparador.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\DownWall.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\FallWall.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\FallWallPhysics.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\FrontWall.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\FxControl.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\GeneratorLevel.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\IAcontrol.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\IWall.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\IngravityFall.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\InputControl.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\InstanceWall.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\ItemMoney.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\MakeJiggly.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\Manager.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\MapNode.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\MasterWall.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\MaterialSkillWallStats.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\MoveSimpleIA.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\Movil.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\RodeNPC.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\RotateSimple.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\SetEffects.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\ShootNPC.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\SlotsMatSkill.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\SuperMaterial.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\TopWall.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\TriggerComp.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\TriggerMenu.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\TriggerRestart.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\Util.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\WayPoints.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\menuCurrentSkill.cs" />
+    <Compile Include="Assets\Scripts\MyScripts\wallNode.cs" />
+    <Compile Include="Assets\Scripts\characterScript\playerNotPhysic\JumpControl.cs" />
+    <Compile Include="Assets\Scripts\characterScript\playerNotPhysic\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\characterScript\playerNotPhysic\PlayerMove.cs" />
+    <Compile Include="Assets\Scripts\characterScript\playerNotPhysic\PlayerSettings.cs" />
+    <Compile Include="Assets\Scripts\characterScript\playerWithPhysic\HorizontalControlPhysic.cs" />
+    <Compile Include="Assets\Scripts\characterScript\playerWithPhysic\JumpControlPhysic.cs" />
+    <Compile Include="Assets\Scripts\characterScript\playerWithPhysic\PlayerControl.cs" />
     <Compile Include="Assets\Scripts\objModel\JsonHelper.cs" />
     <Compile Include="Assets\Scripts\objModel\ModelDialog.cs" />
-    <Compile Include="Assets\Scripts\wallNode.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -288,6 +341,9 @@
     </Reference>
     <Reference Include="LitJson">
       <HintPath>C:/Users/luismi/Documents/ProyectosGit/ROMPERS3d/Assets/LitJson.dll</HintPath>
+    </Reference>
+    <Reference Include="clipper_library">
+      <HintPath>C:/Users/luismi/Documents/ProyectosGit/ROMPERS3d/Library/PackageCache/com.unity.cinemachine@2.7.1/Runtime/ThirdParty/clipper_library.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -652,8 +708,20 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/luismi/Documents/ProyectosGit/ROMPERS3d/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>C:/Users/luismi/Documents/ProyectosGit/ROMPERS3d/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>C:/Users/luismi/Documents/ProyectosGit/ROMPERS3d/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder">
+      <HintPath>C:/Users/luismi/Documents/ProyectosGit/ROMPERS3d/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.Editor">
+      <HintPath>C:/Users/luismi/Documents/ProyectosGit/ROMPERS3d/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+      <HintPath>C:/Users/luismi/Documents/ProyectosGit/ROMPERS3d/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/luismi/Documents/ProyectosGit/ROMPERS3d/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
@@ -666,6 +734,12 @@
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>C:/Users/luismi/Documents/ProyectosGit/ROMPERS3d/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>C:/Users/luismi/Documents/ProyectosGit/ROMPERS3d/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.AddOns.Editor">
+      <HintPath>C:/Users/luismi/Documents/ProyectosGit/ROMPERS3d/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/Users/luismi/Documents/ProyectosGit/ROMPERS3d/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>

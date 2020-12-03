@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8357132712583543526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8357132712583543525}
+  - component: {fileID: 8357132712583543524}
+  - component: {fileID: 8357132712583543531}
+  - component: {fileID: 8357132712583543530}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8357132712583543525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8357132712583543526}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8357132712583543524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8357132712583543526}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89d01578a042ea04ab6fdb631a4fee09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapsNodeToGenerate:
+  - mapsTexture:
+    - {fileID: 2800000, guid: 5965efaaa8e16c54db4637279e243a3f, type: 3}
+    - {fileID: 2800000, guid: 13abfe1ebfe317a4285f78d123d8d51c, type: 3}
+    - {fileID: 2800000, guid: 43d02692deccb9d49abb3de6f75d8e40, type: 3}
+    - {fileID: 2800000, guid: c4a1775e660c4b548a66c8a441f1556a, type: 3}
+    wallPrefabs:
+    - color: {r: 0, g: 0, b: 0, a: 1}
+      prefab: {fileID: 5574128897996401250, guid: 61cd88f84ca16f74c8f97a9ae36a4d08,
+        type: 3}
+    - color: {r: 0, g: 1, b: 0, a: 1}
+      prefab: {fileID: 1632204962724333027, guid: a963c4db6abab354eadac6e7173d4b89,
+        type: 3}
+    - color: {r: 0, g: 0, b: 1, a: 1}
+      prefab: {fileID: 6878429309438652332, guid: 96b260e4f7aae9e4aa49bfada84509ad,
+        type: 3}
+    grounsPrefabs:
+    - color: {r: 1, g: 0, b: 0, a: 1}
+      prefab: {fileID: 7146052724939522061, guid: 478a58596e2a228479589744c53a78df,
+        type: 3}
+    itemsPrefabs:
+    - color: {r: 1, g: 1, b: 0, a: 1}
+      prefab: {fileID: 1601452903150451498, guid: aa84718e76679054f8f8767125d9ba32,
+        type: 3}
+    EnemiesPrefabs:
+    - color: {r: 0, g: 0, b: 1, a: 1}
+      prefab: {fileID: 6636215593012942018, guid: 30ddb00e0512e3f4d90ed263e163962f,
+        type: 3}
+    - color: {r: 1, g: 0, b: 0, a: 1}
+      prefab: {fileID: 2447782759228298682, guid: 02df7e62321afac4cba3631b06a472ec,
+        type: 3}
+    - color: {r: 1, g: 1, b: 0, a: 1}
+      prefab: {fileID: 957232749537149874, guid: 85a440bb217ec6a489acdbb2299c989a,
+        type: 3}
+    - color: {r: 0, g: 1, b: 0, a: 1}
+      prefab: {fileID: 3535236332863145621, guid: 67c13e94a22b45a40a6180e778afe7b0,
+        type: 3}
+  offsetCenterMap: {x: -5.5, y: 0, z: -5}
+  indexLevel: 0
+--- !u!114 &8357132712583543531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8357132712583543526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5065e6668fc98654a9283d7f967b390e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullStop: 0
+  playerControl: {fileID: 0}
+  checkPoints:
+  - {fileID: 0}
+  GlobalUsePad: 1
+  levels: []
+--- !u!114 &8357132712583543530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8357132712583543526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79cc11f80df0a96469a283c79a2adc3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerTypeConnected: 0
+  forceChangeControllerInput: 0

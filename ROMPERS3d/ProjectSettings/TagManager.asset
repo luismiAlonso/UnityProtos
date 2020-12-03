@@ -6,6 +6,11 @@ TagManager:
   tags:
   - movilWall
   - Enemy
+  - money
+  - ground
+  - fx
+  - triggerDead
+  - sx
   layers:
   - Default
   - TransparentFX

@@ -304,6 +304,9 @@
     <Reference Include="LitJson">
       <HintPath>C:/Users/luismi/Documents/ProyectosGit/ROMPERS3d/Assets/LitJson.dll</HintPath>
     </Reference>
+    <Reference Include="clipper_library">
+      <HintPath>C:/Users/luismi/Documents/ProyectosGit/ROMPERS3d/Library/PackageCache/com.unity.cinemachine@2.7.1/Runtime/ThirdParty/clipper_library.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>C:/Users/luismi/Documents/ProyectosGit/ROMPERS3d/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>

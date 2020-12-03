@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7592770403472290827}
   - component: {fileID: 7592770403472290826}
   - component: {fileID: 8993305396249700712}
+  - component: {fileID: 1950742121944647705}
   m_Layer: 0
   m_Name: baseBullet
   m_TagString: Untagged
@@ -111,7 +112,7 @@ MonoBehaviour:
   damage: 0.1
   speedBullet: 3
   TimeToDestroy: 0
-  numColisions: 0
+  numColisions: 3
   layerColEffect:
     serializedVersion: 2
     m_Bits: 8448
@@ -131,3 +132,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1950742121944647705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7592770403472290825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5b1a078adc3ad842b8654d2986b4299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeFx: 8
+  soundsScene: {fileID: 9078463474863607571, guid: 374f2a6acc230ce4088b3210eedd0d1a,
+    type: 3}

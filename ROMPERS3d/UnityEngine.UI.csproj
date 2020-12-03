@@ -352,6 +352,9 @@
     <Reference Include="LitJson">
       <HintPath>C:/Users/luismi/Documents/ProyectosGit/ROMPERS3d/Assets/LitJson.dll</HintPath>
     </Reference>
+    <Reference Include="clipper_library">
+      <HintPath>C:/Users/luismi/Documents/ProyectosGit/ROMPERS3d/Library/PackageCache/com.unity.cinemachine@2.7.1/Runtime/ThirdParty/clipper_library.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>

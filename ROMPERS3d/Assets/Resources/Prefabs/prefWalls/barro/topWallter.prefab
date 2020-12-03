@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1289048374423975142}
   - component: {fileID: 2866147271901962785}
   - component: {fileID: 4607730849911533607}
-  - component: {fileID: 7250481790380675275}
+  - component: {fileID: 2844194045867144793}
   m_Layer: 8
   m_Name: topWallter
   m_TagString: movilWall
@@ -110,9 +110,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeSmaterial: 0
   lifeWall: 0.2
-  TimeScale: 0
-  maxIncrement: 0
-  forceThrow: 10
+  TimeScale: {x: 0, y: 0, z: 0}
+  maxIncrement: {x: 0, y: 0, z: 0}
+  rescaleWall: {x: 1.5, y: 0.8, z: 1.5}
+  maxForceThrow: 15
+  incForce: 2
 --- !u!54 &4607730849911533607
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -121,15 +123,15 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3395159405769476449}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 100
+  m_Drag: 0.5
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 104
   m_CollisionDetection: 3
---- !u!114 &7250481790380675275
+--- !u!114 &2844194045867144793
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,7 +140,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3395159405769476449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4ae12284cf447c46ab40188b17931af, type: 3}
+  m_Script: {fileID: 11500000, guid: b5b1a078adc3ad842b8654d2986b4299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushForce: 5
+  typeFx: 5
+  soundsScene: {fileID: 9078463474863607571, guid: 374f2a6acc230ce4088b3210eedd0d1a,
+    type: 3}
